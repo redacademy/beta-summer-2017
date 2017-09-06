@@ -7,8 +7,8 @@ import {
 
 const LandingPage = () => {
   <View>
-    <Text>This is the landing page. </Text>
-  </View>  
+    <Text> This is the landing page. </Text>
+  </View>
 }
 
 export default LandingPage;
