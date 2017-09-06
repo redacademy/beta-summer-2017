@@ -4,6 +4,9 @@ import {
   TabNavigation,
   TabNavigationItem as TabItem,
 } from '@expo/ex-navigation';
+import {
+  Text
+} from 'react-native';
 
 import Router from './routes'
 
@@ -22,8 +25,7 @@ class NavigationLayout extends Component {
           <StackNavigation
             id="landing"
             navigatorUID="landing"
-            initialRoute={Router.getRoute('schedule')}
-            defaultRouteConfig={defaultRouteConfig}
+            initialRoute={Router.getRoute('landing')}
           />
         </TabItem>
       </TabNavigation>  

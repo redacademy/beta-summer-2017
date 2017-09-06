@@ -6,9 +6,11 @@ import {
 } from 'react-native';
 
 const LandingPage = () => {
-  <View>
-    <Text> This is the landing page. </Text>
-  </View>
+  return (
+    <View>
+      <Text> This is the landing page. </Text>
+    </View>
+  )  
 }
 
 export default LandingPage;

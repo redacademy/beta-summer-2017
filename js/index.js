@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import {
-  AppRegistry
+  AppRegistry,
+  StatusBar
 } from 'react-native';
 import {
   NavigationProvider,
