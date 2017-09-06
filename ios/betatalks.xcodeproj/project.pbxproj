@@ -36,7 +36,6 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		0B8D6317D55544369262C4CA /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AC68DCA061480FBDD7D1CE /* libBVLinearGradient.a */; };
 		11B6C845F79143AEBEE55C58 /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B828D552EC043B1AB52DC38 /* norwester.otf */; };
 		A9E6E2C68EED46F4AE58B087 /* roboto-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6F18E3A25B448DBE0F54FA /* roboto-bold.ttf */; };
 		EE5EDFFD15E54FB999A7CB0D /* roboto-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3FE77123065420DB2645A30 /* roboto-light.ttf */; };
@@ -275,8 +274,6 @@
 		1A6F18E3A25B448DBE0F54FA /* roboto-bold.ttf */ = {isa = PBXFileReference; name = "roboto-bold.ttf"; path = "../js/assets/fonts/roboto-bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C3FE77123065420DB2645A30 /* roboto-light.ttf */ = {isa = PBXFileReference; name = "roboto-light.ttf"; path = "../js/assets/fonts/roboto-light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D9B31D3DDABD471985EF097A /* roboto-regular.ttf */ = {isa = PBXFileReference; name = "roboto-regular.ttf"; path = "../js/assets/fonts/roboto-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3CB31EF8C8FF4D49B42EC045 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		61AC68DCA061480FBDD7D1CE /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
