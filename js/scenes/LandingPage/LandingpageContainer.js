@@ -4,7 +4,6 @@ import LandingPage from './LandingPage';
 
 class LandingPageContainer extends Component {
 
-
   render() {
     return <LandingPage />;
   }

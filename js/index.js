@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import {
@@ -11,7 +10,6 @@ import {
   NavigationContext
 } from '@expo/ex-navigation';
 import Router from './navigation/routes';
-
 
 const navigationContext = new NavigationContext({
   router: Router,
