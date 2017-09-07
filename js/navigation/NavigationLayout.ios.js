@@ -31,7 +31,7 @@ class NavigationLayout extends Component {
         <TabItem
           id="dashboard"
           title="dashboard"
-          renderTitle ={this.renderTitle}
+          renderTitle={this.renderTitle}
         >
           <StackNavigation
             id="dashboard"
@@ -59,6 +59,19 @@ class NavigationLayout extends Component {
             id="home"
             navigatorUID="home"
             initialRoute={Router.getRoute('home')}
+          />
+        </TabItem>
+
+
+        <TabItem
+          id="signup"
+          title="signup"
+          renderTitle={this.renderTitle}
+        >
+          <StackNavigation
+            id="signup"
+            navigatorUID="signup"
+            initialRoute={Router.getRoute('signup')}
           />
         </TabItem>
       </TabNavigation>

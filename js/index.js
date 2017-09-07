@@ -10,24 +10,28 @@ import {
   NavigationContext
 } from '@expo/ex-navigation';
 import Router from './navigation/routes';
+import Store from './redux/store';
 
 const navigationContext = new NavigationContext({
   router: Router,
-})
+  store: Store
+});
 
 export default class betatalks extends Component {
   render() {
     return (
-      <NavigationProvider
-        context={navigationContext}
-      >
-        <StatusBar barStyle="light-content" />
-        <StackNavigation
-          initialRoute={Router.getRoute('navigation')}
-          navigatorUID="root"
-          id="root"
-        />
-      </NavigationProvider>
+      <Provider store={Store}>
+        <NavigationProvider
+          context={navigationContext}
+        >
+          <StatusBar barStyle="light-content" />
+          <StackNavigation
+            initialRoute={Router.getRoute('navigation')}
+            navigatorUID="root"
+            id="root"
+          />
+        </NavigationProvider>
+      </Provider>
     );
   }
 }
