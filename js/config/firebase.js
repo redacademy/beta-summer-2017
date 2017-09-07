@@ -11,10 +11,12 @@ var config = {
 };
 firebase.initializeApp(config);
 
-export const betadb = firebase.database().ref('users'); 
+export const betadb = firebase.database().ref(); 
+export const auth = firebase.auth();
 
-// betadb.on('value', function(snapshot){
-//     console.log(snapshot.val());
-//   }, function(error){
-//     console.log(error)
-//   });
+  //listeners
+  // betadb.on('value', function(snapshot){ //create listener for changes in db
+  //   dispatch(dispatchfunc(snapshot.val())); //dispatch changes in redux
+  // }, function(error){ 
+  //   console.log(error) // handle errors 
+  // });
