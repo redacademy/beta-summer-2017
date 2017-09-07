@@ -20,7 +20,7 @@ const LandingPage = () => {
       <View style={styles.landingSubWrapper}>
         <Text style={{color: 'white'}}>Log in button goes here.</Text>
         <Text style={styles.linkText} onPress={() => Linking.openURL('http://google.com')} >sign up here</Text>
-        <Text style={styles.linkSubText}>soapboxspeakers.com</Text>
+        <Text style={styles.linkSubText} onPress={() => Linking.openURL('http://soapboxspeakers.com')} >soapboxspeakers.com</Text>
       </View>
     </View>
   )
