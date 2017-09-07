@@ -19,8 +19,8 @@ class NavigationLayout extends Component {
       >
         <TabItem
           id="landing"
-          title="landing test"
-          renderTitle={this.renderTitle} 
+          title="landing temp tab"
+          renderTitle={this.renderTitle}
         >
           <StackNavigation
             id="landing"
@@ -28,18 +28,51 @@ class NavigationLayout extends Component {
             initialRoute={Router.getRoute('landing')}
           />
         </TabItem>
-      </TabNavigation>  
+        <TabItem
+          id="dashboard"
+          title="dashboard"
+          renderTitle ={this.renderTitle}
+        >
+          <StackNavigation
+            id="dashboard"
+            navigatorUID="dashboard"
+            initialRoute={Router.getRoute('dashboard')}
+          />
+        </TabItem>
+        <TabItem
+          id="events"
+          title="events"
+          renderTitle={this.renderTitle}
+        >
+          <StackNavigation
+            id="events"
+            navigatorUID="events"
+            initialRoute={Router.getRoute('events')}
+          />
+        </TabItem>
+        <TabItem
+          id="home"
+          title="home"
+          renderTitle={this.renderTitle}
+        >
+          <StackNavigation
+            id="home"
+            navigatorUID="home"
+            initialRoute={Router.getRoute('home')}
+          />
+        </TabItem>
+      </TabNavigation>
     );
   }
 
   renderTitle(isSelected, title) {
     const titleStyle = {
-      color: isSelected ? 'white' : '#999999',
+      color: isSelected ? 'black' : '#999999',
       fontSize: 14
     }
     return (
       <Text style={titleStyle}>{title}</Text>
-    )  
+    )
   }
 
 }
