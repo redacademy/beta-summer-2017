@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     flexDirection: 'row',
     width: Dimensions.get('window').width / 1.2,
+    //marginLeft: 55,
     height: 110,
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
