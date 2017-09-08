@@ -4,12 +4,13 @@ import NavigationLayout from './NavigationLayout';
 import LandingPage from '../scenes/LandingPage';
 import Dashboard from '../scenes/Dashboard';
 import Events from '../scenes/Events';
-import Event from '../scenes/Event';
+import EventScene from '../scenes/Event';
 import Home from '../scenes/Home';
 import Profile from '../scenes/Profile';
 import Login from '../scenes/Login';
 import Surveys from '../scenes/Surveys';
 import Speaker from '../scenes/Speaker';
+import Signup from '../scenes/Signup';
 
 const Router = createRouter(() => ({
   landing: () => LandingPage,
@@ -21,7 +22,8 @@ const Router = createRouter(() => ({
   login: () => Login,
   surveys: () => Surveys,
   speaker: () => Speaker,
-  event: () => Event,
+  event: () => EventScene,
+  signup: () => Signup
 }))
 
 export default Router;
