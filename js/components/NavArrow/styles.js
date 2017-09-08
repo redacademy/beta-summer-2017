@@ -1,16 +1,17 @@
-import {StyleSheet} from 'react-native';
-import {colors, typography} from '../../config/styles';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    color: colors.white,
+
+    position: 'absolute',
+    left: 10,
+    top: '50%'
   },
   arrowContainer: {
-    height: 10,
-    width: 10,
+
   },
   navArrowImg: {
-    height: 10,
-    width: 10,
+    height: 20,
+    width: 20,
   },
 })

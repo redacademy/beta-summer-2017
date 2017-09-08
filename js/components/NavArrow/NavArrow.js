@@ -13,7 +13,7 @@ const NavArrow = ({ navAction }) => {
     <View style={styles.container}>
       <TouchableOpacity style={styles.arrowContainer} onPress={navAction}>
         <Image style={styles.navArrowImg}
-          source={require('../../assets/images/left_arrow.png')}
+          source={require('../../assets/images/arrow.png')}
         />
       </TouchableOpacity>
     </View>
