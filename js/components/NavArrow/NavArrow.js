@@ -10,9 +10,9 @@ import { styles } from './styles';
 
 const NavArrow = ({ navAction }) => {
   return (
-    <View>
-      <TouchableOpacity>
-        <Image style={styles.r10LogoImage}
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.arrowContainer} onPress={navAction}>
+        <Image style={styles.navArrowImg}
           source={require('../../assets/images/left_arrow.png')}
         />
       </TouchableOpacity>
