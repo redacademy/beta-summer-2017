@@ -15,7 +15,6 @@ import { typography, colors } from '../config/styles';
 import Router from './routes';
 import { popModal } from '../redux/modules/moreModal';
 
-
 const defaultRouteConfig = {
   navigationBar: {
     tintColor: colors.white,
