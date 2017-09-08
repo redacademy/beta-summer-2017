@@ -6,8 +6,6 @@ import {colors, typography } from '../../config/styles';
 export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    // marginTop: 20,
-    // marginBottom: 20,
   },
   buttonContainer: {
     borderWidth: 2,
