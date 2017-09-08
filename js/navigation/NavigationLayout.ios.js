@@ -5,44 +5,41 @@ import {
   TabNavigationItem as TabItem,
 } from '@expo/ex-navigation';
 import {
-  Text
+  Text,
+  Image,
+  Linking
 } from 'react-native';
-
-import Router from './routes'
+import { NavMenuPopUp } from '../components/NavMenuPopUp';
+import { styles } from './styles';
+import { typography, colors } from '../config/styles';
+import Router from './routes';
 
 class NavigationLayout extends Component {
+
   render() {
     return (
       <TabNavigation
         id="tabMain"
-        initialTab="landing"
+        initialTab="home"
+        tabBarColor="#353434"
       >
         <TabItem
-          id="landing"
-          title="landing temp tab"
+          id="home"
+          title="home"
           renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/home_icon.png')} style={styles.navIconIos}  />}          
         >
           <StackNavigation
-            id="landing"
-            navigatorUID="landing"
-            initialRoute={Router.getRoute('landing')}
-          />
-        </TabItem>
-        <TabItem
-          id="dashboard"
-          title="dashboard"
-          renderTitle ={this.renderTitle}
-        >
-          <StackNavigation
-            id="dashboard"
-            navigatorUID="dashboard"
-            initialRoute={Router.getRoute('dashboard')}
+            id="home"
+            navigatorUID="home"
+            initialRoute={Router.getRoute('home')}
           />
         </TabItem>
         <TabItem
           id="events"
           title="events"
           renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/events_icon.png')} style={styles.navIconIos}  />}
         >
           <StackNavigation
             id="events"
@@ -51,15 +48,37 @@ class NavigationLayout extends Component {
           />
         </TabItem>
         <TabItem
-          id="home"
-          title="home"
+          id="newTalk"
+          title="new talk"
           renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos}  />}
+          onPress={() => Linking.openURL('mailto:contact@soapboxspeakers.com').catch(err => console.error('An error occurred', err))}
         >
           <StackNavigation
-            id="home"
-            navigatorUID="home"
-            initialRoute={Router.getRoute('home')}
+            id="newTalk"
+            navigatorUID="newTalk"
           />
+        </TabItem>
+        <TabItem
+          id="dashboard"
+          title="dashboard"
+          renderTitle ={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos}  />}          
+        >
+          <StackNavigation
+            id="dashboard"
+            navigatorUID="dashboard"
+            initialRoute={Router.getRoute('dashboard')}
+          />
+        </TabItem>
+        <TabItem
+          id="more"
+          title="more"
+          renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}      
+          //TODO: create redux state to manage conditional rendering of tabnav menu popup
+          onPress={() => console.log('trigger popup render')}    
+        >
         </TabItem>
       </TabNavigation>
     );
@@ -67,14 +86,14 @@ class NavigationLayout extends Component {
 
   renderTitle(isSelected, title) {
     const titleStyle = {
-      color: isSelected ? 'black' : '#999999',
-      fontSize: 14
+      color: isSelected ? colors.lightGrey : colors.lightGrey,
+      fontSize: 10,
+      fontFamily: typography.fontMainRegular
     }
     return (
       <Text style={titleStyle}>{title}</Text>
     )
   }
-
 }
 
 export default NavigationLayout;

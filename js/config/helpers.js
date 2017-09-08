@@ -98,3 +98,6 @@ export function updateFullname(name, user) {
 
 //talks
 //update talks speaker stats
+
+//Navigation Helper
+
