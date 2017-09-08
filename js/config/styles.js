@@ -3,7 +3,7 @@
 
 export const colors = {
   taxiYellow: '#FFCC01',
-  paleYellow: '#FF8DA',
+  paleYellow: '#FFF8DA',
   softYellow: '#F8E594',
   darkGrey: '#353434',
   mediumGrey: '#979797',

@@ -4,7 +4,7 @@ import NavigationLayout from './NavigationLayout';
 import LandingPage from '../scenes/LandingPage';
 import Dashboard from '../scenes/Dashboard';
 import Events from '../scenes/Events';
-import Event from '../scenes/Event';
+import EventScene from '../scenes/Event';
 import Home from '../scenes/Home';
 import Profile from '../scenes/Profile';
 import Login from '../scenes/Login';
@@ -22,7 +22,7 @@ const Router = createRouter(() => ({
   login: () => Login,
   surveys: () => Surveys,
   speaker: () => Speaker,
-  event: () => Event,
+  event: () => EventScene,
   signup: () => Signup
 }))
 

@@ -43,9 +43,7 @@ class SignupContainer extends Component {
         passwordField={this.props.passwordField}
         fullnameField={this.props.fullnameField}
 
-        signupHandler={() => {
-          this.signupHandler()
-        }}
+        signupHandler={this.signupHandler}
 
         handleEmail={(e) => {
           this.handleEmail(e)
