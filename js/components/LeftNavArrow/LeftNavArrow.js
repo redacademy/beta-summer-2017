@@ -8,7 +8,7 @@ import {
 
 import { styles } from './styles';
 
-const NavArrow = ({ navAction }) => {
+const LeftNavArrow = ({ navAction }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.arrowContainer} onPress={navAction}>
@@ -20,4 +20,4 @@ const NavArrow = ({ navAction }) => {
   );
 };
 
-export default NavArrow;
+export default LeftNavArrow;
