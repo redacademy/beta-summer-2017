@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   sceneContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: "space-around",
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width
   },
@@ -69,6 +68,10 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     width: Dimensions.get('window').width / 1.55,
     height: Dimensions.get('window').height / 3.15,
+<<<<<<< HEAD
+=======
+    marginTop: -10
+>>>>>>> finished styling on home screen to scale to different screen sizes
   },
   attendHeader: {
     color: colors.white,
@@ -78,6 +81,10 @@ export const styles = StyleSheet.create({
     fontSize: typography.norwester16,
     fontWeight: 'bold',
     marginLeft: 3,
+<<<<<<< HEAD
+=======
+    marginBottom: 8
+>>>>>>> finished styling on home screen to scale to different screen sizes
   },
   attendeeScrollView: {
     flexDirection: 'row',
@@ -100,7 +107,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     flexWrap: 'wrap',
     fontSize: typography.norwester14,
-    marginLeft: 5,
+    marginLeft: 10,
     color: colors.white
   },
   attendeePhoto: {
