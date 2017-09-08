@@ -42,6 +42,19 @@ class NavigationLayout extends Component {
         initialTab="home"
         tabBarColor="#353434"
       >
+        {/* Remove in final push! */}
+        <TabItem
+          id="surveys_test"
+          title="surveys_test"
+          renderTitle={this.renderTitle}
+        >
+          <StackNavigation
+            id="surveys"
+            navigatorUID="surveys"
+            initialRoute={Router.getRoute('surveys')}
+            defaultRouteConfig={defaultRouteConfig}
+          />
+        </TabItem>
         <TabItem
           id="home"
           title="home"
