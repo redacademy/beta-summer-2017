@@ -68,10 +68,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     width: Dimensions.get('window').width / 1.55,
     height: Dimensions.get('window').height / 3.15,
-<<<<<<< HEAD
-=======
     marginTop: -10
->>>>>>> finished styling on home screen to scale to different screen sizes
   },
   attendHeader: {
     color: colors.white,
@@ -81,10 +78,7 @@ export const styles = StyleSheet.create({
     fontSize: typography.norwester16,
     fontWeight: 'bold',
     marginLeft: 3,
-<<<<<<< HEAD
-=======
     marginBottom: 8
->>>>>>> finished styling on home screen to scale to different screen sizes
   },
   attendeeScrollView: {
     flexDirection: 'row',
