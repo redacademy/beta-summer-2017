@@ -16,12 +16,12 @@ export const getNextEvent = (events, users) => {
 
 export const eventWithSpeakers = (event, users) => {
   return event.talks.map(talk => {
-    if(typeof(talk.speaker_id)==='string'){
+    if (typeof (talk.speaker_id) === 'string') {
       talk.speaker_id = users.users[talk.speaker_id]
     }
     return talk
   });
-} 
+}
 
 export const eventWithTalks = (event, speeches) => {
   return event.talks.reduce((acc, cur) => {
@@ -33,3 +33,14 @@ export const eventWithTalks = (event, speeches) => {
 export const eventDataSet = (event, talks, users) => {
   return eventWithSpeakers(eventWithTalks(event, talks), users)
 }
+
+export const parseGoalsObjToArr = goalsObj => {
+  return Object.keys(goalsObj).reduce((acc, val) => {
+    if (goalsObj[val] === "") {
+      return acc;
+    } else {
+      acc.push(goalsObj[val])
+      return acc;
+    }
+  }, []);
+};

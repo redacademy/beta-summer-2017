@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
-import { Dimensions, Image, Text } from 'react-native';
-import Surveys from './Surveys';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Dimensions, Image } from 'react-native';
+
+import '../../redux/modules/actions/questionsActions';
+import Surveys from './Pages/Surveys';
+import CommentScreen from './Pages/CommentScreen';
 import Loader from '../../components/Loader';
+import {
+  setSurveyAnswers,
+  setSurveyComments,
+  setTalkData
+} from '../../redux/modules/actions/surveyActions';
+import { goToSurveyComplete } from '../../navigation/navHelpers';
+import { giveFeedback } from '../../config/surveyhelpers';
+import { parseGoalsObjToArr } from '../Lib/helperFunctions';
 
 class SurveysContainer extends Component {
   static route = {
@@ -16,51 +29,83 @@ class SurveysContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true, 
-      questions: [],
-      answers: {},
+      showWarningModal: false,
+      showGoalModal: false,
       selectedValue: -1,
       n: 0
     };
   }
 
   componentDidMount() {
-    fetch("https://betatalks-7fc6d.firebaseio.com/questions.json")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ questions: data, loading: false })
-      }).catch(err => console.log('Error fetching JSON', err))
+    this.props.dispatch(setTalkData(this.props.talkObj.speakerData));
+    this.displayGoalModal(!this.state.showGoalModal);
   }
 
-  dispatchAnswer(question, quality, answer) {
+  dispatchAnswer = (question, quality, answer) => {
     const answerWithQ = { ...answer, quality, question };
+    this.props.dispatch(setSurveyAnswers({ [question]: answerWithQ }));
     this.setState({
-      answers: { [question]: answerWithQ },
       selectedValue: answer.value
     });
   }
 
-  nextQuestion = () => {
-    this.setState({ n: this.state.n + 1})
+  displayGoalModal = modalState => this.setState({ showGoalModal: modalState });
+
+  closeWarningModal = () => this.setState({ showWarningModal: false });
+
+  dispatchComments = comment => this.props.dispatch(setSurveyComments(comment))
+
+  submitSurvey = () => {
+    const talk = this.props.talkObj.speakerData;
+    const surveyAns = this.props.surveyAnswers;
+    const textfeedback = this.props.comments;
+    // placeholder id for testing
+    giveFeedback(talk, 'EVyPYeHeziX06GqVO9nMZ8ieONh1', surveyAns, textfeedback);
+    goToSurveyComplete();
   }
 
-  previousQuestion = () => {
-    this.setState({ n: this.state.n - 1})
+  nextQuestion = () => {
+    if (this.state.selectedValue === -1) {
+      this.setState({ showWarningModal: true });
+    } else {
+      this.setState({ n: this.state.n + 1, selectedValue: -1 });
+    } 
+  }
+
+  previousQuestion = prevQuestion => {
+    const prevSelectedAnswer = this.props.surveyAnswers[prevQuestion];
+    this.setState({
+      n: this.state.n - 1,
+      selectedValue: prevSelectedAnswer.value
+    })
   }
 
   renderQuestion = (questions, dispatch, selectedValue, n) => {
-    if (n + 1 >= questions.length) {
-      return <Text>Boom!</Text>
+    if (n + 1 > questions.length) {
+      return (
+        <CommentScreen
+          modalState={this.state.showGoalModal}
+          displayGoalModal={this.displayGoalModal}
+          submitSurvey={this.submitSurvey}
+          dispatchComments={this.dispatchComments}
+          previousQuestionFunc={this.previousQuestion}
+          prevQuestion={questions[n - 1]}
+        />
+      );
     } else {
       return (
         <Surveys
-          n={n}
           dispatchAnswer={dispatch}
+          speakerGoals={parseGoalsObjToArr(this.props.talkObj.speakerData.speaker_id.goals)}
+          goalModalState={this.state.showGoalModal}
+          warningModalState={this.state.showWarningModal}
+          closeWarningModal={this.closeWarningModal}
+          displayGoalModal={this.displayGoalModal}
           questions={questions}
           question={questions[n]}
           nextQuestion={this.nextQuestion}
-          previousQuestion={this.previousQuestion}
+          previousQuestionFunc={this.previousQuestion}
+          prevQuestion={questions[n - 1]}
           selectedValue={selectedValue}
         />
       );
@@ -68,9 +113,72 @@ class SurveysContainer extends Component {
   }
 
   render() {
-    if (this.state.loading) return <Loader />;
-    return this.renderQuestion(this.state.questions, this.dispatchAnswer.bind(this), this.state.selectedValue, this.state.n);
+    const { loading, questions } = this.props.questions;
+    if (loading) return <Loader />;
+    return this.renderQuestion(questions, this.dispatchAnswer, this.state.selectedValue, this.state.n);
   }
 }
 
-export default SurveysContainer;
+const mapStateToProps = state => ({
+  questions: state.questions,
+  surveyAnswers: state.survey.surveyAnswers,
+  comments: state.survey.comments
+});
+
+export default connect(mapStateToProps)(SurveysContainer);
+
+SurveysContainer.defaultProps = {
+  comments: null
+};
+
+SurveysContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  comments: PropTypes.string,
+  questions: PropTypes.shape({
+    loading: PropTypes.bool,
+    questions: PropTypes.arrayOf(PropTypes.shape({
+      quality: PropTypes.string,
+      question: PropTypes.string,
+      answers: PropTypes.arrayOf(PropTypes.shape({
+        answer: PropTypes.string,
+        value: PropTypes.number
+      }))
+    }))
+  }).isRequired,
+  surveyAnswers: PropTypes.shape({   
+    answer: PropTypes.string,
+    value: PropTypes.number,
+    quality: PropTypes.string,
+    question: PropTypes.string
+  }).isRequired,
+  talkObj: PropTypes.shape({
+    speakerData: PropTypes.shape({
+      event_id: PropTypes.string,
+      respondants: PropTypes.shape({
+        init: PropTypes.bool,
+      }),
+      score: PropTypes.number,
+      speaker_id: PropTypes.PropTypes.shape({
+        bio: PropTypes.string,
+        user_id: PropTypes.string,
+        email: PropTypes.string,
+        fullName: PropTypes.string,
+        goals: PropTypes.objectOf(PropTypes.string),
+        myTalks: PropTypes.arrayOf(PropTypes.string),
+        socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+        speakerStats: PropTypes.arrayOf(PropTypes.shape({
+          quality: PropTypes.string,
+          submitAmnt: PropTypes.number,
+          value: PropTypes.number
+        }))
+      }),
+      talkStats: PropTypes.arrayOf(PropTypes.shape({
+        quality: PropTypes.string,
+        submitAmnt: PropTypes.number,
+        value: PropTypes.number
+      })),
+      talk_id: PropTypes.string,
+      title: PropTypes.string
+    })
+  }).isRequired
+};

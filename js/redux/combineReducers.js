@@ -6,6 +6,8 @@ import { EventsReducer } from './modules/reducers/eventReducer';
 import { UsersReducer } from './modules/reducers/userReducer';
 import { TalksReducer } from './modules/reducers/talkReducer';
 import { HandleModal } from './modules/moreModal';
+import { QuestionsReducer } from './modules/reducers/questionsReducer';
+import { SurveyReducer } from './modules/reducers/surveyReducer';
 
 export default combineReducers({ 
   navigation: NavigationReducer,
@@ -14,5 +16,7 @@ export default combineReducers({
   events: EventsReducer,
   users: UsersReducer,
   talks: TalksReducer,
-  modal: HandleModal
+  modal: HandleModal,
+  questions: QuestionsReducer,
+  survey: SurveyReducer
 });

@@ -38,23 +38,11 @@ class NavigationLayout extends Component {
   render() {
     return (
       <TabNavigation
-        id="tabMain"
+        id="main"
+        navigatorUID="main"
         initialTab="home"
         tabBarColor="#353434"
       >
-        {/* Remove in final push! */}
-        <TabItem
-          id="surveys_test"
-          title="surveys_test"
-          renderTitle={this.renderTitle}
-        >
-          <StackNavigation
-            id="surveys"
-            navigatorUID="surveys"
-            initialRoute={Router.getRoute('surveys')}
-            defaultRouteConfig={defaultRouteConfig}
-          />
-        </TabItem>
         <TabItem
           id="home"
           title="home"
@@ -70,6 +58,7 @@ class NavigationLayout extends Component {
         </TabItem>
         <TabItem
           id="events"
+          navigatorUID="events"
           title="events"
           renderTitle={this.renderTitle}
           renderIcon={() => <Image source={require('../assets/icons/events_icon.png')} style={styles.navIconIos} />}

@@ -13,11 +13,14 @@ export const styles = StyleSheet.create({
     height: Dimensions.get('window').height / 1.25,
     justifyContent: 'space-between',
   },
-  targetIcon: {
+  targetIconContainer: {
+    width: 55, 
+    height: 55, 
     alignSelf: 'flex-end',
-    marginRight: 15,
-    marginTop: 10,
-    marginBottom: 10,
+    justifyContent: 'center'
+  },
+  targetIcon: {
+    alignSelf: 'center',
     width: 35,
     height: 35
   },
@@ -56,5 +59,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 12.5
+  },
+  commentBox: {
+    borderColor: colors.mediumGrey,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    height: Dimensions.get('window').height / 2.75,
+    width: Dimensions.get('window').width / 1.25,
+    margin: 10,
+    padding: 5,
+    fontSize: typography.norwester12,
+    fontFamily: typography.fontMainRegular
   }
 });

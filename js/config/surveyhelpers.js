@@ -108,7 +108,7 @@ export const valuecalc = (value) => {
 
 export const transactionCombo = (talk, updates, textfeedback) => {
   const talkref = betatalks.child(talk.talk_id + '/talkStats');
-  const speakerref = betausers.child(talk.speaker_id + '/speakerStats');
+  const speakerref = betausers.child(talk.speaker_id.user_id + '/speakerStats');
   talkref.transaction(
     statsUpd(updates), 
     ()=>{return speakerref.transaction(
