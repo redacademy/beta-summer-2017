@@ -6,15 +6,14 @@ import {
   TextInput,
   Image,
 } from 'react-native';
-
 import LinearGradient from 'react-native-linear-gradient';
-
-import { colors, typography } from '../../config/styles';
+import OutlinedButton from '../../components/OutlinedButton'
+import { auth } from '../../config/firebase';
+import { colors } from '../../config/styles';
 import { styles } from './styles';
 
-const Login = () => {
+const Login = ({ loginHandler, handleEmail, handlePassword, emailField, passwordField }) => {
   return (
-    //TODO: background gradient
     <View style={styles.container}>
       <LinearGradient style={styles.lgHeight} colors={[colors.lightGrey, colors.black]} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 0.4 }}>
         <View style={styles.loginField}>
@@ -27,20 +26,38 @@ const Login = () => {
           />
           <Text style={styles.bodyText}>Please enter your...</Text>
           <TextInput
+            autoCapitalize='none'
             style={styles.input}
-            placeholder='Email Address'
+            onChangeText={handleEmail}
+            value={emailField}
+            placeholder='Email'
           />
           <TextInput
             style={styles.input}
+            onChangeText={handlePassword}
+            value={passwordField}
             placeholder='Password'
+            secureTextEntry={true}
           />
-          <Text style={styles.text}>
-            This will be the button
-          </Text>
+          <OutlinedButton
+            style={styles.bodyText}
+            onPress={() => loginHandler()}
+            text={'LOG IN'}
+          />
+          {console.log(auth.currentUser)}
         </View>
       </LinearGradient>
     </View>
   )
 }
+
+Login.propTypes = {
+  emailField: PropTypes.string.isRequired,
+  passwordField: PropTypes.string.isRequired,
+  handleEmail: PropTypes.func.isRequired,
+  handlePassword: PropTypes.func.isRequired,
+  loginHandler: PropTypes.func.isRequired
+
+};
 
 export default Login;
