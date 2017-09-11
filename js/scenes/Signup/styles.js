@@ -18,8 +18,8 @@ export const styles = StyleSheet.create({
   },
 
   bulb: {
-    width: 65,
-    height: 110,
+    width: 60,
+    height: 100,
     marginTop: 20,
     marginBottom: 20
   },
@@ -34,17 +34,17 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.white,
     width: '80%',
-    height: 35,
-    marginTop: 10,
-    marginBottom: 10
+    height: 30,
+    marginTop: 8,
+    marginBottom: 8
   },
 
   title: {
     color: colors.white,
     fontFamily: typography.titleHeading,
-    fontSize: typography.norwester36,
-    marginTop: 30,
-    width: '90%',
+    fontSize: typography.norwester24,
+    marginTop: 35,
+    width: '70%',
     textAlign: 'center',
     alignContent: 'center',
     alignItems: 'center',
@@ -53,6 +53,8 @@ export const styles = StyleSheet.create({
   subTitle: {
     color: colors.white,
     fontFamily: typography.fontMain,
-    fontSize: typography.robotoRegular18
+    fontSize: typography.robotoRegular16,
+    marginTop: 5,
+    marginBottom: 5
   }
 });

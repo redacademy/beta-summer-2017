@@ -23,6 +23,7 @@ export const typography = {
   norwester36: 36,
   norwester24: 24,
   norwester20: 20,
+  norwester16: 16,
   norwester14: 14,
   norwester12: 12,
   norwester10: 10,
