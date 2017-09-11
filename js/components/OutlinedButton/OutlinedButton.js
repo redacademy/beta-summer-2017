@@ -8,15 +8,15 @@ import {
 import { styles } from './styles';
 
 
-const OutlineButtons = ({ buttonAction, text }) => {
+const OutlinedButton = ({ onPress, text }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.buttonContainer} onPress={buttonAction}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
         <Text style={styles.buttonText}>{text}</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default OutlineButtons;
+export default OutlinedButton;
 
