@@ -4,15 +4,12 @@ export const UPDATE_PASSWORD_FIELD = 'UPDATE_PASSWORD_FIELD';
 export const UPDATE_FULLNAME_FIELD = 'UPDATE_FULLNAME_FIELD';
 export const UPDATE_BIO_FIELD = 'UPDATE_BIO_FIELD';
 export const UPDATE_GOALS_FIELD = 'UPDATE_GOALS_FIELD';
-export const UPDATE_FACEBOOK_FIELD = 'UPDATE_FACEBOOK_FIELD';
-export const UPDATE_LINKEDIN_FIELD = 'UPDATE_LINKEDIN_FIELD';
-export const UPDATE_TWITTER_FIELD = 'UPDATE_TWITTER_FIELD';
 
 // ACTION CREATORS
 export function updateEmailField(email) {
   return {
     type: UPDATE_EMAIL_FIELD,
-    payload: email
+    email
   };
 }
 
@@ -44,25 +41,12 @@ export function updateGoalsField(goals) {
   };
 }
 
-export function updateFacebookField(facebook) {
-  return {
-    type: UPDATE_FACEBOOK_FIELD,
-    payload: facebook
-  };
-}
 
-export function updateLinkedInField(linkedin) {
+export function updateSocialMedia(payload) {
   return {
-    type: UPDATE_LINKEDIN_FIELD,
-    payload: linkedin
-  };
-}
-
-export function updateTwitterField(twitter) {
-  return {
-    type: UPDATE_TWITTER_FIELD,
-    payload: twitter
-  };
+    type: "UPDATE_SOCIAL_MEDIA",
+    payload
+  }
 }
 
 // REDUCERS
@@ -72,9 +56,9 @@ const initialState = {
   fullnameField: '',
   bioField: '',
   goalsField: '',
-  facebookField: '',
-  linkedInField: '',
-  twitterField: ''
+  facebook: '',
+  linkedin: '',
+  twitter: ''
 };
 
 export function userFormsReducer(state = initialState, action) {
@@ -82,7 +66,7 @@ export function userFormsReducer(state = initialState, action) {
   case UPDATE_EMAIL_FIELD:
     return {
       ...state,
-      emailField: action.payload
+      emailField: action.email
     };
 
   case UPDATE_PASSWORD_FIELD:
@@ -109,22 +93,12 @@ export function userFormsReducer(state = initialState, action) {
       goalsField: action.payload
     };
 
-  case UPDATE_FACEBOOK_FIELD:
+  case "UPDATE_SOCIAL_MEDIA":
+    const { value, type } = action.payload;
+    const newState = state;
+    newState[type] = value
     return {
-      ...state,
-      facebookField: action.payload
-    };
-
-  case UPDATE_LINKEDIN_FIELD:
-    return {
-      ...state,
-      linkedInField: action.payload
-    };
-
-  case UPDATE_TWITTER_FIELD:
-    return {
-      ...state,
-      twitterField: action.payload
+      ...newState
     };
 
   default:
