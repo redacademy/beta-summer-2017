@@ -7,6 +7,7 @@ import '../../redux/modules/actions/eventActions';
 import '../../redux/modules/actions/userActions';
 import Home from './Home';
 import Loader from '../../components/Loader';
+import { getNextEvent } from '../Lib/helperFunctions';
 
 class HomeContainer extends Component {
 
@@ -16,21 +17,10 @@ class HomeContainer extends Component {
     }
   }
 
-  getNextEvent = (events, users) => {
-    const nextEvent = events.find(event => event.date > Math.floor(Date.now() / 1000));
-    // return next event and replace attendees ids with full objects of user data
-    const attendeesWithData = nextEvent.attendees.reduce((acc, val) => {
-      acc.push(users[val]);
-      return acc;
-    }, []);
-    nextEvent.attendees = attendeesWithData;
-    return nextEvent;
-  }
-
   render() {
     const { events, users } = this.props;
     if (events.loading || users.loading) return <Loader />;
-    return <Home nextEvent={this.getNextEvent(events.events, users.users)} />;
+    return <Home nextEvent={getNextEvent(events.events, users.users)} />;
   }
 }
 
