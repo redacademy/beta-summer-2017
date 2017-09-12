@@ -3,11 +3,10 @@ export const calcNextEventDate = (events) => {
 }
 
 export const replaceIdArrWithObjs = (objProp, arr) => {
-  const arrWithData = objProp.reduce((acc, val) => {
+  return objProp.reduce((acc, val) => {
     acc.push(arr[val]);
     return acc;
   }, []);
-  return arrWithData;
 }
 
 export const getNextEvent = (events, users) => {
