@@ -16,6 +16,11 @@ import Router from './routes';
 
 class NavigationLayout extends Component {
 
+  openEmail() {
+    Linking.openURL('mailto:contact@soapboxspeakers.com')
+      .catch(err => console.error('An error occurred', err))
+  }
+
   render() {
     return (
       <TabNavigation
@@ -52,7 +57,7 @@ class NavigationLayout extends Component {
           title="new talk"
           renderTitle={this.renderTitle}
           renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos}  />}
-          onPress={() => Linking.openURL('mailto:contact@soapboxspeakers.com').catch(err => console.error('An error occurred', err))}
+          onPress={() => this.openEmail()}
         >
           <StackNavigation
             id="newTalk"
