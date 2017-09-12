@@ -4,11 +4,21 @@ import {
   TabNavigation,
   TabNavigationItem as TabItem,
 } from '@expo/ex-navigation';
-import {
-  Text
-} from 'react-native';
+import { Text } from 'react-native';
+import { colors, typography } from '../config/styles';
 
 import Router from './routes'
+
+const defaultRouteConfig = {
+  navigationBar: {
+    tintColor: 'white',
+    backgroundColor: colors.darkGrey,
+    titleStyle: {
+      fontFamily: typography.titleHeading,
+      fontSize: typography.norwester20
+    }
+  }
+}
 
 class NavigationLayout extends Component {
   render() {
@@ -62,14 +72,15 @@ class NavigationLayout extends Component {
           />
         </TabItem>
         <TabItem
-          id="speaker"
-          title="speekur"
+          id="event"
+          title="event"
           renderTitle={this.renderTitle}
         >
           <StackNavigation
-            id="speaker"
-            navigatorUID="speaker"
-            initialRoute={Router.getRoute('speaker')}
+            id="event"
+            navigatorUID="event"
+            initialRoute={Router.getRoute('event')}
+            defaultRouteConfig={defaultRouteConfig}
           />
         </TabItem>
       </TabNavigation>
