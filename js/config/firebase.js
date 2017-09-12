@@ -11,11 +11,15 @@ var config = {
 };
 firebase.initializeApp(config);
 
-export const betadb = firebase.database().ref(); 
+export const betadb = firebase.database().ref();
+export const betausers = firebase.database().ref('users'); //only users
+export const betaevents = firebase.database().ref('events'); //only events
+export const betaquestions = firebase.database().ref('questions'); //only questions
+export const betatalks = firebase.database().ref('talks'); //only talks
 export const auth = firebase.auth();
 
   //listeners
-  // betadb.on('value', function(snapshot){ //create listener for changes in db
+  // nameofthedatabase.on('value', function(snapshot){ //create listener for changes in db
   //   dispatch(dispatchfunc(snapshot.val())); //dispatch changes in redux
   // }, function(error){ 
   //   console.log(error) // handle errors 
