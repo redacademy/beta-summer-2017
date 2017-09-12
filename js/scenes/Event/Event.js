@@ -10,11 +10,11 @@ import {
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import LinearGradient from 'react-native-linear-gradient';
-import { goToSpeaker } from '../../navigation/navHelpers';
+import { goToSpeaker} from '../../navigation/navHelpers';
 import { styles } from './styles';
 import { colors } from '../../config/styles';
 
-const SingleEvent = ({ eventData, eventDataSet, navigatorUID }) => {
+const SingleEvent = ({ eventData, eventDataSet}) => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -30,7 +30,7 @@ const SingleEvent = ({ eventData, eventDataSet, navigatorUID }) => {
         <ScrollView>
           {eventDataSet.map((item) => (
             <View key={item.id}>
-              <TouchableOpacity onPress={() => goToSpeaker(navigatorUID, { item })}>
+              <TouchableOpacity onPress={() => goToSpeaker({ item })}>
                 <View style={styles.talkBorder} />
                 <View style={styles.talkContainer}>
                   <Image style={styles.image} source={{ uri: 'https://s3-eu-west-1.amazonaws.com/storage.publisherplus.ie/media.image.ie/uploads/2017/07/19173304/BWOTY17-PROMO-PIC-1-LR.jpg' }} />
