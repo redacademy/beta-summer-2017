@@ -19,8 +19,7 @@ export const styles = StyleSheet.create({
     height: 75,
     borderWidth: 3,
     borderColor: colors.darkGrey,
-    marginTop: 30,
-    marginLeft: 20
+    marginTop: 30
   },
 
   pencil: {
@@ -65,10 +64,7 @@ export const styles = StyleSheet.create({
 
   fieldsContainer: {
     justifyContent: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row'
-  },
-
-  button: {
-    marginTop: 20
   }
 });

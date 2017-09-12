@@ -12,6 +12,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10
   },
   buttonText: {
     fontFamily: typography.titleHeading,
