@@ -19,8 +19,13 @@ export const betatalks = firebase.database().ref('talks'); //only talks
 export const auth = firebase.auth();
 
   //listeners
+<<<<<<< HEAD
   // nameofthedatabase.on('value', function(snapshot){ //create listener for changes in db
   //   dispatch(dispatchfunc(snapshot.val())); //dispatch changes in redux
+=======
+  // betadb.on('value', function(snapshot){ //create listener for changes in db
+  //   store.dispatch(dispatchfunc(snapshot.val())); //dispatch changes in redux
+>>>>>>> refactored redux modules to be separate actions and reducers
   // }, function(error){ 
   //   console.log(error) // handle errors 
   // });

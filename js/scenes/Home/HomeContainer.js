@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Home from './Home';
 import Loader from '../../components/Loader';
-import { fetchEventData } from '../../redux/modules/home';
+import { getEvents } from '../../redux/modules/actions/eventActions';
+import { getUsers } from '../../redux/modules/actions/userActions';
 
 class HomeContainer extends Component {
 
@@ -15,46 +17,64 @@ class HomeContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchEventData());
+    this.props.getEvents();
+    this.props.getUsers();
+   
+  }
+
+  getAttendeesWithData = () => {
+    const { events, users } = this.props;
+    const nxtEvent = events.nextEvent;
+
+    console.log("I AM NEXT EVENT", nxtEvent)
+
+    const attendeesWithData = nxtEvent.attendees.reduce((acc, val) => {
+      acc.push(users[val]);
+      return acc;
+    }, []);
+    nxtEvent.attendees = attendeesWithData;
+    return nxtEvent;
   }
 
   render() {
-    if (this.props.loading) return <Loader />;
-    return <Home nextEvent={this.props.nextEvent} />;
+    const { events, users } = this.props;
+    if (events.loading || users.loading) return <Loader />;
+    return <View><Text>Hi</Text></View>;
+    //return <Home nextEvent={this.getAttendeesWithData()} />;
   }
 }
 
 const mapStateToProps = state => ({
-  loading: state.home.loading,
-  nextEvent: state.home.nextEvent
+  events: state.events,
+  users: state.users
 });
 
-export default connect(mapStateToProps)(HomeContainer);
+export default connect(mapStateToProps, { getEvents, getUsers })(HomeContainer);
 
 HomeContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  nextEvent: PropTypes.shape({
-    attendees: PropTypes.arrayOf(PropTypes.shape({
-      bio: PropTypes.string,
-      email: PropTypes.string,
-      fullName: PropTypes.string,
-      goals: PropTypes.objectOf(PropTypes.string),
-      myTalks: PropTypes.arrayOf(PropTypes.string),
-      socialMediaUrls: PropTypes.objectOf(PropTypes.string),
-      speakerStats: PropTypes.arrayOf(PropTypes.shape({
-        quality: PropTypes.string,
-        submitAmnt: PropTypes.number,
-        value: PropTypes.number
-      })),
-    })),
-    date: PropTypes.number,
-    startTime: PropTypes.number,
-    endTime: PropTypes.number,
-    eventCode: PropTypes.string,
-    id: PropTypes.string,
-    location: PropTypes.objectOf(PropTypes.string),
-    speakers: PropTypes.arrayOf(PropTypes.string),
-    talks: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired
+  //   loading: PropTypes.bool.isRequired,
+  //   nextEvent: PropTypes.shape({
+  //     attendees: PropTypes.arrayOf(PropTypes.shape({
+  //       bio: PropTypes.string,
+  //       email: PropTypes.string,
+  //       fullName: PropTypes.string,
+  //       goals: PropTypes.objectOf(PropTypes.string),
+  //       myTalks: PropTypes.arrayOf(PropTypes.string),
+  //       socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+  //       speakerStats: PropTypes.arrayOf(PropTypes.shape({
+  //         quality: PropTypes.string,
+  //         submitAmnt: PropTypes.number,
+  //         value: PropTypes.number
+  //       })),
+  //     })),
+  //     date: PropTypes.number,
+  //     startTime: PropTypes.number,
+  //     endTime: PropTypes.number,
+  //     eventCode: PropTypes.string,
+  //     id: PropTypes.string,
+  //     location: PropTypes.objectOf(PropTypes.string),
+  //     speakers: PropTypes.arrayOf(PropTypes.string),
+  //     talks: PropTypes.arrayOf(PropTypes.string),
+  //   }).isRequired
 }
+

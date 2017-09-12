@@ -73,35 +73,35 @@ class NavigationLayout extends Component {
           id="newTalk"
           title="new talk"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos}  />}
+          renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos} />}
           onPress={() => Linking.openURL('mailto:contact@soapboxspeakers.com').catch(err => console.error('An error occurred', err))}
         >
-        <StackNavigation
-          id="newTalk"
-          navigatorUID="newTalk"
-        />
-      </TabItem>
-      <TabItem
-        id="dashboard"
-        title="dashboard"
-        renderTitle={this.renderTitle}
-        renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
-      >
-        <StackNavigation
+          <StackNavigation
+            id="newTalk"
+            navigatorUID="newTalk"
+          />
+        </TabItem>
+        <TabItem
           id="dashboard"
-          navigatorUID="dashboard"
-          initialRoute={Router.getRoute('dashboard')}
-        />
-      </TabItem>
-      <TabItem
-        id="more"
-        title="more"
-        renderTitle={this.renderTitle}
-        renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}
-        //TODO: create redux state to manage conditional rendering of tabnav menu popup
-        onPress={() => console.log('trigger popup render')}
-      >
-      </TabItem>
+          title="dashboard"
+          renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
+        >
+          <StackNavigation
+            id="dashboard"
+            navigatorUID="dashboard"
+            initialRoute={Router.getRoute('dashboard')}
+          />
+        </TabItem>
+        <TabItem
+          id="more"
+          title="more"
+          renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}
+          //TODO: create redux state to manage conditional rendering of tabnav menu popup
+          onPress={() => console.log('trigger popup render')}
+        >
+        </TabItem>
       </TabNavigation >
     );
   }
