@@ -13,6 +13,7 @@ import {
 } from '@expo/ex-navigation';
 import Router from './navigation/routes';
 import Store from './redux/store';
+import { colors } from './config/styles';
 
 const navigationContext = new NavigationContext({
   router: Router,
@@ -32,7 +33,7 @@ export default class betatalks extends Component {
         <NavigationProvider
           context={navigationContext}
         >
-          <CustomStatusBar backgroundColor="#000" barStyle="light-content" />
+          <CustomStatusBar backgroundColor={colors.black} barStyle="light-content" />
           <StackNavigation
             initialRoute={Router.getRoute('navigation')}
             navigatorUID="root"
