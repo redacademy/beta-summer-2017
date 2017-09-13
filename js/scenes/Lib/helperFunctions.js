@@ -1,16 +1,15 @@
 export const calcNextEventDate = (events) => {
-  return events.find(event => event.date > Math.floor(Date.now() / 1000));
+  const eventsCopy = events;
+  return eventsCopy.find(event => event.date > Math.floor(Date.now() / 1000));
 }
 
-export const replaceIdArrWithObjs = (objProp, arr) => {
-  return objProp.reduce((acc, val) => {
-    acc.push(arr[val]);
+export const idToObjs = (event, users) => {
+  return event.attendees.reduce((acc, cur)=> {
+    acc.attendees.push(users[cur])
     return acc;
-  }, []);
+  }, {...event, attendees:[]});
 }
 
 export const getNextEvent = (events, users) => {
-  const nextEvent = calcNextEventDate(events);
-  nextEvent.attendees = replaceIdArrWithObjs(nextEvent.attendees, users);
-  return nextEvent;
+  return idToObjs(calcNextEventDate(events), users);
 }
