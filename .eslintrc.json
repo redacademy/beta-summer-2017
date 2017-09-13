@@ -29,7 +29,7 @@
         "no-unused-vars": 1,
         "indent": [
             "error",
-            4
+            2
         ],
         "max-len": 0,
         "global-require": 0,
@@ -40,12 +40,10 @@
         "react/jsx-no-bind": 0,
         "react/jsx-filename-extension": 0,
         "react/jsx-indent": [
-            2,
-            4
+            2
         ],
         "react/jsx-indent-props": [
-            2,
-            4
+            2
         ],
         "react/prop-types": 1,
         "comma-dangle": 0,

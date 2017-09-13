@@ -14,6 +14,17 @@ import { styles } from './styles';
 import { typography, colors } from '../config/styles';
 import Router from './routes';
 
+const defaultRouteConfig = {
+  navigationBar: {
+    tintColor: 'white',
+    backgroundColor: colors.darkGrey,
+    titleStyle: {
+      fontFamily: typography.titleHeading,
+      fontSize: typography.norwester20
+    }
+  }
+}
+
 class NavigationLayout extends Component {
 
   openEmail() {
@@ -84,6 +95,7 @@ class NavigationLayout extends Component {
           //TODO: create redux state to manage conditional rendering of tabnav menu popup
           onPress={() => console.log('trigger popup render')}    
         >
+
         </TabItem>
       </TabNavigation>
     );
