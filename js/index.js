@@ -26,7 +26,7 @@ export default class betatalks extends Component {
         >
           <StatusBar barStyle="light-content" />
           <StackNavigation
-            initialRoute={Router.getRoute('navigation')}
+            initialRoute={Router.getRoute('landing')}
             navigatorUID="root"
             id="root"
           />
