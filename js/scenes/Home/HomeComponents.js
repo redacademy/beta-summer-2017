@@ -69,17 +69,76 @@ export const AttendeeList = ({ cStyles, attendees }) => (
     <Text style={cStyles.attendHeader}>Attending</Text>
     <ScrollView contentContainerStyle={cStyles.attendeeScrollView}>
       {(attendees)
-        ? attendees.map(attendee => (
+        && attendees.map(attendee => (
           <AttendeeListItem
             key={attendee.email}
             itemStyles={cStyles}
             attendee={attendee}
           />
-        ))
-        : null}
+        ))}
     </ScrollView>
   </View>
 );
 
+DateHolder.propTypes,
+EventInfo.propTypes = {
+  nextEvent: PropTypes.shape({
+    attendees: PropTypes.arrayOf(PropTypes.shape({
+      bio: PropTypes.string,
+      email: PropTypes.string,
+      fullName: PropTypes.string,
+      goals: PropTypes.objectOf(PropTypes.string),
+      myTalks: PropTypes.arrayOf(PropTypes.string),
+      socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+      speakerStats: PropTypes.arrayOf(PropTypes.shape({
+        quality: PropTypes.string,
+        submitAmnt: PropTypes.number,
+        value: PropTypes.number
+      })),
+    })),
+    date: PropTypes.number,
+    startTime: PropTypes.number,
+    endTime: PropTypes.number,
+    eventCode: PropTypes.string,
+    id: PropTypes.string,
+    location: PropTypes.objectOf(PropTypes.string),
+    speakers: PropTypes.arrayOf(PropTypes.string),
+    talks: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+};
 
+EventLocation.propTypes = {
+  location: PropTypes.objectOf(PropTypes.string).isRequired
+};
 
+AttendeeListItem.propTypes = {
+  attendee: PropTypes.shape({
+    bio: PropTypes.string,
+    email: PropTypes.string,
+    fullName: PropTypes.string,
+    goals: PropTypes.objectOf(PropTypes.string),
+    myTalks: PropTypes.arrayOf(PropTypes.string),
+    socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+    speakerStats: PropTypes.arrayOf(PropTypes.shape({
+      quality: PropTypes.string,
+      submitAmnt: PropTypes.number,
+      value: PropTypes.number
+    }))
+  }).isRequired
+}
+
+AttendeeList.propTypes = {
+  attendees: PropTypes.arrayOf(PropTypes.shape({
+    bio: PropTypes.string,
+    email: PropTypes.string,
+    fullName: PropTypes.string,
+    goals: PropTypes.objectOf(PropTypes.string),
+    myTalks: PropTypes.arrayOf(PropTypes.string),
+    socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+    speakerStats: PropTypes.arrayOf(PropTypes.shape({
+      quality: PropTypes.string,
+      submitAmnt: PropTypes.number,
+      value: PropTypes.number
+    })),
+  })).isRequired
+};
