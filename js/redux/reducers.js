@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import { NavigationReducer } from '@expo/ex-navigation';
-//import { reducer as formReducer } from 'redux-form';
 import { authReducer } from './modules/auth';
 import { userFormsReducer } from './modules/user-forms';
+import { EventsReducer } from './modules/events';
 
 export default combineReducers({ 
   navigation: NavigationReducer,
   auth: authReducer,
-  forms: userFormsReducer
+  forms: userFormsReducer,
+  events: EventsReducer
 });

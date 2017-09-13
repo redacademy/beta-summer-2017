@@ -9,36 +9,44 @@ export const UPDATE_GOALS_FIELD = 'UPDATE_GOALS_FIELD';
 export function updateEmailField(email) {
   return {
     type: UPDATE_EMAIL_FIELD,
-    payload: email
+    email
   };
 }
 
 export function updatePasswordField(password) {
   return {
     type: UPDATE_PASSWORD_FIELD,
-    payload: password
+    password
   };
 }
 
 export function updateFullnameField(fullname) {
   return {
     type: UPDATE_FULLNAME_FIELD,
-    payload: fullname
+    fullname
   };
 }
 
 export function updateBioField(bio) {
   return {
     type: UPDATE_BIO_FIELD,
-    payload: bio
+    bio
   };
 }
 
 export function updateGoalsField(goals) {
   return {
     type: UPDATE_GOALS_FIELD,
-    payload: goals
+    goals
   };
+}
+
+
+export function updateSocialMedia(payload) {
+  return {
+    type: "UPDATE_SOCIAL_MEDIA",
+    payload
+  }
 }
 
 // REDUCERS
@@ -47,7 +55,10 @@ const initialState = {
   passwordField: '',
   fullnameField: '',
   bioField: '',
-  goalsField: ''
+  goalsField: '',
+  facebook: '',
+  linkedin: '',
+  twitter: ''
 };
 
 export function userFormsReducer(state = initialState, action) {
@@ -55,31 +66,39 @@ export function userFormsReducer(state = initialState, action) {
   case UPDATE_EMAIL_FIELD:
     return {
       ...state,
-      emailField: action.payload
+      emailField: action.email
     };
 
   case UPDATE_PASSWORD_FIELD:
     return {
       ...state,
-      passwordField: action.payload
+      passwordField: action.password
     };
 
   case UPDATE_FULLNAME_FIELD:
     return {
       ...state,
-      fullnameField: action.payload
+      fullnameField: action.fullname
     };
 
   case UPDATE_BIO_FIELD:
     return {
       ...state,
-      bioField: action.payload
+      bioField: action.bio
     };
 
   case UPDATE_GOALS_FIELD:
     return {
       ...state,
-      goalsField: action.payload
+      goalsField: action.goals
+    };
+
+  case "UPDATE_SOCIAL_MEDIA":
+    const { value, type } = action.payload;
+    const newState = state;
+    newState[type] = value
+    return {
+      ...newState
     };
 
   default:

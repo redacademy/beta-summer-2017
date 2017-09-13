@@ -6,20 +6,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    borderWidth: 2,
-    borderColor: colors.taxiYellow,
-    height: 50,
-    width: 165,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.taxiYellow,
+    height: 35,
+    width: 140,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 25,
-    marginTop: 10,
-    marginBottom: 10
+    borderRadius: 10,
   },
   buttonText: {
     fontFamily: typography.titleHeading,
-    fontSize: typography.norwester16,
-    color: colors.white,
+    fontSize: typography.norwester14,
+    color: colors.black,
   },
 })
