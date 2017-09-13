@@ -4,11 +4,13 @@ import { authReducer } from './modules/auth';
 import { userFormsReducer } from './modules/user-forms';
 import { EventsReducer } from './modules/reducers/eventReducer';
 import { UsersReducer } from './modules/reducers/userReducer';
+import { TalksReducer } from './modules/reducers/talkReducer';
 
 export default combineReducers({ 
   navigation: NavigationReducer,
   auth: authReducer,
   forms: userFormsReducer,
   events: EventsReducer,
-  users: UsersReducer
+  users: UsersReducer,
+  talks: TalksReducer
 });
