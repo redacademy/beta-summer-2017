@@ -43,6 +43,7 @@
             2
         ],
         "react/jsx-indent-props": [
+            2,
             2
         ],
         "react/prop-types": 1,
