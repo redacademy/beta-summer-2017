@@ -3,14 +3,15 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   landingLogo: {
     flexDirection: 'row',
-    height: 150,
-    width: 350,
+    height: 125,
+    width: 300,
     marginTop: 150
   },
   landingWrapper: {
     backgroundColor: '#000',
     ...StyleSheet.absoluteFillObject,
     display: 'flex',
+    flex: 2,
     alignItems: 'center'
   },
   landingSubWrapper: {
