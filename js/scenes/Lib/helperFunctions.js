@@ -13,3 +13,21 @@ export const idToObjs = (event, users) => {
 export const getNextEvent = (events, users) => {
   return idToObjs(calcNextEventDate(events), users);
 }
+
+export const eventWithSpeakers = (event, users) => {
+  return event.talks.map(talk => {
+    talk.speaker_id = users.users[talk.speaker_id]
+    return talk
+  });
+}
+
+export const eventWithTalks = (event, speeches) => {
+  return event.talks.reduce((acc, cur) => {
+    acc.talks.push(speeches.talks[cur])
+    return acc;
+  }, {...event, talks: []});
+}
+
+export const eventDataSet = (event, talks, users) => {
+  return eventWithSpeakers(eventWithTalks(event, talks), users)
+}
