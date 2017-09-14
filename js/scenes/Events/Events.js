@@ -11,10 +11,8 @@ import { goToEvent } from '../../navigation/navHelpers';
 import { styles } from './styles';
 import { colors } from '../../config/styles';
 
-const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
+const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => { 
 
-  console.log(eventsData);
-  
   return (
     //TODO: Pass data into section list once Charlie completes his formatting
     //TODO: Add filter methods to button onPress listeners
@@ -50,7 +48,6 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
       <ScrollView>
         <View style={styles.eventsListWrapper}>
           {
-           
             eventsData.map((item) => (
               <View key={item.id}>
                 <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, item)}>

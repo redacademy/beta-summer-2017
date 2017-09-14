@@ -3,8 +3,7 @@ import { colors, typography } from '../../config/styles';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.lightGrey
+    flex: 1
   },
 
   eventContainer: {
@@ -21,7 +20,8 @@ export const styles = StyleSheet.create({
 
   eventTime: {
     fontFamily: typography.fontMainBold,
-    fontSize: typography.robotoRegular18
+    fontSize: typography.robotoRegular18,
+    backgroundColor: 'transparent'
   },
 
   talkContainer: {
