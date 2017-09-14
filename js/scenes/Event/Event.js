@@ -67,7 +67,11 @@ SingleEvent.propTypes = {
       init: PropTypes.bool,
     }),
     score: PropTypes.number,
-    speaker_id: PropTypes.string,
+    speaker_id: PropTypes.shape({
+      bio: PropTypes.string,
+      email: PropTypes.string,
+      fullName: PropTypes.string
+    }),
     talkStats: PropTypes.arrayOf(PropTypes.shape({
       quality: PropTypes.string,
       submitAmnt: PropTypes.number,
