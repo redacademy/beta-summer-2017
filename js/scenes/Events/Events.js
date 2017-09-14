@@ -34,7 +34,7 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
 
   const EventListItem = ({ item }) => (
     <View key={item.id}>
-      <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, item)}>
+      <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, {item})}>
         <View style={styles.eventsListItemInfo}>
           <Text style={styles.eventDate}>{eventDate(item.date)}</Text>
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>

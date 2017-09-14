@@ -1,27 +1,27 @@
 import { StyleSheet } from 'react-native';
 
+import {colors, typography } from '../../config/styles';
+
 export const styles = StyleSheet.create({
   landingLogo: {
     flexDirection: 'row',
-    height: 150,
-    width: 350,
+    height: 118,
+    width: 280,
     marginTop: 150
   },
   landingWrapper: {
     backgroundColor: '#000',
     ...StyleSheet.absoluteFillObject,
     display: 'flex',
-    alignItems: 'center'
+    justifyContent: 'center',
   },
   landingSubWrapper: {
-    marginTop: 150,
-    display: 'flex',
+    marginTop: 75,
     alignItems: 'center',
-    justifyContent: 'space-between'
   },
   linkText: {
     textDecorationLine: 'underline',
-    color: '#FFF',
+    color: colors.white,
     marginTop: 25,
     fontSize: 18
   },
