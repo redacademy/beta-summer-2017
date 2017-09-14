@@ -1,4 +1,4 @@
-import { auth, betadb } from './firebase';
+import { auth, betadb, betaevents, betatalks, betaquestions, betausers } from './firebase';
 //users
 const user = { //input format for initial signup form;
   email: 'test@pest.com',
@@ -129,9 +129,29 @@ export const updateImg = (key, imageurl) => {
 //delete
 
 //events
+export const eventCodeSet = (event_id, events, code) => { //pass in specific event id, all events to find this one and new code
+  const event = events.find(event=>{return event.id === event_id});
+  const index = events.findIndex(elem=>{return elem.id === event_id});
+  const updates = {}
+  updates[index+'/eventCode/'] = code //set up updates for the event
+  betaevents.update(updates, ()=>{talkCode(event, code)}); //update event, onSuccess update all corresponding talks
+}
+const talkCode = (event, code) => { //this one returns a promise if you need it to check whether the db write happened;
+  const updates = event.talks.reduce((acc, talk)=>{
+    acc[talk+'/eventCode/'] = code
+    return acc
+  }, {})
+  return betatalks.update(updates) 
+}
 
 //attend an event (leave?)
 
 //talks
-
+export const enterSurvey = (talk, code) => { //attach to the button 
+  if(code===talk.eventCode) {
+    console.log('replace me with navigator redirect')
+  } else {
+    throw new Error('Unacceptable event code')
+  }
+}
 //update talks speaker stats
