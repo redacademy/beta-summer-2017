@@ -11,6 +11,7 @@ import {
   StackNavigation,
   NavigationContext
 } from '@expo/ex-navigation';
+import NavMenuPopUp from './components/NavMenuPopUp';
 import Router from './navigation/routes';
 import Store from './redux/store';
 import { colors } from './config/styles';
@@ -39,6 +40,7 @@ export default class betatalks extends Component {
             navigatorUID="root"
             id="root"
           />
+          <NavMenuPopUp />
         </NavigationProvider>
       </Provider>
     );
