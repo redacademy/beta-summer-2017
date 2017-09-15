@@ -11,14 +11,20 @@ import Loader from '../../components/Loader/';
 import { eventDataSet } from '../Lib/helperFunctions';
 import Router from '../../navigation/routes';
 import store from '../../redux/store';
+import { attendEvent } from '../../config/helpers';
+import { auth } from '../../config/firebase';
 
 class EventContainer extends Component {
   static route = {
     navigationBar: {
       title(params){
-        return Moment.unix(params.eventData.item.date).format('dddd, MMMM Do YYYY')
+        return Moment.unix(params.eventData.item.date).format('dddd, MMMM Do, YYYY').toUpperCase()
       } 
     }
+  }
+
+  attendEvent = () => {
+    attendEvent(this.props.eventData.item.id, this.props.eventsData.events, auth.currentUser.uid)
   }
 
   render() {
@@ -30,7 +36,8 @@ class EventContainer extends Component {
       return (
         <SingleEvent
           navigatorUID={'event'}
-          eventData={this.props.eventsData.events}
+          attendEvent={this.attendEvent}
+          eventData={this.props.eventData.item}
           eventDataSet={eventDataSet(
             this.props.eventData.item,
             this.props.talksData,
