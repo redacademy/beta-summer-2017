@@ -1,4 +1,6 @@
+import firebase from 'firebase';
 import { auth, betadb, betaevents, betatalks, betaquestions, betausers } from './firebase';
+
 //users
 const user = { //input format for initial signup form;
   email: 'test@pest.com',
@@ -14,32 +16,67 @@ export function login(profile) {
     });
 }
 export function logout() {
-  auth.signOut().catch(function (error) {
-    console.log('logout fail', error)
-  });
+  auth.signOut()
+    .catch(function (error) {
+      console.log('logout fail', error)
+    });
 }
 //create
 export async function signUp(profile) {
-  await auth.createUserWithEmailAndPassword(profile.email, profile.password).catch(function (error) {
+  try {
+    await auth.createUserWithEmailAndPassword(profile.email, profile.password)
+    await updateFullname(profile.name, auth.currentUser);
+    await initialProfileSetup(auth.currentUser.uid, profile.email, profile.name);
+  } catch (error) {
     console.log(error.code, ' -code', error.message, ' -message');
-  });
-  await updateFullname(profile.name, auth.currentUser);
-  await initialProfileSetup(auth.currentUser.uid, profile.email, profile.name);
+  }
 }
 //update
-export function updateEmail(email, user) {
-  user.updateEmail(email).catch(function (error) {
-    console.log(error)
-  });
-  updateEmailField(user.uid, email)
+function updateEmail(email, user) {
+  if(email) {
+   return user.updateEmail(email)
+    .then(()=>updateEmailField(user.uid, email))
+    .catch(function (error) {
+      console.log(error)
+    });
+  } else {
+    console.log('empty email')
+  }
 }
-export function updateFullname(name, user) {
-  user.updateProfile({
-    displayName: name,
-  }).catch(function (error) {
-    console.log(error)
-  });
-  updateNameField(user.uid, name)
+function updateFullname(name, user) {
+  if(name) {
+    user.updateProfile({
+      displayName: name,
+    })
+      .then(()=>updateNameField(user.uid, name))
+      .catch(function (error) {
+        console.log(error)
+      });
+  } else {
+    console.log('empty name')
+  }
+}
+function updatePass(password, user) {
+  if(password) {
+    user.updatePassword(password)
+    .catch(function (error) {
+      console.log(error)
+    });
+  } else {
+    console.log('empty pass')
+  }
+}
+export const batchProfileUpdate = async (options, user, currentdata) => { 
+  const credential = firebase.auth.EmailAuthProvider.credential(
+    currentdata.email,
+    currentdata.password
+)
+  try {
+    await auth.currentUser.reauthenticateWithCredential(credential)
+    await updateEmail(options.email, user)
+    await updateFullname(options.name, user)
+    await updatePass(options.password, user)
+  } catch (e) {console.log(e)}
 }
 
 //set up custom profile fields
@@ -97,32 +134,38 @@ export const initialProfileSetup = (key, email, name) => {
 const updateEmailField = (key, email) => {
   const updates = {}
   updates['/users/' + key + '/email'] = email
-  betadb.update(updates)
+  return betadb.update(updates)
 }
 const updateNameField = (key, name) => {
   const updates = {}
   updates['/users/' + key + '/fullName'] = name
-  betadb.update(updates)
+  return betadb.update(updates)
 }
 export const updateBio = (key, bio) => {
   const updates = {}
   updates['/users/' + key + '/bio'] = bio
-  betadb.update(updates)
+  return betadb.update(updates)
 }
 export const updateMyGoals = (key, goals) => {
   const updates = {}
   updates['/users/' + key + '/goals'] = goals
-  betadb.update(updates)
+  return betadb.update(updates)
 }
 export const updateSocialMedia = (key, sm) => {
   const updates = {}
   updates['/users/' + key + '/socialMediaUrls'] = sm
-  betadb.update(updates)
+  return betadb.update(updates)
 }
 export const updateImg = (key, imageurl) => {
   const updates = {}
   updates['/users/' + key + '/imageUrl'] = imageurl
-  betadb.update(updates)
+  return betadb.update(updates)
+}
+export const customFieldsUpdater = (key, options) => {
+  updateBio(key, options.bio)
+    .then(updateMyGoals(key, options.goals))
+    .then(updateSocialMedia(key, options.sm))
+    .catch(e => { console.log(e) })
 }
 //update speakerstats after survey
 
@@ -130,25 +173,33 @@ export const updateImg = (key, imageurl) => {
 
 //events
 export const eventCodeSet = (event_id, events, code) => { //pass in specific event id, all events to find this one and new code
-  const event = events.find(event=>{return event.id === event_id});
-  const index = events.findIndex(elem=>{return elem.id === event_id});
+  let hit = {} 
+  events.find((event, index) => {
+    if(event.id === event_id){
+      hit = {
+        event, 
+        index
+      }
+      return hit;
+    } 
+  });
   const updates = {}
-  updates[index+'/eventCode/'] = code //set up updates for the event
-  betaevents.update(updates, ()=>{talkCode(event, code)}); //update event, onSuccess update all corresponding talks
+  updates[hit.index + '/eventCode/'] = code //set up updates for the event
+  betaevents.update(updates, () => { talkCode(hit.event, code) }); //update event, onSuccess update all corresponding talks
 }
 const talkCode = (event, code) => { //this one returns a promise if you need it to check whether the db write happened;
-  const updates = event.talks.reduce((acc, talk)=>{
-    acc[talk+'/eventCode/'] = code
+  const updates = event.talks.reduce((acc, talk) => {
+    acc[talk + '/eventCode/'] = code
     return acc
   }, {})
-  return betatalks.update(updates) 
+  return betatalks.update(updates)
 }
 
 //attend an event (leave?)
 
 //talks
 export const enterSurvey = (talk, code) => { //attach to the button 
-  if(code===talk.eventCode) {
+  if (code === talk.eventCode) {
     console.log('replace me with navigator redirect')
   } else {
     throw new Error('Unacceptable event code')
