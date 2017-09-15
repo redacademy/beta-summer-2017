@@ -72,14 +72,6 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
               />
             ))
           }
-          {
-            eventsData.map((item) => (
-              <EventListItem
-                key={item.id}
-                item={item}
-              />
-            ))
-          }
         </View>
       </ScrollView>
     </LinearGradient>
