@@ -39,6 +39,7 @@ class EventsContainer extends Component {
         eventsData={this.props.eventsData.events}
         eventDate={this.eventDate}
         eventTime={this.eventTime}
+        navigatorUID={'events'}
       />
     )
   }
