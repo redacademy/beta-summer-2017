@@ -19,7 +19,6 @@ class EventContainer extends Component {
     }
   }
 
-
   render() {
     if (this.props.eventsData.loading) {
       return (

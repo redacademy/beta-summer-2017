@@ -1,37 +1,61 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   View,
   TouchableOpacity,
   Image
 } from 'react-native';
+import Modal from 'react-native-modal';
+import { logout } from '../../config/helpers';
+import { popModal } from '../../redux/modules/moreModal';
 import { styles } from './styles';
+import settings from '../../assets/icons/setting.png';
+import profile from '../../assets/icons/profile.png';
+import logoutIcon from '../../assets/icons/cancel_icon.png';
 
-const NavMenuPopUp = () => {
+const NavMenuPopUp = ({ isModalVisible, dispatch }) => {
+
+  const popUpItems = [
+    {title: 'Settings', icon: settings, func: null},
+    {title: 'View / Edit Profile', icon: profile, func: null},
+    {title: 'Log Out', icon: logoutIcon, func: logout}
+  ];
+
+  const PopUpList = ({ data }) => {
+    const { title, icon, func } = data;
+    return (
+      <TouchableOpacity
+        onPress={() => func}
+      >
+        <View style={styles.menuItem}>
+          <Image style={styles.menuIcon} source={icon} />
+          <Text style={styles.popUpText}>{title}</Text>
+        </View>  
+      </TouchableOpacity>
+    )
+  }
+
   return (
-    <View style={styles.popUpWrapper}>
-      <TouchableOpacity
-        onPress={() => console.log('export data')}
+    <View>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => dispatch(popModal(!isModalVisible))}
       >
-        <Text style={styles.popUpText}>Export Data</Text>
-      </TouchableOpacity>  
-      <TouchableOpacity
-        onPress={() => console.log('view or edit profile')}
-      >
-        <Text style={styles.popUpText}>View/Edit Profile</Text>
-      </TouchableOpacity>  
-      <TouchableOpacity
-        onPress={() => console.log('settings page')}
-      >  
-        <Text style={styles.popUpText}>Settings</Text>
-      </TouchableOpacity>  
-      <TouchableOpacity
-        onPress={() => console.log('quick guide')}
-      >          
-        <Text style={styles.popUpText}>Quick Guide</Text>
-      </TouchableOpacity>  
-    </View>  
+        <View style={styles.modal}>
+          {
+            popUpItems.map((data, idx) => (
+              <PopUpList data={data} key={idx} />
+            ))
+          }
+        </View>
+      </Modal>
+    </View>
   )
 }
 
-export default NavMenuPopUp;
+const mapStateToProps = (state) => ({
+  isModalVisible: state.modal.isModalVisible
+})
+
+export default connect(mapStateToProps )(NavMenuPopUp);

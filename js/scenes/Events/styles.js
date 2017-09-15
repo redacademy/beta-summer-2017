@@ -1,10 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { colors, typography } from '../../config/styles';
 
 export const styles = StyleSheet.create({
-  eventsWrapper: {
-    flex: 2,
-  },
   eventsHeaderWrapper: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -25,14 +22,15 @@ export const styles = StyleSheet.create({
     fontSize: typography.norwester12
   },
   eventsListWrapper: {
-    justifyContent: 'space-between'
+    height: '100%',
+    justifyContent: 'space-between',
   },
   eventsListItem: {
     backgroundColor: colors.darkGrey,
     margin: 10,
     padding: 15,
     borderRadius: 10,
-    height: 75,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -54,7 +52,7 @@ export const styles = StyleSheet.create({
     fontSize: typography.robotoRegular10,
     color: colors.white
   },
-  eventsListItemSpeakers: {
-
+  scrollView: {
+    marginBottom: 100
   }
 });
