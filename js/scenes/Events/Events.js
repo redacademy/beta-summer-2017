@@ -60,8 +60,18 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
           ))
         }
       </View>
-      <ScrollView>
+      <ScrollView
+        style={styles.scrollView}
+      >
         <View style={styles.eventsListWrapper}>
+          {
+            eventsData.map((item) => (
+              <EventListItem
+                key={item.id}
+                item={item}
+              />
+            ))
+          }
           {
             eventsData.map((item) => (
               <EventListItem

@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     fontSize: typography.robotoRegular10,
     color: colors.white
   },
-  eventsListItemSpeakers: {
-
+  scrollView: {
+    marginBottom: 100
   }
 });
