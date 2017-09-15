@@ -28,7 +28,7 @@ class EventsContainer extends Component {
   
   eventTime(time) {
     return (
-      Moment.unix(time).format('h:mm:ss a')    
+      Moment.unix(time).format('h:mm a')    
     )
   }
 
