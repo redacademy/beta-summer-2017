@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
@@ -10,49 +10,52 @@ import Modal from 'react-native-modal';
 import { logout } from '../../config/helpers';
 import { popModal } from '../../redux/modules/moreModal';
 import { styles } from './styles';
+import settings from '../../assets/icons/setting.png';
+import profile from '../../assets/icons/profile.png';
+import logoutIcon from '../../assets/icons/cancel_icon.png';
 
-class NavMenuPopUp extends Component {
-  render() {
+const NavMenuPopUp = ({ isModalVisible, dispatch }) => {
+
+  const popUpItems = [
+    {title: 'Settings', icon: settings, func: null},
+    {title: 'View / Edit Profile', icon: profile, func: null},
+    {title: 'Log Out', icon: logoutIcon, func: logout}
+  ];
+
+  const PopUpList = ({ data }) => {
+    const { title, icon, func } = data;
     return (
-      <View>
-        <Modal
-          isVisible={this.props.isModalVisible}
-          onBackdropPress={() => this.props.dispatch(popModal(!this.props.isModalVisible))}
-        >
-          <View style={styles.modal}>
-            <TouchableOpacity
-              onPress={() => console.log('settings page')}
-            >
-              <View style={styles.menuItem}>
-                <Image style={styles.menuIcon} source={require('../../assets/icons/setting.png')} />
-                <Text style={styles.popUpText}>Settings</Text>
-              </View>  
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => console.log('go to settings page')}
-            >
-              <View style={styles.menuItem}>
-                <Image style={styles.menuIcon} source={require('../../assets/icons/profile.png')} />
-                <Text style={styles.popUpText}>View / Edit Profile</Text>
-              </View>  
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => logout()}
-            >
-              <View style={styles.menuItem}>
-                <Image style={styles.menuIcon} source={require('../../assets/icons/cancel_icon.png')} />
-                <Text style={styles.popUpText}>Log Out</Text>
-              </View>  
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
+      <TouchableOpacity
+        onPress={() => func}
+      >
+        <View style={styles.menuItem}>
+          <Image style={styles.menuIcon} source={icon} />
+          <Text style={styles.popUpText}>{title}</Text>
+        </View>  
+      </TouchableOpacity>
     )
   }
+
+  return (
+    <View>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={() => dispatch(popModal(!isModalVisible))}
+      >
+        <View style={styles.modal}>
+          {
+            popUpItems.map((data, idx) => (
+              <PopUpList data={data} key={idx} />
+            ))
+          }
+        </View>
+      </Modal>
+    </View>
+  )
 }
 
 const mapStateToProps = (state) => ({
   isModalVisible: state.modal.isModalVisible
 })
 
-export default connect(mapStateToProps)(NavMenuPopUp);
+export default connect(mapStateToProps )(NavMenuPopUp);
