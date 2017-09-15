@@ -58,20 +58,24 @@ const mocktalk= {
   respondents: {'EVyPYeHeziX06GqVO9nMZ8ieONh1': false, init: true}
 }
 
-export const giveFeedback = (talk, respondent_id, surveyanswers) => {
-  if (respondentCheck(talk.talk_id, respondent_id)) {
+export const giveFeedback = (talk, respondent_id, surveyanswers, textfeedback) => {
+  if (respondentCheck(talk.respondents, respondent_id)) {
     throw new Error('Alredy surveyed this talk')
   } else {
-    transactionCombo(talk, processSurvey(surveyanswers));
+    transactionCombo(talk, processSurvey(surveyanswers), textfeedback);
   }
 }
-export const respondentsUpdate = (talkid, userid) => {
+export const respondentsUpdate = (talkid, userid, textfeedback) => {
   const updates = {}
-  updates[talkid+ '/respondents/' + userid] = true
+  if(textfeedback){
+    updates[talkid+ '/respondents/' + userid] = textfeedback
+  } else {
+    updates[talkid+ '/respondents/' + userid] = true
+  }
   betatalks.update(updates)
 }
 export const respondentCheck = (respondents, id) => { 
-  return respondents[id]
+  return respondents[id] ? true : false
 }
 export const processSurvey = (answers) => {
   return Object.keys(answers).reduce((acc, cur) => {
@@ -102,14 +106,14 @@ export const valuecalc = (value) => {
   }
 }
 
-export const transactionCombo = (talk, updates) => {
+export const transactionCombo = (talk, updates, textfeedback) => {
   const talkref = betatalks.child(talk.talk_id + '/talkStats');
   const speakerref = betausers.child(talk.speaker_id + '/speakerStats');
   talkref.transaction(
     statsUpd(updates), 
     ()=>{return speakerref.transaction(
       statsUpd(updates), 
-      respondentsUpdate(talk.talk_id, auth.currentUser.uid)
+      respondentsUpdate(talk.talk_id, auth.currentUser.uid, textfeedback)
     )}
   )
 }
