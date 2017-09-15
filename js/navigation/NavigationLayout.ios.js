@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   StackNavigation,
   TabNavigation,
@@ -9,10 +10,10 @@ import {
   Image,
   Linking
 } from 'react-native';
-import { NavMenuPopUp } from '../components/NavMenuPopUp';
 import { styles } from './styles';
 import { typography, colors } from '../config/styles';
 import Router from './routes';
+import { popModal } from '../redux/modules/moreModal';
 
 
 const defaultRouteConfig = {
@@ -74,37 +75,37 @@ class NavigationLayout extends Component {
           title="new talk"
           renderTitle={this.renderTitle}
           renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos} />}
-          onPress={() => Linking.openURL('mailto:contact@soapboxspeakers.com').catch(err => console.error('An error occurred', err))}
+          onPress={() => this.props.dispatch(popModal(!this.props.modal))}
         >
-        <StackNavigation
-          id="newTalk"
-          navigatorUID="newTalk"
-          defaultRouteConfig={defaultRouteConfig}          
-        />
-      </TabItem>
-      <TabItem
-        id="dashboard"
-        title="dashboard"
-        renderTitle={this.renderTitle}
-        renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
-      >
-        <StackNavigation
+          <StackNavigation
+            id="newTalk"
+            navigatorUID="newTalk"
+            defaultRouteConfig={defaultRouteConfig}
+          />
+        </TabItem>
+        <TabItem
           id="dashboard"
-          navigatorUID="dashboard"
-          initialRoute={Router.getRoute('dashboard')}
-          defaultRouteConfig={defaultRouteConfig}          
-        />
-      </TabItem>
-      <TabItem
-        id="more"
-        title="more"
-        renderTitle={this.renderTitle}
-        renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}
-        //TODO: create redux state to manage conditional rendering of tabnav menu popup
-        onPress={() => console.log('trigger popup render')}
-      >
-      </TabItem>
-      </TabNavigation >
+          title="dashboard"
+          renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
+        >
+          <StackNavigation
+            id="dashboard"
+            navigatorUID="dashboard"
+            initialRoute={Router.getRoute('dashboard')}
+            defaultRouteConfig={defaultRouteConfig}
+          />
+        </TabItem>
+        <TabItem
+          id="more"
+          title="more"
+          renderTitle={this.renderTitle}
+          renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}
+          //TODO: create redux state to manage conditional rendering of tabnav menu popup
+          onPress={() => this.props.dispatch(popModal(!this.props.isModalVisible))}
+          >
+        </TabItem>
+      </TabNavigation>
     );
   }
 
@@ -118,6 +119,11 @@ class NavigationLayout extends Component {
       <Text style={titleStyle}>{title}</Text>
     )
   }
+
 }
 
-export default NavigationLayout;
+const mapStateToProps = (state) => ({
+  isModalVisible: state.modal.isModalVisible
+})
+
+export default connect(mapStateToProps)(NavigationLayout);
