@@ -8,28 +8,30 @@ import {
 } from 'react-native';
 import Moment from 'moment';
 
+import { styles } from './styles';
+
 // COMPONENTS
 
-export const DateHolder = ({ cStyles, nextEvent }) => (
-  <View style={cStyles.dateHolder}>
-    <Text style={cStyles.eventDay}>{Moment.unix(nextEvent.date).format('D')}</Text>
-    <Text style={cStyles.eventMonth}>{(Moment.unix(nextEvent.date).format('MMM')).toUpperCase()}</Text>
+export const DateHolder = ({ nextEvent }) => (
+  <View style={styles.dateHolder}>
+    <Text style={styles.eventDay}>{Moment.unix(nextEvent.date).format('D')}</Text>
+    <Text style={styles.eventMonth}>{(Moment.unix(nextEvent.date).format('MMM')).toUpperCase()}</Text>
   </View>
 );
 
-export const EventInfo = ({ cStyles, nextEvent }) => (
-  <View style={cStyles.eventInfo}>
-    <Text style={cStyles.nextEvent}>Next Event:</Text>
-    <Text style={cStyles.eventDate}>
+export const EventInfo = ({ nextEvent }) => (
+  <View style={styles.eventInfo}>
+    <Text style={styles.nextEvent}>Next Event:</Text>
+    <Text style={styles.eventDate}>
       {Moment.unix(nextEvent.date).format('MMMM Do YYYY')}
     </Text>
-    <Text style={cStyles.eventDate}>
+    <Text style={styles.eventDate}>
       {Moment.unix(nextEvent.startTime).format('hh:mm a')} - {Moment.unix(nextEvent.endTime).format('hh:mm a')}
     </Text>
   </View>
 )
 
-export const EventLocation = ({ cStyles, location }) => {
+export const EventLocation = ({ location }) => {
   
   const {
     streetNumber,
@@ -43,36 +45,35 @@ export const EventLocation = ({ cStyles, location }) => {
   
   return (
     <View>
-      <Text style={cStyles.locationText}>
+      <Text style={styles.locationText}>
         {(location) && name}
       </Text>
-      <Text style={cStyles.locationText}>
+      <Text style={styles.locationText}>
         {(location) && `${streetNumber} ${streetName} ${unitNumber}, ${city}, ${province}, ${postCode}`}
       </Text>
     </View>
   )
 };
 
-export const AttendeeListItem = ({ itemStyles, attendee }) => (
-  <View style={itemStyles.attendeeContainer}>
+export const AttendeeListItem = ({ attendee }) => (
+  <View style={styles.attendeeContainer}>
     <Image
-      style={itemStyles.attendeePhoto}
+      style={styles.attendeePhoto}
       source={require('../../assets/images/glenn.png')}
     />
-    <Text style={itemStyles.attendeeName}>{attendee.fullName}</Text>
+    <Text style={styles.attendeeName}>{attendee.fullName}</Text>
   </View>
 );
 
 
-export const AttendeeList = ({ cStyles, attendees }) => (
-  <View style={cStyles.attendContainer}>
-    <Text style={cStyles.attendHeader}>Attending</Text>
-    <ScrollView contentContainerStyle={cStyles.attendeeScrollView}>
+export const AttendeeList = ({ attendees }) => (
+  <View style={styles.attendContainer}>
+    <Text style={styles.attendHeader}>Attending</Text>
+    <ScrollView contentContainerStyle={styles.attendeeScrollView}>
       {(attendees)
         && attendees.map(attendee => (
           <AttendeeListItem
             key={attendee.email}
-            itemStyles={cStyles}
             attendee={attendee}
           />
         ))}

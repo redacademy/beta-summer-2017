@@ -44,3 +44,11 @@ export const parseGoalsObjToArr = goalsObj => {
     }
   }, []);
 };
+
+export const findTalks = (talkIds, talks) => {
+  return talkIds.reduce((acc, curr) => {
+    acc.push(talks[curr])
+    return acc;
+  }, []);
+}
+

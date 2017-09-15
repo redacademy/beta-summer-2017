@@ -2,51 +2,81 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { colors, typography } from '../../config/styles';
 
 export const styles = StyleSheet.create({
+  buttonText: {
+    color: colors.taxiYellow,
+    fontSize: 45
+  },
   sceneContainer: {
     flex: 1,
-    flexDirection: 'column',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
+    flexDirection: 'column'
   },
   contentContainer: {
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: 'center',
-    height: Dimensions.get('window').height / 1.25,
+    width: Dimensions.get('window').width
+  }
+});
+
+export const talkStyles = StyleSheet.create({
+  talksContainer: {
+    justifyContent: "space-around",
+    alignItems: 'flex-end',
     width: Dimensions.get('window').width
   },
-  skillsHeader: {
+  talkBar: {
+    backgroundColor: colors.darkGrey,
+    flexDirection: 'row',
+    width: Dimensions.get('window').width / 1.2,
+    height: 90,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    justifyContent: "space-around",
+    alignItems: "center",
+    alignSelf: "flex-end",
+    marginBottom: 12.5,
+    marginTop: 12.5
+  },
+  scoreHolder: {
+    borderTopRightRadius: 15,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    backgroundColor: colors.taxiYellow,
+    width: 70,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 5,
+    right: 30,
+  },
+  score: {
+    color: colors.white,
+    fontFamily: typography.titleHeading,
+    fontSize: typography.norwester36
+  },
+  talkInfoContainer: {
+    position: 'relative',
+    flexDirection: 'row',
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  infoTextContainer: {
+    height: 70,
+    justifyContent: 'center',
+    width: Dimensions.get('window').width / 1.6,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 10,
+    right: 30,
+    marginLeft: 10
+  },
+  talkTitle: {
+    color: colors.white,
+    fontSize: typography.norwester12,
     fontFamily: typography.fontMainBold,
-    fontSize: typography.norwester18,
-    textAlign: 'center',
-    backgroundColor: 'transparent',
     marginBottom: 10
   },
-  graphBarContainer: {
-    height: Dimensions.get('window').height / 1.75,
-    width: Dimensions.get('window').width / 1.2,
-    borderColor: colors.white,
-    borderLeftWidth: 2.5,
-    justifyContent: 'space-around'
-  },
-  graphBarBorder: {
-    borderColor: colors.black,
-    borderLeftWidth: 0,
-    borderRightWidth: 2,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    backgroundColor: 'transparent',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 2,
-      height: 2
-    },
-    shadowOpacity: 1,
-    shadowRadius: 3,
-    height: 25,
-    justifyContent: 'center'
-  },
-  graphBarText: {
-    marginLeft: 8,
-    color: colors.white
+  speakerName: {
+    color: colors.white,
+    fontSize: typography.norwester12
   }
 });
