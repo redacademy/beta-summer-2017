@@ -21,7 +21,7 @@ export const eventWithSpeakers = (event, users) => {
     }
     return talk
   });
-}
+} 
 
 export const eventWithTalks = (event, speeches) => {
   return event.talks.reduce((acc, cur) => {

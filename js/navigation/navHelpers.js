@@ -9,10 +9,9 @@ export const goToEvent = (currentNavigatorUID, eventData) => {
   ));
 }
 
-export const goToSpeaker = (currentNavigatorUID, speakerData) => {
+export const goToSpeaker = (speakerData) => {
   Store.dispatch(NavigationActions.push(
-    currentNavigatorUID, 
+    'events',
     Router.getRoute('speaker', { speakerData })
   ));
 }
-
