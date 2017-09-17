@@ -10,13 +10,13 @@ const user = { //input format for initial signup form;
 
 //login/logout
 export function login(profile) {
-  auth.signInWithEmailAndPassword(profile.email, profile.password)
+  return auth.signInWithEmailAndPassword(profile.email, profile.password)
     .catch(function (error) {
       console.log(error.code, ' -code', error.message, ' -message');
     });
 }
 export function logout() {
-  auth.signOut()
+  return auth.signOut()
     .catch(function (error) {
       console.log('logout fail', error)
     });
@@ -94,9 +94,9 @@ export const initialProfileSetup = (key, email, name) => {
     "imageUrl": "",
     "myTalks": [],
     "socialMediaUrls": {
-      "facebook": "",
-      "linkedIn": "",
-      "twitter": ""
+      "facebook": " ",
+      "linkedIn": " ",
+      "twitter": " "
     },
     "speakerStats": [{
       "quality": "Credibility",
@@ -126,7 +126,8 @@ export const initialProfileSetup = (key, email, name) => {
       "quality": "Story Telling",
       "submitAmnt": 0,
       "value": 0
-    }]
+    }],
+    "user_id": key
   }
   betadb.update(updates)
 }
@@ -173,19 +174,31 @@ export const customFieldsUpdater = (key, options) => {
 
 //events
 export const eventCodeSet = (event_id, events, code) => { //pass in specific event id, all events to find this one and new code
-  let hit = {} 
-  events.find((event, index) => {
-    if(event.id === event_id){
-      hit = {
-        event, 
-        index
-      }
-      return hit;
-    } 
-  });
+  let hit = findEvent(event_id, events)
   const updates = {}
   updates[hit.index + '/eventCode/'] = code //set up updates for the event
   betaevents.update(updates, () => { talkCode(hit.event, code) }); //update event, onSuccess update all corresponding talks
+}
+export const attendEvent = (event_id, events, user_id) => {
+  let hit = findEvent(event_id, events)
+  if(!hit.event.attendees.includes(user_id)){
+    let updates = {}
+    hit.event.attendees.push(user_id)
+    updates[hit.index] = hit.event
+    betaevents.update(updates)
+  }
+}
+const findEvent = (event_id, events) => {
+  let result = {}
+  events.find((event, index) => {
+    if(event.id === event_id){
+      result = {
+        event, 
+        index
+      }
+    } 
+  })
+  return result;
 }
 const talkCode = (event, code) => { //this one returns a promise if you need it to check whether the db write happened;
   const updates = event.talks.reduce((acc, talk) => {
@@ -194,8 +207,6 @@ const talkCode = (event, code) => { //this one returns a promise if you need it 
   }, {})
   return betatalks.update(updates)
 }
-
-//attend an event (leave?)
 
 //talks
 export const enterSurvey = (talk, code) => { //attach to the button 
