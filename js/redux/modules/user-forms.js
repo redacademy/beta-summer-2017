@@ -6,6 +6,8 @@ export const UPDATE_BIO_FIELD = 'UPDATE_BIO_FIELD';
 export const UPDATE_GOALS_FIELD = 'UPDATE_GOALS_FIELD';
 export const UPDATE_IMAGEURL_FIELD = 'UPDATE_IMAGEURL_FIELD';
 export const UPDATE_SOCIAL_MEDIA = 'UPDATE_SOCIALMEDIA';
+export const CURRENT_EMAIL = 'CURRENT_EMAIL';
+export const CURRENT_PASSWORD = 'CURRENT_PASSWORD';
 
 // ACTION CREATORS
 export function updateEmailField(email) {
@@ -54,7 +56,21 @@ export function updateSocialMedia(smUrls) {
   return {
     type: UPDATE_SOCIAL_MEDIA,
     smUrls
-  }
+  };
+}
+
+export function takeCurrentEmail(currentEmail) {
+  return {
+    type: CURRENT_EMAIL,
+    currentEmail
+  };
+}
+
+export function takeCurrentPassword(currentPassword) {
+  return {
+    type: CURRENT_PASSWORD,
+    currentPassword
+  };
 }
 
 // REDUCERS
@@ -65,7 +81,9 @@ const initialState = {
   bioField: null,
   goalsField: {},
   imageUrl: null,
-  socialMediaUrls: {}
+  socialMediaUrls: {},
+  currentEmail: null,
+  currentPassword: null
 };
 
 export function userFormsReducer(state = initialState, action) {
@@ -116,6 +134,18 @@ export function userFormsReducer(state = initialState, action) {
         ...state.socialMediaUrls,
         ...action.smUrls
       }
+    };
+
+  case CURRENT_EMAIL:
+    return {
+      ...state,
+      currentEmail: action.currentEmail
+    };
+
+  case CURRENT_PASSWORD:
+    return {
+      ...state,
+      currentPassword: action.currentPassword
     };
 
   default:

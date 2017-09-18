@@ -7,52 +7,50 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import SurveyButton from '../../components/SurveyButton/';
+import accountIcon from '../../assets/icons/account_icon.png'
+import pencil from '../../assets/icons/pencil.png';
 import { styles } from './styles';
+import SettingsPopUp from '../../components/SettingsPopUp/';
 
-const AccountSettings = ({ handleImageUpload, imageUrl, handleEmail, emailField, handlePassword, passwordField, handleFullname, fullnameField }) => {
+const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCurrentEmail, getCurrentPassword, isVisible, user, showPopUp, handleImageUpload, imageUrl, handleEmail, emailField, handlePassword, passwordField, handleFullname, fullnameField }) => {
+  const getImage = imageUrl || user.imageUrl
   return (
     <ScrollView style={styles.container}>
       <View>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity onPress={() => handleImageUpload()}>
+        <TouchableOpacity onPress={() => handleImageUpload()}>
+          <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={{ uri: imageUrl }}
+              source={getImage ? {uri: getImage} : accountIcon}
             />
-            {/* <Image
-            style={styles.pencil}
-            source={require('../../assets/icons/pencil.png')}
-          /> */}
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.headings}>First & Last Name</Text>
+            <Image
+              style={styles.pencil}
+              source={pencil}
+            />
+          </View>
+        </TouchableOpacity>
+        <Text style={styles.headings}>Fullname</Text>
         <View style={styles.fieldsContainer}>
           <TextInput
             style={styles.inputSmall}
-            onChangeText={handleFullname}
+            onChangeText={(text) => handleFullname(text)}
             value={fullnameField}
-            placeholder="First & Last Name"
+            placeholder={user.fullName}
           />
-          {/* <Image
-            style={styles.pencil}
-            source={require('../../assets/icons/pencil.png')}
-          /> */}
         </View>
 
         <Text style={styles.headings}>Email</Text>
         <View style={styles.fieldsContainer}>
           <TextInput
             style={styles.inputSmall}
-            onChangeText={handleEmail}
+            onChangeText={(text) => handleEmail(text)}
             autoCapitalize="none"
             value={emailField}
-            placeholder="Email"
+            placeholder={user.email}
           />
-          {/* <Image
-            style={styles.pencil}
-            source={require('../../assets/icons/pencil.png')}
-          /> */}
         </View>
 
         <Text style={styles.headings}>Password</Text>
@@ -60,21 +58,71 @@ const AccountSettings = ({ handleImageUpload, imageUrl, handleEmail, emailField,
           <TextInput
             style={styles.inputSmall}
             onChangeText={handlePassword}
+            secureTextEntry={true}
             autoCapitalize="none"
             value={passwordField}
-            placeholder="Password"
+            placeholder={user.password}
           />
-          {/* <Image
-            style={styles.pencil}
-            source={require('../../assets/icons/pencil.png')}
-          /> */}
         </View>
         <SurveyButton
           text="save settings"
+          onPress={() => showPopUp()}
         />
       </View>
+      <SettingsPopUp 
+        isVisible={isVisible}
+        currentEmail={currentEmail}
+        currentPassword={currentPassword}
+        getCurrentEmail={getCurrentEmail}
+        getCurrentPassword={getCurrentPassword}
+        updateSettings={updateSettings}
+      />
     </ScrollView>
   )
 }
 
-export default AccountSettings;
+const mapStateToProps = (state) => ({
+  isVisible: state.popup.isVisible
+});
+
+AccountSettings.propTypes = {
+  updateSettings: PropTypes.func.isRequired,
+  currentEmail: PropTypes.string,
+  currentPassword: PropTypes.string,
+  getCurrentEmail: PropTypes.func.isRequired,
+  getCurrentPassword: PropTypes.func.isRequired,
+  isVisible: PropTypes.bool,
+  showPopUp: PropTypes.func.isRequired,
+  handleImageUpload: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string,
+  handleEmail: PropTypes.func.isRequired,
+  emailField: PropTypes.string,
+  handlePassword: PropTypes.func.isRequired,
+  passwordField: PropTypes.string,
+  fullnameField: PropTypes.string,
+  handleFullname: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    bio: PropTypes.string,
+    email: PropTypes.string,
+    fullName: PropTypes.string,
+    goals: PropTypes.shape({
+      goalOne: PropTypes.string,
+      goalTwo: PropTypes.string,
+      goalThree: PropTypes.string,
+    }),
+    imageUrl: PropTypes.string,
+    socialMediaUrls: PropTypes.shape({
+      facebook: PropTypes.string,
+      linkedIn: PropTypes.string,
+      twitter: PropTypes.string,
+    }),
+    speakerStats: PropTypes.arrayOf(PropTypes.shape({
+      quality: PropTypes.string,
+      submitAmnt: PropTypes.number,
+      value: PropTypes.number
+    })),
+    user_id: PropTypes.string
+  })
+}
+
+export default connect(mapStateToProps)(AccountSettings);

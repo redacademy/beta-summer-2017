@@ -76,7 +76,7 @@ export const batchProfileUpdate = async (options, user, currentdata) => {
   const credential = firebase.auth.EmailAuthProvider.credential(
     currentdata.email,
     currentdata.password
-)
+  )
   try {
     await auth.currentUser.reauthenticateWithCredential(credential)
     await updateEmail(user, options.email)
