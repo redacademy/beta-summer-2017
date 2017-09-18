@@ -14,7 +14,7 @@ import { colors } from '../../config/styles';
 const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
 
   const filterData = [
-    //TODO: Add nev helper methods to func and action
+    //TODO: Add filter methods
     { title: 'PAST', func: console.log, action: 'past events filter' },
     { title: 'UPCOMING', func: console.log, action: 'upcoming events filter' },
     { title: 'ATTENDED', func: console.log, action: 'attended events filter' },

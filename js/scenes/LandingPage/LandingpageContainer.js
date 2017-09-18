@@ -6,6 +6,7 @@ class LandingPageContainer extends Component {
   render() {
     return <LandingPage />;
   }
+
 }
 
 export default LandingPageContainer;
