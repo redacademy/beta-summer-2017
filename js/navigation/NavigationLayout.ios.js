@@ -40,7 +40,7 @@ class NavigationLayout extends Component {
     return (
       <TabNavigation
         id="tabMain"
-        initialTab="landing"
+        initialTab="home"
         tabBarColor="#353434"
       >
         <TabItem
@@ -92,19 +92,6 @@ class NavigationLayout extends Component {
             id="dashboard"
             navigatorUID="dashboard"
             initialRoute={Router.getRoute('dashboard')}
-            defaultRouteConfig={defaultRouteConfig}
-          />
-        </TabItem>
-        <TabItem
-          id="landing"
-          title="landing"
-          renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
-        >
-          <StackNavigation
-            id="landing"
-            navigatorUID="landing"
-            initialRoute={Router.getRoute('landing')}
             defaultRouteConfig={defaultRouteConfig}
           />
         </TabItem>
