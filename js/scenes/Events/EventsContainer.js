@@ -11,13 +11,7 @@ class EventsContainer extends Component {
   static route = {
     navigationBar: {
       title: 'EVENTS',
-      backgroundColor: colors.darkGrey,
-      titleStyle: {
-        fontFamily: typography.titleHeading,
-        color: colors.white,
-        fontSize: typography.norwester20
-      }
-    }
+    }  
   }
 
   eventDate(date) {

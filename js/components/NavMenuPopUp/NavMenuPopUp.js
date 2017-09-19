@@ -27,7 +27,7 @@ const NavMenuPopUp = ({ isModalVisible, dispatch }) => {
     const { title, icon, func } = data;
     return (
       <TouchableOpacity
-        onPress={() => func}
+        onPress={() => func()}
       >
         <View style={styles.menuItem}>
           <Image style={styles.menuIcon} source={icon} />
