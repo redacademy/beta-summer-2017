@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import SurveyButton from '../../components/SurveyButton/';
+import pencil from '../../assets/icons/pencil.png';
+import accountIcon from '../../assets/icons/account_icon.png';
 import { styles } from './styles';
 
 const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, bioField, handleGoals, goalsField, socialMedia, handleSocialMedia }) => {
@@ -19,11 +21,11 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TouchableOpacity style={styles.imageContainer} onPress={() => handleImageUpload()}>
             <Image
               style={styles.image}
-              source={{ uri: (imageUrl ? imageUrl || user.imageUrl : 'https://image.ibb.co/moG48k/account_icon.png') }}
+              source={{ uri: (imageUrl ? imageUrl || user.imageUrl : accountIcon) }}
             />
             <Image
               style={styles.pencil}
-              source={require('../../assets/icons/pencil.png')}
+              source={pencil}
             />
           </TouchableOpacity>
         </View>
@@ -32,11 +34,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleBio(text)}
-            value={
-              bioField ?
-                bioField :
-                handleBio(user.bio)
-            }
+            value={bioField || handleBio(user.bio)}
             multiline={true}
             maxLength={100}
             placeholder="Personal bio"
@@ -47,11 +45,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalOne")}
-            value={
-              goalsField.goalOne ?
-                goalsField.goalOne :
-                handleGoals(user.goals.goalOne, "goalOne")
-            }
+            value={goalsField.goalOne || handleGoals(user.goals.goalOne, "goalOne")}
             multiline={true}
             maxLength={100}
             placeholder="Goal #1"
@@ -61,11 +55,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalTwo")}
-            value={
-              goalsField.goalTwo ?
-                goalsField.goalTwo :
-                handleGoals(user.goals.goalTwo, "goalTwo")
-            }
+            value={goalsField.goalTwo || handleGoals(user.goals.goalTwo, "goalTwo")}
             multiline={true}
             maxLength={100}
             placeholder="Goal #2"
@@ -75,11 +65,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalThree")}
-            value={
-              goalsField.goalThree ?
-                goalsField.goalThree :
-                handleGoals(user.goals.goalThree, "goalThree")
-            }
+            value={goalsField.goalThree || handleGoals(user.goals.goalThree, "goalThree")}
             multiline={true}
             maxLength={100}
             placeholder="Goal #3"
@@ -92,11 +78,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "facebook")}
-            value={
-              socialMedia.facebook ?
-                socialMedia.facebook :
-                handleSocialMedia(user.socialMediaUrls.facebook, "facebook")
-            }
+            value={socialMedia.facebook || handleSocialMedia(user.socialMediaUrls.facebook, "facebook")}
             placeholder="Facebook"
           />
         </View>
@@ -107,11 +89,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "twitter")}
-            value={
-              socialMedia.twitter ?
-                socialMedia.twitter :
-                handleSocialMedia(user.socialMediaUrls.twitter, "twitter")
-            }
+            value={socialMedia.twitter || handleSocialMedia(user.socialMediaUrls.twitter, "twitter")}
             placeholder="Twitter"
           />
         </View>
@@ -122,11 +100,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "linkedIn")}
-            value={
-              socialMedia.linkedIn ?
-                socialMedia.linkedIn :
-                handleSocialMedia(user.socialMediaUrls.linkedIn, "linkedIn")
-            }
+            value={socialMedia.linkedIn || handleSocialMedia(user.socialMediaUrls.linkedIn, "linkedIn")}
             placeholder="LinkedIn"
           />
         </View>
