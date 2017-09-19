@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ImagePickerIOS } from 'react-native';
 import Profile from './Profile';
-import { 
+import {
   updateBioField,
   updateGoalsField,
   updateSocialMedia,
@@ -13,57 +13,50 @@ import {
 import { customFieldsUpdater } from '../../config/helpers';
 import { auth } from '../../config/firebase';
 
-class ProfileContainer extends Component {
 
-  static route = {
-    navigationBar: {
-      title: 'EDIT PROFILE',
-    }
+const ProfileContainer = ({ bioField, goalsField, socialMedia, imageUrl, users, dispatch }) => {
+
+  const handleBio = (value) => {
+    dispatch(updateBioField(value));
   }
 
-  handleBio = (value) => {
-    this.props.dispatch(updateBioField(value));
+  const handleGoals = (value, id) => {
+    dispatch(updateGoalsField({ [id]: value }));
   }
 
-  handleGoals = (value, id) => {
-    this.props.dispatch(updateGoalsField({ [id]: value }));
+  const handleSocialMedia = (value, type) => {
+    dispatch(updateSocialMedia({ [type]: value }))
   }
 
-  handleSocialMedia = (value, type) => {
-    this.props.dispatch(updateSocialMedia({ [type]: value }))
-  }
-
-  handleImageUpload = () => {
+  const handleImageUpload = () => {
     ImagePickerIOS.openSelectDialog({}, imageUri => {
-      this.props.dispatch(updateImageUrlField(imageUri));
+      dispatch(updateImageUrlField(imageUri));
     }, error => console.error(error));
   }
 
-  updateProfile = () => {
+  const updateProfile = () => {
     const options = {
-      bio: this.props.bioField,
-      goals: this.props.goalsField,
-      socialMedia: this.props.socialMedia
+      bio: bioField,
+      goals: goalsField,
+      socialMedia: socialMedia
     }
     customFieldsUpdater(auth.currentUser.uid, options)
   }
 
-  render() {
-    return (
-      <Profile
-        bioField={this.props.bioField}
-        goalsField={this.props.goalsField}
-        imageUrl={this.props.imageUrl}
-        socialMedia={this.props.socialMedia}
-        user={this.props.users.users[auth.currentUser.uid]}
-        handleBio={this.handleBio}
-        handleGoals={this.handleGoals}
-        handleSocialMedia={this.handleSocialMedia}
-        handleImageUpload={this.handleImageUpload}
-        updateProfile={this.updateProfile}
-      />
-    )
-  }
+  return (
+    <Profile
+      bioField={bioField}
+      goalsField={goalsField}
+      imageUrl={imageUrl}
+      socialMedia={socialMedia}
+      user={users.users[auth.currentUser.uid]}
+      handleBio={handleBio}
+      handleGoals={handleGoals}
+      handleSocialMedia={handleSocialMedia}
+      handleImageUpload={handleImageUpload}
+      updateProfile={updateProfile}
+    />
+  )
 }
 
 const mapStateToProps = state => ({
@@ -73,6 +66,12 @@ const mapStateToProps = state => ({
   socialMedia: state.forms.socialMediaUrls,
   users: state.users
 });
+
+ProfileContainer.route = {
+  navigationBar: {
+    title: 'EDIT PROFILE',
+  }
+}
 
 ProfileContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,

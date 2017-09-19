@@ -14,6 +14,10 @@ import accountIcon from '../../assets/icons/account_icon.png';
 import { styles } from './styles';
 
 const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, bioField, handleGoals, goalsField, socialMedia, handleSocialMedia }) => {
+
+  const getImage = imageUrl || user.imageUrl
+
+  console.log("THIS IS GET IMAGE", getImage)
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -21,7 +25,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TouchableOpacity style={styles.imageContainer} onPress={() => handleImageUpload()}>
             <Image
               style={styles.image}
-              source={imageUrl ? imageUrl || user.imageUrl : accountIcon}
+              source={getImage ? { uri: getImage } : accountIcon}
             />
             <Image
               style={styles.pencil}
