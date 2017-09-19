@@ -13,6 +13,9 @@ import {
 } from './HomeComponents';
 import { styles } from './styles';
 import { colors } from '../../config/styles';
+import { logout } from '../../config/helpers';
+import OutlinedButton from '../../components/OutlinedButton';
+
 
 const Home = ({ nextEvent }) => (
   <View style={styles.sceneContainer}>

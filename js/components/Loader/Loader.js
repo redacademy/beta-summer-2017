@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 
-const Loader = () => {
+const Loader = ({color = 'black'}) => {
   return (
-    <ActivityIndicator animating={true} size="small" color="black" style={styles.activityIndicator}/>
+    <ActivityIndicator animating={true} size="small" color={color} style={styles.activityIndicator}/>
   );
 }
 
