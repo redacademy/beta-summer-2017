@@ -5,6 +5,25 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { cStyles } from './cStyles';
 import OutlinedButton from '../../components/OutlinedButton';
 import SurveyWarningModal from '../../components/SurveyWarningModal';
+import EventCodeModal from '../../components/EventCodeModal';
+
+export const EventModal = ({ modalState, onBackdropPress, onButtonPress, text, textChange, inputValue }) => (
+  <View>
+    <Modal
+      isVisible={modalState}
+      onBackdropPress={onBackdropPress}
+    >
+      <View style={{ alignSelf: 'center' }}>
+        <EventCodeModal 
+          onButtonPress={onButtonPress}
+          text={text}
+          value={inputValue}
+          textChange={textChange}
+        />
+      </View>
+    </Modal>
+  </View>
+);
 
 export const WarningModal = ({ modalState, onPress }) => (
   <View>
@@ -13,7 +32,7 @@ export const WarningModal = ({ modalState, onPress }) => (
       onBackdropPress={onPress}
     >
       <View style={{ alignSelf: 'center' }}>
-        <SurveyWarningModal 
+        <SurveyWarningModal
           text={"You have already provided feedback for this talk. You may only submit feedback once per talk."}
         />
       </View>

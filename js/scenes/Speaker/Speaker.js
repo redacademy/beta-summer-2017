@@ -6,15 +6,27 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import GradientWrapper from '../../components/GradientWrapper';
-import { SpeakerHeader, SpeakerContent, GoalsList, FeedbackButton, WarningModal } from './SpeakerComponents';
-import { goToSurvey } from '../../navigation/navHelpers';
+import { 
+  SpeakerHeader, 
+  SpeakerContent, 
+  GoalsList, 
+  FeedbackButton, 
+  WarningModal,
+  EventModal
+} from './SpeakerComponents';
 // import SpeakerAvatar from '../../components/SpeakerAvatar';
 
 const Speaker = ({ 
   speakerData, 
   checkRespondent, 
+  checkEventCode,
   displayWarningModal,
-  warningModalState 
+  displayEventModal,
+  warningModalState,
+  inputEventCode,
+  eventModalState,
+  eventInput,
+  setEventInput
 }) => {
   return (
     <View style={styles.contianer}>
@@ -33,12 +45,20 @@ const Speaker = ({
           onPress={
             (checkRespondent())
               ? () => displayWarningModal(true)
-              : () => goToSurvey({ speakerData })
+              : () => inputEventCode()
           }
         />
         <WarningModal
           onPress={() => displayWarningModal(!warningModalState)}
           modalState={warningModalState}
+        />
+        <EventModal 
+          onBackdropPress={() => displayEventModal(!eventModalState)}
+          text={'Submit'}
+          onButtonPress={() => checkEventCode(speakerData)}
+          modalState={eventModalState}
+          textChange={(text) => setEventInput(text)}
+          inputValue={eventInput}
         />
       </GradientWrapper>
     </View>
