@@ -34,13 +34,8 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
   }
 
   const EventListItem = ({ item }) => (
-<<<<<<< HEAD
-    <View key={item.id}>
-      <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, {item})}>
-=======
     <View>
       <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, { item })}>
->>>>>>> Completed survey component
         <View style={styles.eventsListItemInfo}>
           <Text style={styles.eventDate}>{eventDate(item.date)}</Text>
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>
