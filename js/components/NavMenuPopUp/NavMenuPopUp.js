@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { logout } from '../../config/helpers';
 import { popModal } from '../../redux/modules/moreModal';
@@ -58,4 +59,9 @@ const mapStateToProps = (state) => ({
   isModalVisible: state.modal.isModalVisible
 })
 
-export default connect(mapStateToProps )(NavMenuPopUp);
+PropTypes.NavMenuPopUp = {
+  isModalVisible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func,
+}
+
+export default connect(mapStateToProps)(NavMenuPopUp);
