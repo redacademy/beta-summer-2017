@@ -13,10 +13,7 @@ const RadioButton = ({ isSelected, children, onPress }) => {
       >
         <View style={styles.buttonContainer}>
           <View style={[styles.radio, styles.outerStyle]}>
-            {(isSelected)
-              ? <View style={styles.innerStyle} />
-              : null
-            }
+            {(isSelected) && <View style={styles.innerStyle} />}
           </View>
           <View style={styles.buttonLabel}>
             {children}

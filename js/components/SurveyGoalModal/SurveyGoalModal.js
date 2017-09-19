@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, View, Text } from 'react-native';
 import { styles } from './styles';
 
-const SurveyGoalModal = ({ goals }) => {
+const SurveyGoalModal = ({ goals = ["No goals specified..."] }) => {
   return (
     <View style={styles.popup}>
       <Text style={styles.title}>Speaker Goals</Text>
@@ -10,9 +10,9 @@ const SurveyGoalModal = ({ goals }) => {
         When answering the survey please keep in mind the following goals the speaker would like feedback on:
       </Text>
       <View style={styles.goals}>
-        {(goals) && goals.map((goal, index) => {
+        {goals.map((goal, index) => {
           return (
-            <Text key={goal} style={styles.goalText}>
+            <Text key={index} style={styles.goalText}>
               {index + 1}. {goal}
             </Text>
           );

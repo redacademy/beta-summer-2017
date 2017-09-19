@@ -24,7 +24,7 @@ const Surveys = ({
   return (
     <ScrollView style={styles.sceneContain}>
       <View style={styles.background}>
-        {(question) ?
+        {(question) &&
           <View>
             <GoalsModal
               onPress={() => displayGoalModal(!goalModalState)}
@@ -50,12 +50,10 @@ const Surveys = ({
                 />
               ))}
             </View>
-          </View>
-          : null}
+          </View>}
         <View style={styles.progressContainer}>
-          {(questions.indexOf(question) === 0)
-            ? null
-            : <LeftNavArrow navAction={() => previousQuestionFunc(prevQuestion.question)} />}
+          {(questions.indexOf(question) === 0) ||
+            <LeftNavArrow navAction={() => previousQuestionFunc(prevQuestion.question)} />}
           <ProgressBar
             overlayText={`${questions.indexOf(question) + 1}/${questions.length + 1}`}
             completePerc={questions.indexOf(question) + 1}

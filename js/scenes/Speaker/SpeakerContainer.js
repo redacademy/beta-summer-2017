@@ -13,12 +13,9 @@ class SpeakerContainer extends Component {
     }
   }
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      showWarningModal: false
-    };
-  }
+  state = {
+    showWarningModal: false
+  };
 
   displayWarningModal = modalState => this.setState({ showWarningModal: modalState });
   

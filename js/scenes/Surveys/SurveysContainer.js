@@ -26,15 +26,12 @@ class SurveysContainer extends Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showWarningModal: false,
-      showGoalModal: false,
-      selectedValue: -1,
-      n: 0
-    };
-  }
+  state = {
+    showWarningModal: false,
+    showGoalModal: false,
+    selectedValue: -1,
+    n: 0
+  };
 
   componentDidMount() {
     this.props.dispatch(setTalkData(this.props.talkObj.speakerData));
@@ -70,7 +67,7 @@ class SurveysContainer extends Component {
       this.setState({ showWarningModal: true });
     } else {
       this.setState({ n: this.state.n + 1, selectedValue: -1 });
-    } 
+    }
   }
 
   previousQuestion = prevQuestion => {
@@ -146,7 +143,7 @@ SurveysContainer.propTypes = {
       }))
     }))
   }).isRequired,
-  surveyAnswers: PropTypes.shape({   
+  surveyAnswers: PropTypes.shape({
     answer: PropTypes.string,
     value: PropTypes.number,
     quality: PropTypes.string,
