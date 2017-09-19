@@ -9,6 +9,8 @@ import '../../redux/modules/actions/talkActions';
 import '../../redux/modules/actions/userActions';
 import Loader from '../../components/Loader/';
 import { eventDataSet } from '../Lib/helperFunctions';
+import Router from '../../navigation/routes';
+import store from '../../redux/store';
 
 class EventContainer extends Component {
   static route = {
@@ -29,13 +31,11 @@ class EventContainer extends Component {
         <SingleEvent
           navigatorUID={'event'}
           eventData={this.props.eventsData.events}
-          eventDataSet={
-            eventDataSet(
-              this.props.eventData.item,
-              this.props.talksData,
-              this.props.usersData
-            )
-          }
+          eventDataSet={eventDataSet(
+            this.props.eventData.item,
+            this.props.talksData,
+            this.props.usersData
+          )}
         />
       );
     }

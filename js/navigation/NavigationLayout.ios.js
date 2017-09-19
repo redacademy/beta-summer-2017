@@ -34,8 +34,7 @@ const defaultRouteConfig = {
     height: 35,
     backgroundColor: colors.darkGrey
   }
-};
-
+}
 class NavigationLayout extends Component {
 
   openEmail() {

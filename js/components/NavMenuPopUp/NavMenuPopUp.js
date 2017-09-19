@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { logout } from '../../config/helpers';
 import { pushSceneFromModal } from '../../navigation/navHelpers';
@@ -62,4 +63,9 @@ const mapStateToProps = (state) => ({
   navigatorUID: state.navigation.currentNavigatorUID
 })
 
-export default connect(mapStateToProps )(NavMenuPopUp);
+PropTypes.NavMenuPopUp = {
+  isModalVisible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func,
+}
+
+export default connect(mapStateToProps)(NavMenuPopUp);

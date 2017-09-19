@@ -1,4 +1,4 @@
-import { NavigationActions } from '@expo/ex-navigation';
+ import { NavigationActions } from '@expo/ex-navigation';
 import Store from '../redux/store';
 import Router from './routes';
 
@@ -16,10 +16,9 @@ export const pushSceneFromModal = ([currentNavigatorUID, scene]) => {
   ));
 }
 
-export const goToSpeaker = (currentNavigatorUID, speakerData) => {
+export const goToSpeaker = (speakerData) => {
   Store.dispatch(NavigationActions.push(
-    currentNavigatorUID, 
+    'events',
     Router.getRoute('speaker', { speakerData })
   ));
 }
-

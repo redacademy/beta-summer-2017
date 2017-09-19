@@ -6,6 +6,7 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
+import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import { goToEvent } from '../../navigation/navHelpers';
 import { styles } from './styles';
@@ -77,5 +78,33 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
     </LinearGradient>
   )
 }
+
+Events.PropTypes = {
+  eventsData: PropTypes.shape({
+    loading: PropTypes.bool,
+    events: PropTypes.objectOf(PropTypes.shape({
+      date: PropTypes.number,
+      startTime: PropTypes.number,
+      endTime: PropTypes.number,
+      id: PropTypes.string,
+      eventCode: PropTypes.string,
+      attendees: PropTypes.objectOf(PropTypes.string),
+      speakers: PropTypes.objectOf(PropTypes.string),
+      talks: PropTypes.objectOf(PropTypes.string),
+      location: PropTypes.objectOf(PropTypes.shape({
+        city: PropTypes.string,
+        name: PropTypes.string,
+        postCode: PropTypes.string,
+        province: PropTypes.string,
+        streetName: PropTypes.string,
+        streetNumber: PropTypes.string,
+        unitNumber: PropTypes.string
+      })),
+    })),
+  }).isRequired,
+  eventDate: PropTypes.func,
+  eventTime: PropTypes.func,
+  navigatorUID: PropTypes.string
+};
 
 export default Events;
