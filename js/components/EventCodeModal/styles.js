@@ -25,5 +25,13 @@ export const styles = StyleSheet.create({
     color: colors.black,
     textAlign: 'center',
     marginBottom: 15
+  },
+  codeInput: {
+    height: 40, 
+    width: 100, 
+    textAlign: 'center',
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.lightestGrey
   }
 });

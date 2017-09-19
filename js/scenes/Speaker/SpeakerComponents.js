@@ -12,6 +12,7 @@ export const EventModal = ({ modalState, onBackdropPress, onButtonPress, text, t
     <Modal
       isVisible={modalState}
       onBackdropPress={onBackdropPress}
+      avoidKeyboard
     >
       <View style={{ alignSelf: 'center' }}>
         <EventCodeModal 
