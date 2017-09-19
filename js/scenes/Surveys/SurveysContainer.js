@@ -10,10 +10,10 @@ import Loader from '../../components/Loader';
 import {
   setSurveyAnswers,
   setSurveyComments,
-  setTalkData
+  setTalkData,
+  ExecFeedBackAsync
 } from '../../redux/modules/actions/surveyActions';
 import { goToSurveyComplete } from '../../navigation/navHelpers';
-import { giveFeedback } from '../../config/surveyhelpers';
 import { parseGoalsObjToArr } from '../Lib/helperFunctions';
 
 class SurveysContainer extends Component {
@@ -59,8 +59,9 @@ class SurveysContainer extends Component {
     const talk = this.props.talkObj.speakerData;
     const surveyAns = this.props.surveyAnswers;
     const textfeedback = this.props.comments;
+    const user = 'EVyPYeHeziX06GqVO9nMZ8ieONh1'
     // placeholder id for testing
-    giveFeedback(talk, 'EVyPYeHeziX06GqVO9nMZ8ieONh1', surveyAns, textfeedback);
+    ExecFeedBackAsync(talk, user, surveyAns, textfeedback);
     goToSurveyComplete();
   }
 

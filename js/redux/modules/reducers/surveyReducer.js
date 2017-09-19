@@ -2,7 +2,10 @@ const initialState = {
   loading: true,
   surveyComments: '',
   surveyAnswers: {},
-  talkObj: {}
+  talkObj: {},
+  feedbackError: {},
+  feebackSuccess: false,
+  feedbackLoading: false
 };
 
 export function SurveyReducer(state = initialState, action) {
@@ -24,6 +27,21 @@ export function SurveyReducer(state = initialState, action) {
     return {
       ...state,
       talkObj: action.talkData
+    }
+  case 'FEEDBACK_SUCCESS':
+    return {
+      ...state,
+      feedbackSuccess: true
+    }
+  case 'FEEDBACK_ERROR':
+    return {
+      ...state,
+      feedbackError: action.error
+    }
+  case 'FEEDBACK_BEGIN': 
+    return {
+      ...state,
+      feedbackLoading: false 
     }
   default:
     return state;
