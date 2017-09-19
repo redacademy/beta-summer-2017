@@ -21,7 +21,7 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TouchableOpacity style={styles.imageContainer} onPress={() => handleImageUpload()}>
             <Image
               style={styles.image}
-              source={{ uri: (imageUrl ? imageUrl || user.imageUrl : accountIcon) }}
+              source={imageUrl ? imageUrl || user.imageUrl : accountIcon}
             />
             <Image
               style={styles.pencil}
