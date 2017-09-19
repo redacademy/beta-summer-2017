@@ -216,4 +216,8 @@ export const enterSurvey = (talk, code) => { //attach to the button
     throw new Error('Unacceptable event code')
   }
 }
-//update talks speaker stats
+
+//for time and stuff
+export const getTime = () => {
+  return Math.round((Date.now()/1000))
+}
