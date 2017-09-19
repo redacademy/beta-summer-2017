@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dimensions, Image } from 'react-native';
+import logo from '../../assets/images/beta_talks_logo_white_header.png';
 
 import '../../redux/modules/actions/questionsActions';
 import Surveys from './Pages/Surveys';
@@ -21,7 +22,7 @@ class SurveysContainer extends Component {
     navigationBar: {
       title: <Image
         style={{ width: Dimensions.get('window').width / 2.5, height: 27 }}
-        source={require('../../assets/images/beta_talks_logo_white_header.png')}
+        source={logo}
       />
     }
   }

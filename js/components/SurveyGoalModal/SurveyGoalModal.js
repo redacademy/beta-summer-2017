@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, View, Text } from 'react-native';
+import target from '../../assets/icons/target.png';
 import { styles } from './styles';
 
 const SurveyGoalModal = ({ goals = ["No goals specified..."] }) => {
@@ -23,7 +24,7 @@ const SurveyGoalModal = ({ goals = ["No goals specified..."] }) => {
       </Text>
       <Image
         style={styles.targetIcon}
-        source={require('../../assets/icons/target.png')}
+        source={target}
       />
     </View>
   );

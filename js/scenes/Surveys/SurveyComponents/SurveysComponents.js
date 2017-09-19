@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
+import target from '../../../assets/icons/target.png';
 import SurveyWarningModal from '../../../components/SurveyWarningModal';
 import RadioButton from '../../../components/RadioButton';
 import SurveyGoalModal from '../../../components/SurveyGoalModal';
@@ -36,7 +37,7 @@ export const GoalsModal = ({ modalState, onPress, speakerGoals }) => (
     >
       <Image
         style={styles.targetIcon}
-        source={require('../../../assets/icons/target.png')}
+        source={target}
       />
     </TouchableOpacity>
     <Modal
@@ -72,10 +73,14 @@ WarningModal.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
+GoalsModal.defaultProps = {
+  speakerGoals: null
+}
+
 GoalsModal.propTypes = {
   modalState: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
-  speakerGoals: PropTypes.arrayOf(PropTypes.string).isRequired,
+  speakerGoals: PropTypes.arrayOf(PropTypes.string)
 };
 
 RadioAnswers.defaultProps = {
