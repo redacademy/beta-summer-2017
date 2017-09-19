@@ -1,8 +1,25 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native'
+import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { cStyles } from './cStyles';
 import OutlinedButton from '../../components/OutlinedButton';
+import SurveyWarningModal from '../../components/SurveyWarningModal';
+
+export const WarningModal = ({ modalState, onPress }) => (
+  <View>
+    <Modal
+      isVisible={modalState}
+      onBackdropPress={onPress}
+    >
+      <View style={{ alignSelf: 'center' }}>
+        <SurveyWarningModal 
+          text={"You have already provided feedback for this talk. You may only submit feedback once per talk."}
+        />
+      </View>
+    </Modal>
+  </View>
+);
 
 export const SpeakerHeader = ({ speakerData, styles }) => (
   <View style={cStyles.speakerHeader}>
@@ -38,11 +55,12 @@ export const GoalsList = ({ speakerData }) => (
   </ScrollView>
 )
 
-export const FeedbackButton = () => (
+export const FeedbackButton = ({ onPress }) => (
 
   <View style={cStyles.feedbackButton}>
     <OutlinedButton
       text={'GIVE FEEDBACK'}
+      onPress={onPress}
     />
   </View>
 

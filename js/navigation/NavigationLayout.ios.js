@@ -15,7 +15,6 @@ import { typography, colors } from '../config/styles';
 import Router from './routes';
 import { popModal } from '../redux/modules/moreModal';
 
-
 const defaultRouteConfig = {
   navigationBar: {
     tintColor: colors.white,
@@ -39,7 +38,8 @@ class NavigationLayout extends Component {
   render() {
     return (
       <TabNavigation
-        id="tabMain"
+        id="main"
+        navigatorUID="main"
         initialTab="home"
         tabBarColor="#353434"
       >
@@ -58,6 +58,7 @@ class NavigationLayout extends Component {
         </TabItem>
         <TabItem
           id="events"
+          navigatorUID="events"
           title="events"
           renderTitle={this.renderTitle}
           renderIcon={() => <Image source={require('../assets/icons/events_icon.png')} style={styles.navIconIos} />}

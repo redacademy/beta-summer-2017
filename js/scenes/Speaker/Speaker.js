@@ -6,10 +6,16 @@ import {
 } from 'react-native';
 import { styles } from './styles';
 import GradientWrapper from '../../components/GradientWrapper';
-import { SpeakerHeader, SpeakerContent, GoalsList, FeedbackButton } from './SpeakerComponents';
+import { SpeakerHeader, SpeakerContent, GoalsList, FeedbackButton, WarningModal } from './SpeakerComponents';
+import { goToSurvey } from '../../navigation/navHelpers';
 // import SpeakerAvatar from '../../components/SpeakerAvatar';
 
-const Speaker = ({ speakerData }) => {
+const Speaker = ({ 
+  speakerData, 
+  checkRespondent, 
+  displayWarningModal,
+  warningModalState 
+}) => {
   return (
     <View style={styles.contianer}>
       <GradientWrapper>
@@ -23,7 +29,17 @@ const Speaker = ({ speakerData }) => {
         </View>
         <Text style={styles.titleText}>Speakers Goals</Text>
         <GoalsList speakerData={speakerData} />
-        <FeedbackButton />
+        <FeedbackButton
+          onPress={
+            (checkRespondent())
+              ? () => displayWarningModal(true)
+              : () => goToSurvey({ speakerData })
+          }
+        />
+        <WarningModal
+          onPress={() => displayWarningModal(!warningModalState)}
+          modalState={warningModalState}
+        />
       </GradientWrapper>
     </View>
   )

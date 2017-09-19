@@ -17,6 +17,7 @@ import { logout } from '../../config/helpers';
 import OutlinedButton from '../../components/OutlinedButton';
 
 
+
 const Home = ({ nextEvent }) => (
   <View style={styles.sceneContainer}>
     <LinearGradient
