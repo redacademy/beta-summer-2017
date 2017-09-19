@@ -112,9 +112,8 @@ export const transactionCombo = (talk, updates, textfeedback) => {
   talkref.transaction(
     statsUpd(updates), 
     ()=>{return speakerref.transaction(
-      statsUpd(updates), 
-      // auth.currentUser.uid
-      respondentsUpdate(talk.talk_id, 'EVyPYeHeziX06GqVO9nMZ8ieONh1', textfeedback)
+      statsUpd(updates),
+      respondentsUpdate(talk.talk_id, auth.currentUser.uid, textfeedback)
     )}
   )
 }
