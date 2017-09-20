@@ -30,6 +30,7 @@ const AttendeeComments = ({ comments }) => {
                 key={index}
                 comment={comment}
                 cStyles={commentStyles}
+                imgStyle={commentStyles.imgRight}
                 commentDir={commentStyles.commentBarRight}
               />);
             } else {
@@ -37,6 +38,7 @@ const AttendeeComments = ({ comments }) => {
                 key={index}
                 comment={comment}
                 cStyles={commentStyles}
+                imgStyle={commentStyles.imgLeft}
                 commentDir={commentStyles.commentBarLeft}
               />);
             }

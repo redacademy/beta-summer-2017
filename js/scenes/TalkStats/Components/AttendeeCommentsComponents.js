@@ -5,10 +5,10 @@ import {
   Text
 } from 'react-native';
 
-export const Comment = ({ comment, cStyles, commentDir }) => (
+export const Comment = ({ imgStyle, comment, cStyles, commentDir }) => (
   <View style={commentDir}>
     <Image
-      style={cStyles.commenterAvatar}
+      style={[ cStyles.commenterAvatar, imgStyle ]}
       source={{ uri: comment.imageUrl }}
     />
     <View style={cStyles.commentContainer}>
