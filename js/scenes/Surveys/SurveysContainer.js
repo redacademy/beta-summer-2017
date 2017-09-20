@@ -36,7 +36,7 @@ class SurveysContainer extends Component {
 
   componentDidMount() {
     this.props.dispatch(setTalkData(this.props.talkObj.speakerData));
-    this.displayGoalModal(!this.state.showGoalModal);
+    setTimeout(() => this.displayGoalModal(!this.state.showGoalModal), 500);
   }
 
   dispatchAnswer = (question, quality, answer) => {
