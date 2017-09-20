@@ -4,18 +4,15 @@ import {
   Text,
   Image,
   TouchableOpacity,
-<<<<<<< HEAD
-  ScrollView
-=======
   ScrollView,
   StyleSheet
->>>>>>> changed events styling to be scrollable
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import GradientWrapper from '../../components/GradientWrapper';
+import LinearGradient from 'react-native-linear-gradient';
 import { goToSpeaker } from '../../navigation/navHelpers';
 import OutlinedButton from '../../components/OutlinedButton/';
+import { colors } from '../../config/styles';
 import { styles } from './styles';
 
 const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
@@ -35,14 +32,15 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
           {eventDataSet.map((item) => (
             <View key={item.talk_id}>
               <TouchableOpacity onPress={() => goToSpeaker({ item })}>
-                <View style={styles.talkBorder} />
-                <View style={styles.talkContainer}>
-                  <Image style={styles.image} source={{ uri: item.speaker_id.imageUrl }} />
-                  <View style={styles.talkDetails}>
-                    <View style={styles.talkTitleContainer}>
-                      <Text style={styles.talkTitle}>{item.title}</Text>
+                <View style={styles.talkBorder}>
+                  <View style={styles.talkContainer}>
+                    <Image style={styles.image} source={{ uri: item.speaker_id.imageUrl }} />
+                    <View style={styles.talkDetails}>
+                      <View style={styles.talkTitleContainer}>
+                        <Text style={styles.talkTitle}>{item.title}</Text>
+                      </View>
+                      <Text style={styles.speaker}>{item.speaker_id.fullName}</Text>
                     </View>
-                    <Text style={styles.speaker}>{item.speaker_id.fullName}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
