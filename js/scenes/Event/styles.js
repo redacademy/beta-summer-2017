@@ -34,30 +34,37 @@ export const styles = StyleSheet.create({
 
   talkContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     marginBottom: 10,
-    width: '50%'
+    borderColor: 'red',
+    borderWidth: 2,
+    right: 30,
+    width: Dimensions.get('window').width,
   },
 
   talkBorder: {
     backgroundColor: colors.darkGrey,
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    marginLeft: 30,
-    height: 90,
-    width: '100%'
+    minHeight: 50,
+    width: Dimensions.get('window').width / 1.1,
+    alignSelf: 'flex-end',
+    marginTop: 2.5,
+    marginBottom: 2.5,
+    borderColor: 'green',
+    borderWidth: 2
   },
 
   talkDetails: {
     flexDirection: 'column',
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: 25,
-    left: 90,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderColor: 'yellow',
+    borderWidth: 2,
+    maxWidth: Dimensions.get('window').width / 1.55
   },
 
   talkTitleContainer: {
-    width: Dimensions.get('window').width / 2,
     flexWrap: 'wrap'
   },
 
@@ -79,9 +86,7 @@ export const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 10,
-    margin: 10,
-    position: 'absolute',
-    bottom: 0
+    margin: 10
   }
   
 });
