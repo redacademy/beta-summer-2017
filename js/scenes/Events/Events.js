@@ -16,10 +16,10 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEven
 
   const filterData = [
     //TODO: Add filter methods
-    { title: 'PAST', func: console.log, action: 'past events filter' },
-    { title: 'UPCOMING', func: console.log, action: 'upcoming events filter' },
-    { title: 'ATTENDED', func: console.log, action: 'attended events filter' },
-    { title: 'MY TALKS', func: console.log, action: 'my talks filter?' }
+    { title: 'PAST', func: displayPastEvents, action: null },
+    { title: 'UPCOMING', func: displayUpcomingEvents, action: null },
+    { title: 'ATTENDED', func: displayAttendedEvents, action: null },
+    { title: 'ALL EVENTS', func: displayAllEvents, action: null }
   ];
 
   const FilterButton = ({ data }) => {

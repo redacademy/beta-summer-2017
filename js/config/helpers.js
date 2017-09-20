@@ -38,7 +38,7 @@ export async function signUp(profile) {
   }
 }
 //update
-function updateEmail(email, user) {
+function updateEmail(user, email) {
   if(email) {
    return user.updateEmail(email)
     .then(()=>updateEmailField(user.uid, email))
@@ -49,7 +49,7 @@ function updateEmail(email, user) {
     console.log('empty email')
   }
 }
-function updateFullname(name, user) {
+function updateFullname(user, name) {
   if(name) {
     user.updateProfile({
       displayName: name,
@@ -62,7 +62,7 @@ function updateFullname(name, user) {
     console.log('empty name')
   }
 }
-function updatePass(password, user) {
+function updatePass(user, password) {
   if(password) {
     user.updatePassword(password)
     .catch(function (error) {
@@ -79,9 +79,9 @@ export const batchProfileUpdate = async (options, user, currentdata) => {
 )
   try {
     await auth.currentUser.reauthenticateWithCredential(credential)
-    await updateEmail(options.email, user)
-    await updateFullname(options.name, user)
-    await updatePass(options.password, user)
+    await updateEmail(user, options.email)
+    await updateFullname(user, options.name)
+    await updatePass(user, options.password)
   } catch (e) {console.log(e)}
 }
 
@@ -231,8 +231,7 @@ export const getTime = () => {
 
 
 //upload profile photos.
-export const uploadImage = (uri, imageName, mime) => {
-  if(!mime) {mime = 'image/jpg'}
+export const uploadImage = (uri, imageName, mime = 'image/jpg') => {
   return new Promise((resolve, reject) => {
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
     let uploadBlob = null
