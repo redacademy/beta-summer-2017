@@ -21,8 +21,8 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
   return (
     <ScrollView style={styles.container}>
       <View>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity style={styles.imageContainer} onPress={() => handleImageUpload()}>
+        <TouchableOpacity onPress={() => handleImageUpload()}>
+          <View style={styles.imageContainer}>
             <Image
               style={styles.image}
               source={getImage ? { uri: getImage } : accountIcon}
@@ -31,8 +31,8 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
               style={styles.pencil}
               source={pencil}
             />
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
         <Text style={styles.headings}>Personal Bio</Text>
         <View style={styles.fieldsContainer}>
           <TextInput

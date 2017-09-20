@@ -8,6 +8,7 @@ import { TalksReducer } from './modules/reducers/talkReducer';
 import { HandleModal } from './modules/moreModal';
 import { QuestionsReducer } from './modules/reducers/questionsReducer';
 import { SurveyReducer } from './modules/reducers/surveyReducer';
+import { settingsPopUp } from './modules/accountSettings';
 
 export default combineReducers({ 
   navigation: NavigationReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   talks: TalksReducer,
   modal: HandleModal,
   questions: QuestionsReducer,
-  survey: SurveyReducer
+  survey: SurveyReducer,
+  popup: settingsPopUp
 });

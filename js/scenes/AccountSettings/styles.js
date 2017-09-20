@@ -6,7 +6,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.paleYellow
   },
+  hopeDisWerks: {
+    flexDirection: 'row',
 
+  },
   imageContainer: {
     justifyContent: 'center',
     flexDirection: 'row',
@@ -19,7 +22,8 @@ export const styles = StyleSheet.create({
     height: 75,
     borderWidth: 3,
     borderColor: colors.darkGrey,
-    marginTop: 30
+    marginTop: 30,
+    marginLeft: 20
   },
 
   pencil: {
@@ -32,20 +36,6 @@ export const styles = StyleSheet.create({
     fontSize: typography.robotoBold14,
     color: colors.darkGrey,
     marginLeft: 50
-  },
-
-  inputBig: {
-    fontFamily: typography.fontMain,
-    fontSize: typography.robotoRegular14,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderWidth: 1,
-    borderColor: colors.darkGrey,
-    backgroundColor: colors.white,
-    width: '70%',
-    height: 85,
-    marginTop: 5,
-    marginBottom: 30
   },
 
   inputSmall: {
@@ -64,7 +54,10 @@ export const styles = StyleSheet.create({
 
   fieldsContainer: {
     justifyContent: 'center',
-    alignItems: 'flex-start',
     flexDirection: 'row'
+  },
+
+  button: {
+    marginTop: 20
   }
 });
