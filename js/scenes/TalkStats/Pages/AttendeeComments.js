@@ -11,7 +11,9 @@ import { Comment } from '../Components/AttendeeCommentsComponents';
 import { colors } from '../../../config/styles';
 import { styles, commentStyles } from '../styles';
 
-const AttendeeComments = ({ comments }) => {
+const AttendeeComments = ({ comments = [] }) => {
+  const isEven = (n) => !!(n % 2 === 0)
+
   return (
     <View style={styles.sceneContainer}>
       <LinearGradient
@@ -24,24 +26,15 @@ const AttendeeComments = ({ comments }) => {
           <Text style={styles.skillsHeader}>
             Talk Feedback
           </Text>
-          {(comments) && comments.map((comment, index) => {
-            if (index === 0 || index % 2 === 0) {
-              return (<Comment
-                key={index}
-                comment={comment}
-                cStyles={commentStyles}
-                imgStyle={commentStyles.imgRight}
-                commentDir={commentStyles.commentBarRight}
-              />);
-            } else {
-              return (<Comment
-                key={index}
-                comment={comment}
-                cStyles={commentStyles}
-                imgStyle={commentStyles.imgLeft}
-                commentDir={commentStyles.commentBarLeft}
-              />);
-            }
+          {comments.map((comment, index) => {
+            const { imgRight, commentBarRight, commentBarLeft, imgLeft } = commentStyles;
+            return (<Comment
+              key={index}
+              comment={comment}
+              cStyles={commentStyles}
+              imgStyle={isEven(index) ? imgRight : imgLeft}
+              commentDir={isEven(index) ? commentBarRight : commentBarLeft}
+            />);
           })}
         </ScrollView>
       </LinearGradient >
