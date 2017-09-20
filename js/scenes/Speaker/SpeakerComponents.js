@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Linking } from 'react-native'
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { cStyles } from './cStyles';
@@ -57,10 +57,34 @@ export const SpeakerContent = ({ speakerData, styles }) => (
     <Text style={cStyles.speakerName}>{speakerData.speaker_id.fullName.toUpperCase()}</Text>
     <Text style={cStyles.speakerBio}>{speakerData.speaker_id.bio}</Text>
     <View style={cStyles.socialMedia}>
-      <Icon style={cStyles.speakerIcons} name='ios-mail' />
-      <Icon style={cStyles.speakerIcons} name='logo-linkedin' />
-      <Icon style={cStyles.speakerIcons} name='logo-facebook' />
-      <Icon style={cStyles.speakerIcons} name='logo-twitter' />
+      {(speakerData.speaker_id.email) &&
+      <Icon 
+        onPress={() => Linking.openURL(`mailto:${speakerData.speaker_id.email}`)}
+        style={cStyles.speakerIcons} 
+        name='ios-mail' 
+      />
+      }
+      {(speakerData.speaker_id.socialMediaUrls.linkedIn.length > 0) && 
+      <Icon 
+        onPress={() => Linking.openURL(`${speakerData.speaker_id.socialMediaUrls.linkedIn}`)} 
+        style={cStyles.speakerIcons} 
+        name='logo-linkedin' 
+      />
+      }
+      {(speakerData.speaker_id.socialMediaUrls.facebook.length > 0) && 
+      <Icon 
+        onPress={() => Linking.openURL(`${speakerData.speaker_id.socialMediaUrls.facebook}`)}
+        style={cStyles.speakerIcons} 
+        name='logo-facebook' 
+      />
+      }
+      {(speakerData.speaker_id.socialMediaUrls.twitter.length > 0) &&
+      <Icon 
+        onPress={() => Linking.openURL(`${speakerData.speaker_id.socialMediaUrls.twitter}`)}
+        style={cStyles.speakerIcons} 
+        name='logo-twitter' 
+      />
+      }
     </View>
   </ScrollView>
 )

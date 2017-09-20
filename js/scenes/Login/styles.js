@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     fontFamily: typography.titleHeading,
     fontSize: typography.norwester27,
     marginTop: 35,
-    width: '60%',
+    width: '50%',
     textAlign: 'center',
   },
   subTitle: {

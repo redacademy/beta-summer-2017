@@ -4,26 +4,19 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ScrollView,
-  Dimensions
+  ScrollView
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import LinearGradient from 'react-native-linear-gradient';
+import GradientWrapper from '../../components/GradientWrapper';
 import { goToSpeaker } from '../../navigation/navHelpers';
 import OutlinedButton from '../../components/OutlinedButton/';
 import { styles } from './styles';
-import { colors } from '../../config/styles';
 
 const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        style={{ height: Dimensions.get('window').height }}
-        colors={[colors.lightGrey, colors.darkGrey]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 0.8 }}
-      >
+      <GradientWrapper>
         <View style={styles.eventContainer}>
           <Text style={styles.eventTime}>Speakers</Text>
           <Text style={styles.eventTime}>{Moment.unix(eventData.startTime).format('h:mmA')} to {Moment.unix(eventData.endTime).format('h:mmA')}</Text>
@@ -50,7 +43,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
             onPress={() => attendEvent()}
           />
         </ScrollView>
-      </LinearGradient>
+      </GradientWrapper>
     </View>
   );
 }

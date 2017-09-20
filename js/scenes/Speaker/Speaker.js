@@ -14,7 +14,6 @@ import {
   WarningModal,
   EventModal
 } from './SpeakerComponents';
-// import SpeakerAvatar from '../../components/SpeakerAvatar';
 
 const Speaker = ({ 
   speakerData, 
@@ -35,7 +34,7 @@ const Speaker = ({
         <View style={styles.speakerContainer}>
           <Image
             style={styles.speakerImage}
-            source={require('../../assets/images/derek-van-dam-profile.jpeg')}
+            source={{ uri: speakerData.speaker_id.imageUrl}}
           />
           <SpeakerContent speakerData={speakerData} />
         </View>
