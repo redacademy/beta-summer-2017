@@ -50,13 +50,15 @@ export const styles = StyleSheet.create({
   talkDetails: {
     flexDirection: 'column',
     position: 'absolute',
+    alignSelf: 'center',
     bottom: 25,
     left: 90,
     backgroundColor: 'transparent'
   },
 
   talkTitleContainer: {
-    width: '80%'
+    width: Dimensions.get('window').width / 2,
+    flexWrap: 'wrap'
   },
 
   talkTitle: {
