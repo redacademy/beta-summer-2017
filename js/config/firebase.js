@@ -11,6 +11,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
+export const betastorage = firebase.storage().ref('images');
 export const betadb = firebase.database().ref();
 export const betausers = firebase.database().ref('users'); //only users
 export const betaevents = firebase.database().ref('events'); //only events
