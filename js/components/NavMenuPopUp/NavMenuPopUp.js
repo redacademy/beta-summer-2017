@@ -9,30 +9,33 @@ import {
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { logout } from '../../config/helpers';
+import { pushSceneFromModal } from '../../navigation/navHelpers';
 import { popModal } from '../../redux/modules/moreModal';
 import { styles } from './styles';
 import settings from '../../assets/icons/setting.png';
 import profile from '../../assets/icons/profile.png';
 import logoutIcon from '../../assets/icons/cancel_icon.png';
+import question from '../../assets/icons/quick_guide.png';
 
-const NavMenuPopUp = ({ isModalVisible, dispatch }) => {
+const NavMenuPopUp = ({ isModalVisible, navigatorUID, dispatch }) => {
 
   const popUpItems = [
-    {title: 'Settings', icon: settings, func: null},
-    {title: 'View / Edit Profile', icon: profile, func: null},
-    {title: 'Log Out', icon: logoutIcon, func: logout}
+    {title: 'Settings', icon: settings, func: console.log, action: 'settings page'},
+    {title: 'View / Edit Profile', icon: profile, func: console.log, action: 'profile page'},
+    {title: 'Survey', icon: question, func: pushSceneFromModal, action: [navigatorUID, 'surveys']},
+    {title: 'Log Out', icon: logoutIcon, func: logout, action: null},
   ];
 
   const PopUpList = ({ data }) => {
-    const { title, icon, func } = data;
+    const { title, icon, func, action } = data;
     return (
       <TouchableOpacity
-        onPress={() => func()}
+        onPress={() => func(action)}
       >
         <View style={styles.menuItem}>
           <Image style={styles.menuIcon} source={icon} />
           <Text style={styles.popUpText}>{title}</Text>
-        </View>  
+        </View>
       </TouchableOpacity>
     )
   }
@@ -56,7 +59,8 @@ const NavMenuPopUp = ({ isModalVisible, dispatch }) => {
 }
 
 const mapStateToProps = (state) => ({
-  isModalVisible: state.modal.isModalVisible
+  isModalVisible: state.modal.isModalVisible,
+  navigatorUID: state.navigation.currentNavigatorUID
 })
 
 PropTypes.NavMenuPopUp = {

@@ -9,6 +9,13 @@ export const goToEvent = (currentNavigatorUID, eventData) => {
   ));
 }
 
+export const pushSceneFromModal = ([currentNavigatorUID, scene]) => {
+  Store.dispatch(NavigationActions.push(
+    currentNavigatorUID,
+    Router.getRoute(scene)
+  ));
+}
+
 export const goToSpeaker = (speakerData) => {
   Store.dispatch(NavigationActions.push(
     'events',

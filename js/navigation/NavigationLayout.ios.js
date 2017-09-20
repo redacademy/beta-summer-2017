@@ -8,12 +8,18 @@ import {
 import {
   Text,
   Image,
-  Linking
+  Linking,
+  Alert
 } from 'react-native';
 import { styles } from './styles';
 import { typography, colors } from '../config/styles';
 import Router from './routes';
 import { popModal } from '../redux/modules/moreModal';
+import dashboard from '../assets/icons/dashboard_icon.png';
+import home from '../assets/icons/home_icon.png';
+import events from '../assets/icons/events_icon.png';
+import newTalk from '../assets/icons/newtalk_icon.png';
+import more from '../assets/icons/more_icon.png';
 
 const defaultRouteConfig = {
   navigationBar: {
@@ -47,7 +53,7 @@ class NavigationLayout extends Component {
           id="home"
           title="home"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/home_icon.png')} style={styles.navIconIos} />}
+          renderIcon={() => <Image source={home} style={styles.navIconIos} />}
         >
           <StackNavigation
             id="home"
@@ -61,7 +67,7 @@ class NavigationLayout extends Component {
           navigatorUID="events"
           title="events"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/events_icon.png')} style={styles.navIconIos} />}
+          renderIcon={() => <Image source={events} style={styles.navIconIos} />}
         >
           <StackNavigation
             id="events"
@@ -74,8 +80,10 @@ class NavigationLayout extends Component {
           id="newTalk"
           title="new talk"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/newtalk_icon.png')} style={styles.navIconIos} />}
-          onPress={() => this.props.dispatch(popModal(!this.props.modal))}
+          renderIcon={() => <Image source={newTalk} style={styles.navIconIos} />}
+          onPress={() => Alert.alert(
+            'E-mail client unavailable on device emulator.'
+          )}
         >
           <StackNavigation
             id="newTalk"
@@ -87,7 +95,7 @@ class NavigationLayout extends Component {
           id="dashboard"
           title="dashboard"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/dashboard_icon.png')} style={styles.navIconIos} />}
+          renderIcon={() => <Image source={dashboard} style={styles.navIconIos} />}
         >
           <StackNavigation
             id="dashboard"
@@ -100,10 +108,9 @@ class NavigationLayout extends Component {
           id="more"
           title="more"
           renderTitle={this.renderTitle}
-          renderIcon={() => <Image source={require('../assets/icons/more_icon.png')} style={styles.navIconIos} />}
-          //TODO: create redux state to manage conditional rendering of tabnav menu popup
+          renderIcon={() => <Image source={more} style={styles.navIconIos} />}
           onPress={() => this.props.dispatch(popModal(!this.props.isModalVisible))}
-          >
+        >
         </TabItem>
       </TabNavigation>
     );
