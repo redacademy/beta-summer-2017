@@ -121,7 +121,7 @@ class SurveysContainer extends Component {
 const mapStateToProps = state => ({
   questions: state.questions,
   surveyAnswers: state.survey.surveyAnswers,
-  comments: state.survey.comments
+  comments: state.survey.surveyComments
 });
 
 export default connect(mapStateToProps)(SurveysContainer);
