@@ -4,6 +4,8 @@ export const UPDATE_PASSWORD_FIELD = 'UPDATE_PASSWORD_FIELD';
 export const UPDATE_FULLNAME_FIELD = 'UPDATE_FULLNAME_FIELD';
 export const UPDATE_BIO_FIELD = 'UPDATE_BIO_FIELD';
 export const UPDATE_GOALS_FIELD = 'UPDATE_GOALS_FIELD';
+export const UPDATE_IMAGEURL_FIELD = 'UPDATE_IMAGEURL_FIELD';
+export const UPDATE_SOCIAL_MEDIA = 'UPDATE_SOCIALMEDIA';
 
 // ACTION CREATORS
 export function updateEmailField(email) {
@@ -41,24 +43,29 @@ export function updateGoalsField(goals) {
   };
 }
 
-
-export function updateSocialMedia(payload) {
+export function updateImageUrlField(imageurl) {
   return {
-    type: "UPDATE_SOCIAL_MEDIA",
-    payload
+    type: UPDATE_IMAGEURL_FIELD,
+    imageurl
+  };
+}
+
+export function updateSocialMedia(smUrls) {
+  return {
+    type: UPDATE_SOCIAL_MEDIA,
+    smUrls
   }
 }
 
 // REDUCERS
 const initialState = {
-  emailField: '',
-  passwordField: '',
-  fullnameField: '',
-  bioField: '',
-  goalsField: '',
-  facebook: '',
-  linkedin: '',
-  twitter: ''
+  emailField: null,
+  passwordField: null,
+  fullnameField: null,
+  bioField: null,
+  goalsField: {},
+  imageUrl: null,
+  socialMediaUrls: {}
 };
 
 export function userFormsReducer(state = initialState, action) {
@@ -90,15 +97,25 @@ export function userFormsReducer(state = initialState, action) {
   case UPDATE_GOALS_FIELD:
     return {
       ...state,
-      goalsField: action.goals
+      goalsField: {
+        ...state.goalsField,
+        ...action.goals
+      }
+    }
+
+  case UPDATE_IMAGEURL_FIELD:
+    return {
+      ...state,
+      imageUrl: action.imageurl
     };
 
-  case "UPDATE_SOCIAL_MEDIA":
-    const { value, type } = action.payload;
-    const newState = state;
-    newState[type] = value
+  case UPDATE_SOCIAL_MEDIA:
     return {
-      ...newState
+      ...state,
+      socialMediaUrls: {
+        ...state.socialMediaUrls,
+        ...action.smUrls
+      }
     };
 
   default:

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { signUp } from '../../config/helpers';
-import Signup from './Signup';
+import { ImagePickerIOS } from 'react-native';
+import AccountSettings from './AccountSettings';
+import { logout } from '../../config/helpers';
 import { 
   updateEmailField, 
   updatePasswordField,
-  updateFullnameField
+  updateFullnameField,
+  updateImageUrlField
 } from '../../redux/modules/user-forms';
 
-class SignupContainer extends Component {
+
+class AccountSettingsContainer extends Component {
+
+  static route = {
+    navigationBar: {
+      title: 'ACCOUNT SETTINGS',
+    }
+  }
 
   handleEmail = (event) => {
     this.props.dispatch(updateEmailField(event));
@@ -23,26 +32,24 @@ class SignupContainer extends Component {
     this.props.dispatch(updateFullnameField(event));
   }
 
-  signupHandler = () => {    
-    if (this.props.emailField.length && this.props.passwordField.length && this.props.fullnameField.length) {
-      const user = {
-        email: this.props.emailField,
-        password: this.props.passwordField,
-        name: this.props.fullnameField
-      }
-      signUp(user)
-    }
+  handleImageUpload = () => {
+    ImagePickerIOS.openSelectDialog({}, imageUri => {
+      this.props.dispatch(updateImageUrlField(imageUri));
+    }, error => console.error(error));
+  }
+
+  handleLogout = () => {
+    logout()
   }
 
 
   render() {
     return (
-      <Signup
+      <AccountSettings 
         emailField={this.props.emailField}
         passwordField={this.props.passwordField}
         fullnameField={this.props.fullnameField}
-
-        signupHandler={this.signupHandler}
+        imageUrl={this.props.imageUrl}
 
         handleEmail={(e) => {
           this.handleEmail(e)
@@ -55,6 +62,10 @@ class SignupContainer extends Component {
         handleFullname={(e) => {
           this.handleFullname(e)
         }}
+
+        handleImageUpload={this.handleImageUpload}
+
+        handleLogout={this.handleLogout}
       />
     );
   }
@@ -63,14 +74,15 @@ class SignupContainer extends Component {
 const mapStateToProps = state => ({
   emailField: state.forms.emailField,
   passwordField: state.forms.passwordField,
-  fullnameField: state.forms.fullnameField
+  fullnameField: state.forms.fullnameField,
+  imageUrl: state.forms.imageUrl
 });
 
-SignupContainer.propTypes = {
+AccountSettingsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   emailField: PropTypes.string.isRequired,
   passwordField: PropTypes.string.isRequired,
   fullnameField: PropTypes.string.isRequired
 };
 
-export default connect(mapStateToProps)(SignupContainer);
+export default connect(mapStateToProps)(AccountSettingsContainer);
