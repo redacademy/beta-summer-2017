@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ImagePickerIOS } from 'react-native';
 import Profile from './Profile';
 import {
   updateBioField,
   updateGoalsField,
-  updateSocialMedia,
-  updateImageUrlField
+  updateSocialMedia
 } from '../../redux/modules/user-forms';
-
-import { customFieldsUpdater } from '../../config/helpers';
+import { customFieldsUpdater, takePicture } from '../../config/helpers';
 import { auth } from '../../config/firebase';
 
 
@@ -29,9 +26,7 @@ const ProfileContainer = ({ bioField, goalsField, socialMedia, imageUrl, users, 
   }
 
   const handleImageUpload = () => {
-    ImagePickerIOS.openSelectDialog({}, imageUri => {
-      dispatch(updateImageUrlField(imageUri));
-    }, error => console.error(error));
+    takePicture()
   }
 
   const updateProfile = () => {
