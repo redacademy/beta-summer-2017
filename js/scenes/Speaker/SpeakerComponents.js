@@ -68,8 +68,8 @@ export const SpeakerContent = ({ speakerData, styles }) => (
 export const GoalsList = ({ speakerData }) => (
 
   <ScrollView style={cStyles.goalsContainer}>
-    {Object.keys(speakerData.speaker_id.goals).map((key) => (
-      speakerData.speaker_id.goals[key].length ? <Text style={cStyles.goalItem}> - {speakerData.speaker_id.goals[key]}</Text> : null
+    {Object.keys(speakerData.speaker_id.goals).map((key, index) => (
+      speakerData.speaker_id.goals[key].length && <Text key={index} style={cStyles.goalItem}> - {speakerData.speaker_id.goals[key]}</Text>
     )
     )}
   </ScrollView>

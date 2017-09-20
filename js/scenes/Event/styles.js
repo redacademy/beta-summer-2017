@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { colors, typography } from '../../config/styles';
 
 export const styles = StyleSheet.create({
@@ -73,4 +73,5 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0
   }
+  
 });

@@ -59,6 +59,10 @@ const mocktalk= {
 }
 
 export const giveFeedback = (talk, respondent_id, surveyanswers, textfeedback) => {
+  console.log(talk);
+  console.log(respondent_id);
+  console.log(surveyanswers);
+  console.log(textfeedback);
   if (respondentCheck(talk.respondents, respondent_id)) {
     throw new Error('Alredy surveyed this talk')
   } else {
@@ -113,7 +117,7 @@ export const transactionCombo = (talk, updates, textfeedback) => {
     statsUpd(updates), 
     ()=>{return speakerref.transaction(
       statsUpd(updates),
-      respondentsUpdate(talk.talk_id, auth.currentUser.uid, textfeedback)
+      respondentsUpdate(talk.talk_id, 'EVyPYeHeziX06GqVO9nMZ8ieONh1', textfeedback)
     )}
   )
 }

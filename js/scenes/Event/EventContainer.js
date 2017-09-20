@@ -108,7 +108,7 @@ EventContainer.propTypes = {
   }).isRequired,
   eventData: PropTypes.shape({
     item: PropTypes.shape({
-      attendees: PropTypes.arrayOf(PropTypes.string),
+      //attendees: PropTypes.arrayOf(PropTypes.string),
       date: PropTypes.number,
       startTime: PropTypes.number,
       endTime: PropTypes.number,

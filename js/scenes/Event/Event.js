@@ -30,7 +30,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
         </View>
         <ScrollView>
           {eventDataSet.map((item) => (
-            <View key={item.id}>
+            <View key={item.talk_id}>
               <TouchableOpacity onPress={() => goToSpeaker({ item })}>
                 <View style={styles.talkBorder} />
                 <View style={styles.talkContainer}>
@@ -57,7 +57,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
 
 SingleEvent.propTypes = {
   eventData: PropTypes.shape({
-    attendees: PropTypes.arrayOf(PropTypes.string),
+    //attendees: PropTypes.arrayOf(PropTypes.string),
     date: PropTypes.number,
     startTime: PropTypes.number,
     endTime: PropTypes.number,

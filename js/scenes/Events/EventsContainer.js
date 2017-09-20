@@ -7,6 +7,7 @@ import '../../redux/modules/actions/eventActions';
 import { colors, typography } from '../../config/styles';
 import { auth } from '../../config/firebase';
 import { getTime } from '../../config/helpers';
+import { idToObjs } from '../Lib/helperFunctions';
 
 class EventsContainer extends Component {
   static route = {
@@ -53,11 +54,17 @@ class EventsContainer extends Component {
     )
   }
 
+  withAttendeeData = (events, users) => {
+    return events.map(event => {
+      return idToObjs(event, users);
+    });
+  }
+
   render() {
     if(this.props.eventsData.loading) return (<Loader />)
     return (
       <Events
-        eventsData={this.state.events}
+        eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
         eventDate={this.eventDate}
         eventTime={this.eventTime}
         navigatorUID={'events'}
@@ -71,7 +78,8 @@ class EventsContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  eventsData: state.events
+  eventsData: state.events,
+  userData: state.users
 });
 
 export default connect(mapStateToProps)(EventsContainer);

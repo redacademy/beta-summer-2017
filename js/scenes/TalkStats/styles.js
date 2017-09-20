@@ -36,11 +36,12 @@ export const commentStyles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "flex-end",
     marginTop: 15,
-    marginBottom: 15
+    marginBottom: 15,
+    minHeight: 125
   },
   commentBarLeft: {
     backgroundColor: colors.darkGrey,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     width: Dimensions.get('window').width / 1.15,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
@@ -48,17 +49,18 @@ export const commentStyles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "flex-start",
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    minHeight: 125
   },
   commentContainer: {
     justifyContent: 'center',
     width: Dimensions.get('window').width / 1.75,
-    padding: 10
+    padding: 20
   },
   commentText: {
     color: colors.white,
     fontSize: typography.norwester12,
-    fontFamily: typography.fontMainBold,
+    fontFamily: typography.fontMainRegular,
     marginBottom: 10
   },
   commenterName: {
@@ -68,8 +70,15 @@ export const commentStyles = StyleSheet.create({
   commenterAvatar: {
     width: 75,
     height: 75,
-    borderRadius: 15,
-    margin: 5
+    borderRadius: 5
+  },
+  imgRight: {
+    marginLeft: 10,
+    marginRight: -10
+  },
+  imgLeft: {
+    marginRight: 10,
+    marginLeft: -10
   }
 });
 

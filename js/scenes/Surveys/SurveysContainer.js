@@ -57,7 +57,7 @@ class SurveysContainer extends Component {
     const talk = this.props.talkObj.speakerData;
     const surveyAns = this.props.surveyAnswers;
     const textfeedback = this.props.comments;
-    const user = 'EVyPYeHeziX06GqVO9nMZ8ieONh1'
+    const user = 'dKJaZ8tuniPW1Ee2BduSQQ8wSsp2'
     // placeholder id for testing
     ExecFeedBackAsync(talk, user, surveyAns, textfeedback);
     goToSurveyComplete();
@@ -121,7 +121,7 @@ class SurveysContainer extends Component {
 const mapStateToProps = state => ({
   questions: state.questions,
   surveyAnswers: state.survey.surveyAnswers,
-  comments: state.survey.comments
+  comments: state.survey.surveyComments
 });
 
 export default connect(mapStateToProps)(SurveysContainer);

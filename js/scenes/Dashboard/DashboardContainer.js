@@ -15,7 +15,7 @@ import { styles } from './styles';
 const DashboardContainer = ({ userData, talksData }) => {
   const { uLoading, users } = userData;
   const { tLoading, talks } = talksData;
-  const testUser = users["dKJaZ8tuniPW1Ee2BduSQQ8wSsp2"];
+  const testUser = users["wJW3GRYqtWYi4QplGLVSKPxxDtD3"];
 
   if (uLoading || tLoading) return <Loader />;
   return (
