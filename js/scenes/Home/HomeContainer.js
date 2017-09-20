@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -9,27 +9,17 @@ import Home from './Home';
 import Loader from '../../components/Loader';
 import { getNextEvent } from '../Lib/helperFunctions';
 
-class HomeContainer extends Component {
+const HomeContainer = ({ events, users }) => (
+  events.loading || users.loading 
+    ? <Loader />
+    : <Home nextEvent={getNextEvent(events.events, users.users)} />
+);
 
-  static route = {
-    navigationBar: {
-      title: 'HOME',
-    }
+HomeContainer.route = {
+  navigationBar: {
+    title: 'HOME',
   }
-
-  render() {
-    const { events, users } = this.props;
-    if (events.loading || users.loading) return <Loader />;
-    return <Home nextEvent={getNextEvent(events.events, users.users)} />;
-  }
-}
-
-const mapStateToProps = state => ({
-  events: state.events,
-  users: state.users
-});
-
-export default connect(mapStateToProps)(HomeContainer);
+};
 
 HomeContainer.propTypes = {
   events: PropTypes.shape({
@@ -63,3 +53,5 @@ HomeContainer.propTypes = {
     }),
   }).isRequired,
 };
+
+export default connect(s => ({ events: s.events, users: s.users}))(HomeContainer)

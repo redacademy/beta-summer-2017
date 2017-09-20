@@ -7,12 +7,15 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import OutlinedButton from '../../components/OutlinedButton'
+import OutlinedButton from '../../components/OutlinedButton';
+import Loader from '../../components/Loader';
 import { auth } from '../../config/firebase';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
-const Login = ({ loginHandler, handleEmail, handlePassword, emailField, passwordField }) => {
+import bulbLogo from '../../assets/images/beta_talks_lightbulb_white.png';
+
+const Login = ({ loginHandler, handleEmail, handlePassword, emailField, passwordField, error, isLoading }) => {
   return (
     <View style={styles.container}>
       <LinearGradient style={styles.lgHeight} colors={[colors.lightGrey, colors.black]} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 0.4 }}>
@@ -22,9 +25,9 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
           </Text>
           <Image
             style={styles.bulb}
-            source={require('../../assets/images/beta_talks_lightbulb_white.png')}
+            source={bulbLogo}
           />
-          <Text style={styles.bodyText}>Please enter your...</Text>
+          <Text style={styles.subTitle}>Please enter your...</Text>
           <TextInput
             autoCapitalize='none'
             style={styles.input}
@@ -41,9 +44,14 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
           />
           <OutlinedButton
             style={styles.bodyText}
-            onPress={() => loginHandler()}
+            onPress={() =>  loginHandler()} 
             text={'LOG IN'}
-          />
+            isLoading={isLoading}
+          >
+            {/* <Loader
+              color='yellow' 
+              /> */}
+          </OutlinedButton>
           {console.log(auth.currentUser)}
         </View>
       </LinearGradient>

@@ -12,6 +12,7 @@ import Login from '../scenes/Login';
 import Surveys from '../scenes/Surveys';
 import Speaker from '../scenes/Speaker';
 import Signup from '../scenes/Signup';
+import SurveyComplete from '../scenes/SurveyComplete';
 
 const Router = createRouter(() => ({
   landing: () => LandingPage,
@@ -25,7 +26,8 @@ const Router = createRouter(() => ({
   surveys: () => Surveys,
   speaker: () => Speaker,
   event: () => EventScene,
-  signup: () => Signup
+  signup: () => Signup,
+  surveyComplete: () => SurveyComplete
 }))
 
 export default Router;

@@ -6,19 +6,20 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
+import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import { goToEvent } from '../../navigation/navHelpers';
 import { styles } from './styles';
 import { colors } from '../../config/styles';
 
-const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
+const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEvents, displayPastEvents, displayUpcomingEvents, displayAttendedEvents }) => {
 
   const filterData = [
     //TODO: Add nev helper methods to func and action
-    { title: 'PAST', func: console.log, action: 'past events filter' },
-    { title: 'UPCOMING', func: console.log, action: 'upcoming events filter' },
-    { title: 'ATTENDED', func: console.log, action: 'attended events filter' },
-    { title: 'MY TALKS', func: console.log, action: 'my talks filter?' }
+    { title: 'PAST', func: displayPastEvents, action: null },
+    { title: 'UPCOMING', func: displayUpcomingEvents, action: null },
+    { title: 'ATTENDED', func: displayAttendedEvents, action: null },
+    { title: 'ALL EVENTS', func: displayAllEvents, action: null }
   ];
 
   const FilterButton = ({ data }) => {
@@ -33,8 +34,8 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
   }
 
   const EventListItem = ({ item }) => (
-    <View key={item.id}>
-      <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, item)}>
+    <View>
+      <TouchableOpacity style={styles.eventsListItem} onPress={() => goToEvent(navigatorUID, { item })}>
         <View style={styles.eventsListItemInfo}>
           <Text style={styles.eventDate}>{eventDate(item.date)}</Text>
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>
@@ -55,8 +56,8 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
     >
       <View style={styles.eventsHeaderWrapper}>
         {
-          filterData.map((data, idx) => (
-            <FilterButton data={data} key={idx} />
+          filterData.map(data => (
+            <FilterButton data={data} key={data.title} />
           ))
         }
       </View>
@@ -77,5 +78,33 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID }) => {
     </LinearGradient>
   )
 }
+
+Events.PropTypes = {
+  eventsData: PropTypes.shape({
+    loading: PropTypes.bool,
+    events: PropTypes.objectOf(PropTypes.shape({
+      date: PropTypes.number,
+      startTime: PropTypes.number,
+      endTime: PropTypes.number,
+      id: PropTypes.string,
+      eventCode: PropTypes.string,
+      attendees: PropTypes.objectOf(PropTypes.string),
+      speakers: PropTypes.objectOf(PropTypes.string),
+      talks: PropTypes.objectOf(PropTypes.string),
+      location: PropTypes.objectOf(PropTypes.shape({
+        city: PropTypes.string,
+        name: PropTypes.string,
+        postCode: PropTypes.string,
+        province: PropTypes.string,
+        streetName: PropTypes.string,
+        streetNumber: PropTypes.string,
+        unitNumber: PropTypes.string
+      })),
+    })),
+  }).isRequired,
+  eventDate: PropTypes.func,
+  eventTime: PropTypes.func,
+  navigatorUID: PropTypes.string
+};
 
 export default Events;
