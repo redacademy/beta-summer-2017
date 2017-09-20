@@ -4,7 +4,12 @@ import {
   Text,
   Image,
   TouchableOpacity,
+<<<<<<< HEAD
   ScrollView
+=======
+  ScrollView,
+  StyleSheet
+>>>>>>> changed events styling to be scrollable
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
@@ -16,12 +21,17 @@ import { styles } from './styles';
 const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
   return (
     <View style={styles.container}>
-      <GradientWrapper>
-        <View style={styles.eventContainer}>
-          <Text style={styles.eventTime}>Speakers</Text>
-          <Text style={styles.eventTime}>{Moment.unix(eventData.startTime).format('h:mmA')} to {Moment.unix(eventData.endTime).format('h:mmA')}</Text>
-        </View>
-        <ScrollView>
+      <LinearGradient
+        style={StyleSheet.absoluteFill}
+        colors={[colors.lightGrey, colors.darkGrey]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 0.8 }}
+      >
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.eventContainer}>
+            <Text style={styles.eventTime}>Speakers</Text>
+            <Text style={styles.eventTime}>{Moment.unix(eventData.startTime).format('h:mmA')} to {Moment.unix(eventData.endTime).format('h:mmA')}</Text>
+          </View>
           {eventDataSet.map((item) => (
             <View key={item.talk_id}>
               <TouchableOpacity onPress={() => goToSpeaker({ item })}>
@@ -43,7 +53,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
             onPress={() => attendEvent()}
           />
         </ScrollView>
-      </GradientWrapper>
+      </LinearGradient>
     </View>
   );
 }
