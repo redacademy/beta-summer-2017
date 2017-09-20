@@ -10,6 +10,14 @@ export function setAuthState(authentication) {
   };
 }
 
+
+export const loginSuccess = (user) => ({ type: "LOGIN_SUCCESS", user })
+export const loginBegin = () => ({ type: "LOGIN_SUCCESS" })
+export const loginError = (error) => ({ type: "LOGIN_SUCCESS", error })
+
+
+
+
 export function showLoginError(loginError) {
   return {
     type: SHOW_LOGIN_ERROR,
@@ -20,6 +28,9 @@ export function showLoginError(loginError) {
 // REDUCERS
 const initialState = {
   authentication: '',
+  user: {},
+  isLoading: false,
+  error: {},
   showLoginError: false
 };
 
@@ -38,7 +49,22 @@ export function authReducer(state = initialState, action) {
         showLoginError: action.payload
       };
       return loginErrorState;
-    
+    case "LOGIN_SUCCESS":
+     return {
+      ...state,
+      isLoading: false,
+      user: action.user
+     }
+     case "LOGIN_ERROR":
+     return {
+      ...state,
+      error: action.error
+     }
+     case "LOGIN_BEGIN":
+     return {
+       ...state,
+       isLoading: true
+     }
     default:
       return state;
   }

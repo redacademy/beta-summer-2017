@@ -9,16 +9,30 @@ import {
   updateEmailField,
   updatePasswordField
 } from '../../redux/modules/user-forms';
+import { loginSuccess, loginError, loginBegin } from '../../redux/modules/auth'
 
 class LoginContainer extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     if (auth.currentUser) {
       this.loginRedirect()
     }
   }
-  loginRedirect() {
+  loginRedirect = () => {
     this.props.navigator.push(Router.getRoute('home'));
+  }
+
+
+  logUser = (loggedInUser) => {
+    console.log("JUST A TEST!")
+    const { dispatch } = this.props
+    dispatch(loginBegin());
+    setTimeout( () => { login(loggedInUser).then(user => {
+      dispatch(loginSuccess(user));
+      this.loginRedirect();
+    }).catch(error => {
+      dispatch(loginError(error))
+    }) }, 1600)
   }
 
   handleEmail = (event) => {
@@ -30,31 +44,25 @@ class LoginContainer extends Component {
   };
 
   loginHandler = async () => {
-    if (this.props.emailField.length && this.props.passwordField.length) {
+    const { emailField, passwordField } = this.props
+    if (emailField.length && passwordField.length) {
       const loggedInUser = {
         email: this.props.emailField,
         password: this.props.passwordField
       }
-      try {
-        const success = await login(loggedInUser)
-        if (success) {
-          this.loginRedirect()
-        }
-      } catch (e) {
-        console.log(e)
-      }
+      this.logUser(loggedInUser);
     }
   };
 
   render() {
-
+    const { isLoading, error } = this.props.auth
     return (
       <Login
         emailField={this.props.emailField}
         passwordField={this.props.passwordField}
-
+        error={error}
         loginHandler={this.loginHandler}
-
+        isLoading={isLoading}
         handleEmail={(event) => {
           this.handleEmail(event)
         }}
@@ -69,6 +77,7 @@ class LoginContainer extends Component {
 const mapStateToProps = state => ({
   emailField: state.forms.emailField,
   passwordField: state.forms.passwordField,
+  auth: state.auth
 });
 
 LoginContainer.propTypes = {

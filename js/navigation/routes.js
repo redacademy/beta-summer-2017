@@ -7,10 +7,13 @@ import Events from '../scenes/Events';
 import EventScene from '../scenes/Event';
 import Home from '../scenes/Home';
 import Profile from '../scenes/Profile';
+import AccountSettings from '../scenes/AccountSettings/';
 import Login from '../scenes/Login';
 import Surveys from '../scenes/Surveys';
 import Speaker from '../scenes/Speaker';
 import Signup from '../scenes/Signup';
+import SurveyComplete from '../scenes/SurveyComplete';
+import TalkStats from '../scenes/TalkStats';
 
 const Router = createRouter(() => ({
   landing: () => LandingPage,
@@ -19,11 +22,14 @@ const Router = createRouter(() => ({
   events: () => Events,
   home: () => Home,
   profile: () => Profile,
+  settings: () => AccountSettings,
   login: () => Login,
   surveys: () => Surveys,
   speaker: () => Speaker,
   event: () => EventScene,
-  signup: () => Signup
-}))
+  signup: () => Signup,
+  surveyComplete: () => SurveyComplete,
+  talkStats: () => TalkStats
+}));
 
 export default Router;

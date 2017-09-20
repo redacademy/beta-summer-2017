@@ -1,6 +1,12 @@
+import {Platform, ImagePickerIOS} from 'react-native';
+import RNFetchBlob from 'react-native-fetch-blob'
 import firebase from 'firebase';
-import { auth, betadb, betaevents, betatalks, betaquestions, betausers } from './firebase';
+import { auth, betadb, betaevents, betatalks, betaquestions, betausers, betastorage } from './firebase';
 
+const Blob = RNFetchBlob.polyfill.Blob
+const fs = RNFetchBlob.fs
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+window.Blob = Blob
 //users
 const user = { //input format for initial signup form;
   email: 'test@pest.com',
@@ -216,4 +222,56 @@ export const enterSurvey = (talk, code) => { //attach to the button
     throw new Error('Unacceptable event code')
   }
 }
+
+//for time and stuff
+export const getTime = () => {
+  return Math.round((Date.now()/1000))
+}
 //update talks speaker stats
+
+
+//upload profile photos.
+export const uploadImage = (uri, imageName, mime) => {
+  if(!mime) {mime = 'image/jpg'}
+  return new Promise((resolve, reject) => {
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+    let uploadBlob = null
+    const imageRef = betastorage.child(imageName)
+    fs.readFile(uploadUri, 'base64')
+      .then((data) => {
+        return Blob.build(data, { type: `${mime};BASE64` })
+      })
+      .then((blob) => {
+        uploadBlob = blob
+        return imageRef.put(blob, { contentType: mime })
+      })
+      .then(() => {
+        uploadBlob.close()
+        return imageRef.getDownloadURL()
+      })
+      .then((url) => {
+        updateImg(auth.currentUser.uid, url)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  })
+}
+export const takePicture = () => {
+  const cam_options = {
+    mediaType: 'photo',
+    maxWidth: 1000,
+    maxHeight: 1000,
+    quality: 1,
+    noData: true,
+  };
+  ImagePickerIOS.openSelectDialog(cam_options, (response) => {
+    if (response.didCancel) {
+      console.log('cancelled')
+    } else {
+      uploadImage(response, auth.currentUser.uid, 'image/jpg')
+    }
+  }, (error) => {
+    console.log('error', error)
+  })
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FirebaseAuth } from '../../config/firebase';
 import { signUp } from '../../config/helpers';
 import Signup from './Signup';
 import { 

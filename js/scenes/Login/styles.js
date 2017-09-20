@@ -23,26 +23,26 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bulb: {
-    width: 65,
-    height: 110,
+    width: 60,
+    height: 100,
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 20
   },
   headerText: {
     color: colors.white,
     backgroundColor: 'transparent',
     fontFamily: typography.titleHeading,
-    fontSize: typography.norwester36,
-    marginTop: 60,
-    paddingBottom: 20,
+    fontSize: typography.norwester27,
+    marginTop: 35,
     width: '60%',
     textAlign: 'center',
   },
-  bodyText: {
+  subTitle: {
     color: colors.white,
-    backgroundColor: 'transparent',
-    fontFamily: typography.fontMainRegular,
-    fontSize: typography.robotoRegular18
+    fontFamily: typography.fontMain,
+    fontSize: typography.robotoRegular16,
+    marginTop: 5,
+    marginBottom: 5
   },
   input: {
     fontFamily: typography.fontMain,

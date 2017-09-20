@@ -28,12 +28,16 @@ const Signup = ({ signupHandler, handleEmail, handlePassword, handleFullname, em
             style={styles.input}
             onChangeText={handleEmail}
             value={emailField}
+            autoCapitalize="none"
+            autoCorrect={false}
             placeholder="Email"
           />
           <TextInput
             style={styles.input}
             onChangeText={handlePassword}
             value={passwordField}
+            autoCapitalize="none"
+            autoCorrect={false}
             secureTextEntry={true}
             placeholder="Password"
           />
