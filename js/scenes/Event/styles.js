@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
 
   talkContainer: {
     flexDirection: 'row',
-    marginBottom: 10
+    marginBottom: 10,
+    width: '50%'
   },
 
   talkBorder: {
@@ -44,6 +45,10 @@ export const styles = StyleSheet.create({
     bottom: 25,
     left: 90,
     backgroundColor: 'transparent'
+  },
+
+  talkTitleContainer: {
+    width: '80%'
   },
 
   talkTitle: {
