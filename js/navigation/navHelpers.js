@@ -1,4 +1,4 @@
- import { NavigationActions } from '@expo/ex-navigation';
+import { NavigationActions } from '@expo/ex-navigation';
 import Store from '../redux/store';
 import Router from './routes';
 
@@ -55,4 +55,11 @@ export const returnToEvents = () => {
 
 export const returnToSpeaker = () => {
   Store.dispatch(NavigationActions.popN('events', 2));
+};
+
+export const goToMyTalkStats = (talkData) => {
+  Store.dispatch(NavigationActions.push(
+    'dashboard', 
+    Router.getRoute('talkStats', { talkData })
+  ));
 };

@@ -13,6 +13,7 @@ import Surveys from '../scenes/Surveys';
 import Speaker from '../scenes/Speaker';
 import Signup from '../scenes/Signup';
 import SurveyComplete from '../scenes/SurveyComplete';
+import TalkStats from '../scenes/TalkStats';
 
 const Router = createRouter(() => ({
   landing: () => LandingPage,
@@ -27,7 +28,8 @@ const Router = createRouter(() => ({
   speaker: () => Speaker,
   event: () => EventScene,
   signup: () => Signup,
-  surveyComplete: () => SurveyComplete
-}))
+  surveyComplete: () => SurveyComplete,
+  talkStats: () => TalkStats
+}));
 
 export default Router;

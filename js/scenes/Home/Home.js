@@ -29,13 +29,13 @@ const Home = ({ nextEvent }) => (
       <View style={styles.contentContainer}>
         <View style={styles.eventHeaderBar}>
           <View style={styles.dateContainer}>
-            <DateHolder cStyles={styles} nextEvent={nextEvent} />
-            <EventInfo cStyles={styles} nextEvent={nextEvent} />
+            <DateHolder nextEvent={nextEvent} />
+            <EventInfo nextEvent={nextEvent} />
           </View>
         </View>
-        <AttendeeList cStyles={styles} attendees={nextEvent.attendees} />
+        <AttendeeList attendees={nextEvent.attendees} />
         <View style={styles.locationContainer}>
-          <EventLocation cStyles={styles} location={nextEvent.location} />
+          <EventLocation location={nextEvent.location} />
         </View>
       </View>
     </LinearGradient>

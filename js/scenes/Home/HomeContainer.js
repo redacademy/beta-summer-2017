@@ -51,7 +51,7 @@ HomeContainer.propTypes = {
         value: PropTypes.number
       }))
     }),
-  }).isRequired,
+  }).isRequired
 };
 
 export default connect(s => ({ events: s.events, users: s.users}))(HomeContainer)
