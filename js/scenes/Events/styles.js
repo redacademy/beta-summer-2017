@@ -28,11 +28,12 @@ export const styles = StyleSheet.create({
   eventsListItem: {
     backgroundColor: colors.darkGrey,
     margin: 10,
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
-    height: 60,
+    //height: 60,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    width: Dimensions.get('window').width / 1.05,
     alignItems: 'center'
   },
   eventsListItemInfo: {
@@ -54,5 +55,18 @@ export const styles = StyleSheet.create({
   },
   scrollView: {
     marginBottom: 100
+  },
+  attendeeContainer: {
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 100,
+    height: 50
+  },
+  attendeeImage: {
+    width: 20,
+    height: 20,
+    margin: 2,
+    borderRadius: 4
   }
 });

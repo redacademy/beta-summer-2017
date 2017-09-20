@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   View,
   Text,
   TouchableOpacity,
@@ -40,8 +41,14 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEven
           <Text style={styles.eventDate}>{eventDate(item.date)}</Text>
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>
         </View>
-        <View style={styles.eventsListItemSpeakers}>
-          <Text style={{ color: 'white' }}>IMAGES GO HERE</Text>
+        <View style={styles.attendeeContainer}>
+          {item.attendees.map(attendee => (
+            <Image
+              key={attendee.user_id}
+              style={styles.attendeeImage}
+              source={{ uri: attendee.imageUrl }}
+            />
+          ))}
         </View>
       </TouchableOpacity>
     </View>
