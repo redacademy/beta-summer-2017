@@ -4,11 +4,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Alert
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Modal from 'react-native-modal';
 import { logout } from '../../config/helpers';
+import { auth } from '../../config/firebase';
 import { pushSceneFromModal } from '../../navigation/navHelpers';
 import { popModal } from '../../redux/modules/moreModal';
 import { styles } from './styles';
@@ -19,11 +21,29 @@ import question from '../../assets/icons/quick_guide.png';
 
 const NavMenuPopUp = ({ isModalVisible, navigatorUID, dispatch }) => {
 
+  function dismissModalWithPush([navigatorUID, scene]) {
+    if(auth.currentUser) {
+      dispatch(popModal(!isModalVisible));
+      pushSceneFromModal([navigatorUID, scene]);
+    } else {
+      Alert.alert('You must be logged in to view the requested page')
+    }  
+  }
+
+  function combinedLogout([navigatorUID, scene]) {
+    if(auth.currentUser) {
+      dispatch(popModal(!isModalVisible));      
+      logout();
+      pushSceneFromModal([navigatorUID, scene]);
+    } else {
+      Alert.alert('You are not currently logged in');
+    }
+  }
+
   const popUpItems = [
-    {title: 'Settings', icon: settings, func: console.log, action: 'settings page'},
-    {title: 'View / Edit Profile', icon: profile, func: console.log, action: 'profile page'},
-    {title: 'Survey', icon: question, func: pushSceneFromModal, action: [navigatorUID, 'surveys']},
-    {title: 'Log Out', icon: logoutIcon, func: logout, action: null},
+    {title: 'Settings', icon: settings, func: dismissModalWithPush, action: [navigatorUID, 'settings']},
+    {title: 'View / Edit Profile', icon: profile, func: dismissModalWithPush, action: [navigatorUID, 'profile']},
+    {title: 'Log Out', icon: logoutIcon, func: combinedLogout, action: [navigatorUID, 'landing']},
   ];
 
   const PopUpList = ({ data }) => {
