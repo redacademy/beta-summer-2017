@@ -59,7 +59,7 @@ export const AttendeeListItem = ({ attendee }) => (
   <View style={styles.attendeeContainer}>
     <Image
       style={styles.attendeePhoto}
-      source={require('../../assets/images/glenn.png')}
+      source={{ uri: attendee.imageUrl }}
     />
     <Text style={styles.attendeeName}>{attendee.fullName}</Text>
   </View>

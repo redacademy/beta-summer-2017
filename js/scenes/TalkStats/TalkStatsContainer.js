@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
@@ -11,36 +11,33 @@ import CustomPageDot from '../../components/CustomPageDot';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
-class TalkStatsContainer extends Component {
+const TalkStatsContainer = ({ talkData }) => {
+  const talkStats = talkData.talk.talkStats;
 
-  static route = {
-    navigationBar: {
-      title(params) {
-        return params.talkData.talk.title.toLowerCase();
-      } 
+  if (!talkStats) return <Loader />;
+  return (
+    <Swiper
+      loop={false}
+      showsButtons
+      activeDotColor={colors.taxiYellow}
+      dot={<CustomPageDot />}
+      nextButton={<Text style={styles.buttonText}>›</Text>}
+      prevButton={<Text style={styles.buttonText}>‹</Text>}
+      paginationStyle={{ bottom: 11 }}
+    >
+      <TalkStats talkStats={talkStats} />
+      <AttendeeComments />
+    </Swiper>
+  );
+}
+
+TalkStatsContainer.route = {
+  navigationBar: {
+    title(params) {
+      return params.talkData.talk.title.toLowerCase();
     }
   }
-
-  render() {
-    const talkStats = this.props.talkData.talk.talkStats;
-    
-    if (!talkStats) return <Loader />;
-    return (
-      <Swiper 
-        loop={false}
-        showsButtons
-        activeDotColor={colors.taxiYellow}
-        dot={<CustomPageDot />}
-        nextButton={<Text style={styles.buttonText}>›</Text>}
-        prevButton={<Text style={styles.buttonText}>‹</Text>}
-        paginationStyle={{ bottom: 11 }}
-      >
-        <TalkStats talkStats={talkStats} />
-        <AttendeeComments />
-      </Swiper>
-    );
-  }
-}
+};
 
 const mapStateToProps = state => ({
   userData: state.users,

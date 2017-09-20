@@ -4,12 +4,13 @@ import {
   View,
   Text
 } from 'react-native';
+import profile from '../../../assets/images/glenn.png';
 
 export const Comment = ({ cStyles, commentDir }) => (
   <View style={commentDir}>
     <Image
       style={cStyles.commenterAvatar}
-      source={require('../../../assets/images/glenn.png')}
+      source={profile}
     />
     <View style={cStyles.commentContainer}>
       <Text style={cStyles.commentText}>

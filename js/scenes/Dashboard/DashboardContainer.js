@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import Dashboard from './Pages/Dashboard';
@@ -12,36 +12,33 @@ import { findTalks } from '../Lib/helperFunctions';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
-class DashboardContainer extends Component {
+const DashboardContainer = ({ userData, talksData }) => {
+  const { uLoading, users } = userData;
+  const { tLoading, talks } = talksData;
+  const testUser = users["dKJaZ8tuniPW1Ee2BduSQQ8wSsp2"];
 
-  static route = {
-    navigationBar: {
-      title: "my speaker dashboard"
-    }
-  }
-
-  render() {
-    const { uLoading, users } = this.props.userData;
-    const { tLoading, talks } = this.props.talksData;
-    const testUser = users["dKJaZ8tuniPW1Ee2BduSQQ8wSsp2"];
-
-    if (uLoading || tLoading) return <Loader />;
-    return (
-      <Swiper
-        loop={false}
-        showsButtons
-        activeDotColor={colors.taxiYellow}
-        dot={<CustomPageDot />}
-        nextButton={<Text style={styles.buttonText}>›</Text>}
-        prevButton={<Text style={styles.buttonText}>‹</Text>}
-        paginationStyle={{ bottom: 11 }}
-      >
-        <Dashboard stats={testUser.speakerStats} />
-        <MyTalks talks={findTalks(testUser.myTalks, talks)} />
-      </Swiper>
-    );
-  }
+  if (uLoading || tLoading) return <Loader />;
+  return (
+    <Swiper
+      loop={false}
+      showsButtons
+      activeDotColor={colors.taxiYellow}
+      dot={<CustomPageDot />}
+      nextButton={<Text style={styles.buttonText}>›</Text>}
+      prevButton={<Text style={styles.buttonText}>‹</Text>}
+      paginationStyle={{ bottom: 11 }}
+    >
+      <Dashboard stats={testUser.speakerStats} />
+      <MyTalks talks={findTalks(testUser.myTalks, talks)} />
+    </Swiper>
+  );
 }
+
+DashboardContainer.route = {
+  navigationBar: {
+    title: "my speaker dashboard"
+  }
+};
 
 const mapStateToProps = state => ({
   userData: state.users,
