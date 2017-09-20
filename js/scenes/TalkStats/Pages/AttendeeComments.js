@@ -2,7 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  ScrollView
+  ScrollView,
+  StyleSheet
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -14,6 +15,7 @@ const AttendeeComments = ({ comments }) => {
   return (
     <View style={styles.sceneContainer}>
       <LinearGradient
+        style={StyleSheet.absoluteFill}
         colors={[colors.lightGrey, colors.darkGrey]}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 0.8 }}
@@ -22,14 +24,23 @@ const AttendeeComments = ({ comments }) => {
           <Text style={styles.skillsHeader}>
             Talk Feedback
           </Text>
-          <Comment 
-            cStyles={commentStyles} 
-            commentDir={commentStyles.commentBarRight}
-          />
-          <Comment 
-            cStyles={commentStyles} 
-            commentDir={commentStyles.commentBarLeft}
-          />
+          {(comments) && comments.map((comment, index) => {
+            if (index === 0 || index % 2 === 0) {
+              return (<Comment
+                key={index}
+                comment={comment}
+                cStyles={commentStyles}
+                commentDir={commentStyles.commentBarRight}
+              />);
+            } else {
+              return (<Comment
+                key={index}
+                comment={comment}
+                cStyles={commentStyles}
+                commentDir={commentStyles.commentBarLeft}
+              />);
+            }
+          })}
         </ScrollView>
       </LinearGradient >
     </View>

@@ -52,3 +52,18 @@ export const findTalks = (talkIds, talks) => {
   }, []);
 }
 
+export const findRespondentDetails = (respondents, users) => {
+  return Object.keys(respondents).reduce((acc, curr) => {
+    if (typeof respondents[curr] !== 'string') {
+      return acc;
+    } else {
+      acc.push({
+        comment: respondents[curr],
+        name: users[curr].fullName,
+        imageUrl: users[curr].imageUrl
+      });
+      return acc;
+    }
+  }, [])
+}
+

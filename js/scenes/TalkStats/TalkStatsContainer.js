@@ -8,13 +8,13 @@ import TalkStats from './Pages/TalkStats';
 import Loader from '../../components/Loader';
 import AttendeeComments from './Pages/AttendeeComments';
 import CustomPageDot from '../../components/CustomPageDot';
+import { findRespondentDetails } from '../Lib/helperFunctions';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
-const TalkStatsContainer = ({ talkData }) => {
+const TalkStatsContainer = ({ talkData, userData }) => {
   const talkStats = talkData.talk.talkStats;
-
-  if (!talkStats) return <Loader />;
+  if (!talkStats || userData.loading) return <Loader />;
   return (
     <Swiper
       loop={false}
@@ -26,7 +26,7 @@ const TalkStatsContainer = ({ talkData }) => {
       paginationStyle={{ bottom: 11 }}
     >
       <TalkStats talkStats={talkStats} />
-      <AttendeeComments />
+      <AttendeeComments comments={findRespondentDetails(talkData.talk.respondents, userData.users)} />
     </Swiper>
   );
 }
@@ -51,7 +51,6 @@ TalkStatsContainer.propTypes = {
     talk: PropTypes.shape({
       eventCode: PropTypes.string,
       event_id: PropTypes.string,
-      respondents: PropTypes.objectOf(PropTypes.bool),
       score: PropTypes.number,
       speaker_id: PropTypes.string,
       talkStats: PropTypes.arrayOf(PropTypes.shape({
@@ -62,5 +61,21 @@ TalkStatsContainer.propTypes = {
       talk_id: PropTypes.string,
       title: PropTypes.string
     })
+  }).isRequired,
+  userData: PropTypes.shape({
+    loading: PropTypes.bool,
+    users: PropTypes.shape({
+      bio: PropTypes.string,
+      email: PropTypes.string,
+      fullName: PropTypes.string,
+      goals: PropTypes.objectOf(PropTypes.string),
+      myTalks: PropTypes.arrayOf(PropTypes.string),
+      socialMediaUrls: PropTypes.objectOf(PropTypes.string),
+      speakerStats: PropTypes.arrayOf(PropTypes.shape({
+        quality: PropTypes.string,
+        submitAmnt: PropTypes.number,
+        value: PropTypes.number
+      }))
+    }),
   }).isRequired
 }

@@ -40,7 +40,7 @@ class SpeakerContainer extends Component {
   checkRespondent = () => {
     const currTalk = this.props.speakerData.item.talk_id;
     // using a static id for testing
-    const currUser = 'EVyPYeHeziX06GqVO9nMZ8ieONh1';
+    const currUser = 'dKJaZ8tuniPW1Ee2BduSQQ8wSsp2';
     return this.props.talkData[currTalk].respondents[currUser];
   }
 

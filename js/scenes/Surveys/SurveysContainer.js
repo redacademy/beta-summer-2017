@@ -57,7 +57,7 @@ class SurveysContainer extends Component {
     const talk = this.props.talkObj.speakerData;
     const surveyAns = this.props.surveyAnswers;
     const textfeedback = this.props.comments;
-    const user = 'EVyPYeHeziX06GqVO9nMZ8ieONh1'
+    const user = 'dKJaZ8tuniPW1Ee2BduSQQ8wSsp2'
     // placeholder id for testing
     ExecFeedBackAsync(talk, user, surveyAns, textfeedback);
     goToSurveyComplete();

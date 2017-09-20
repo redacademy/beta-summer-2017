@@ -40,7 +40,6 @@ MyTalks.propTypes = {
   talks: PropTypes.arrayOf(PropTypes.shape({
     eventCode: PropTypes.string,
     event_id: PropTypes.string,
-    respondents: PropTypes.objectOf(PropTypes.bool),
     score: PropTypes.number,
     speaker_id: PropTypes.string,
     talkStats: PropTypes.arrayOf(PropTypes.shape({
