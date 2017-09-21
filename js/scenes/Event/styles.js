@@ -34,28 +34,33 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    marginBottom: 10,
-    right: 30,
-    height: 70,
+    // borderColor: 'red',
+    // borderWidth: 2,
+    right: 17.5,
+    height: 50,
     width: Dimensions.get('window').width,
   },
 
   talkBorder: {
     backgroundColor: colors.darkGrey,
+    flexDirection: 'row',
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    height: 80,
+    height: 75,
     alignItems: 'center',
-    width: Dimensions.get('window').width / 1.1,
+    width: Dimensions.get('window').width / 1.05,
     alignSelf: 'flex-end',
     marginTop: 2.5,
-    marginBottom: 2.5
+    marginBottom: 2.5,
+    // borderColor: 'green',
+    // borderWidth: 2
   },
 
   talkDetails: {
     flexDirection: 'column',
     backgroundColor: 'transparent',
+    // borderColor: 'yellow',
+    // borderWidth: 2,
     maxWidth: Dimensions.get('window').width / 1.35
   },
 
