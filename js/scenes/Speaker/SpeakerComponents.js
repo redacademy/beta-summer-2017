@@ -44,9 +44,9 @@ export const WarningModal = ({ modalState, onPress }) => (
 export const SpeakerHeader = ({ speakerData, styles }) => (
   <View style={cStyles.speakerHeader}>
     <Text style={cStyles.quoteContainer}>
-      <Text style={cStyles.headerQuote}>"</Text>
+      <Text style={cStyles.headerQuote}>“</Text>
       <Text style={cStyles.titleText}>{speakerData.title}</Text>
-      <Text style={cStyles.headerQuote}>"</Text>
+      <Text style={cStyles.headerQuote}>”</Text>
     </Text>
   </View>
 )
