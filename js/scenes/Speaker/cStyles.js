@@ -28,7 +28,7 @@ export const cStyles = StyleSheet.create({
     textAlign: 'center',
     color: colors.black,
     fontFamily: typography.fontMainBold,
-    fontSize: typography.robotoBold24,
+    fontSize: typography.robotoBold20,
     fontWeight: 'bold',
     paddingTop: 10,
     paddingBottom: 10,
