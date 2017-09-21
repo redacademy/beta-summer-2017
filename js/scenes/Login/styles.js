@@ -16,9 +16,14 @@ export const styles = StyleSheet.create({
   lgHeight: {
     height: Dimensions.get('window').height,
   },
+  backArrow: {
+    width: '50%',
+    paddingTop: 20,
+    marginLeft: 10,
+    backgroundColor: 'transparent',
+  },
   loginField: {
     flex: 1,
-
     alignContent: 'center',
     alignItems: 'center',
   },

@@ -34,9 +34,9 @@ export default class betatalks extends Component {
         <NavigationProvider
           context={navigationContext}
         >
-          <CustomStatusBar backgroundColor={colors.black} barStyle="light-content" />
+          <StatusBar barStyle="light-content" />
           <StackNavigation
-            initialRoute={Router.getRoute('navigation')}
+            initialRoute={Router.getRoute('landing')}
             navigatorUID="root"
             id="root"
           />

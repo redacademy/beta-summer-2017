@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signUp } from '../../config/helpers';
 import Signup from './Signup';
-import { 
-  updateEmailField, 
+import Router from '../../navigation/routes';
+import {
+  updateEmailField,
   updatePasswordField,
   updateFullnameField
 } from '../../redux/modules/user-forms';
 
 class SignupContainer extends Component {
+
+  signupRedirect = () => {
+    this.props.navigator.push(Router.getRoute('navigation'))
+    // this.props.navigator.immediatelyResetStack([
+    //   Router.getRoute('navigation')
+    // ], 0);
+  }
 
   handleEmail = (event) => {
     this.props.dispatch(updateEmailField(event));
@@ -23,17 +31,22 @@ class SignupContainer extends Component {
     this.props.dispatch(updateFullnameField(event));
   }
 
-  signupHandler = () => {    
-    if (this.props.emailField.length && this.props.passwordField.length && this.props.fullnameField.length) {
+  signupHandler = () => {
+    const { emailField, passwordField, fullnameField } = this.props
+    if (emailField.length && passwordField.length && fullnameField.length) {
       const user = {
         email: this.props.emailField,
         password: this.props.passwordField,
         name: this.props.fullnameField
       }
-      signUp(user)
+      const newUser = signUp(user).then(user => {
+        this.signupRedirect()
+      }).catch(err  => {
+        (console.log(err))
+      })
+    
     }
-  }
-
+  };
 
   render() {
     return (
@@ -67,10 +80,10 @@ const mapStateToProps = state => ({
 });
 
 SignupContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  emailField: PropTypes.string.isRequired,
-  passwordField: PropTypes.string.isRequired,
-  fullnameField: PropTypes.string.isRequired
+  dispatch: PropTypes.func,
+  emailField: PropTypes.string,
+  passwordField: PropTypes.string,
+  fullnameField: PropTypes.string
 };
 
 export default connect(mapStateToProps)(SignupContainer);

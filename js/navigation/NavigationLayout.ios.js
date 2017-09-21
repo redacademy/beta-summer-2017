@@ -28,9 +28,9 @@ const defaultRouteConfig = {
     titleStyle: {
       fontFamily: typography.titleHeading,
       fontSize: typography.norwester18,
-      height: 40,
+      height: 25,
     },
-    height: 35,
+    height: 50,
     backgroundColor: colors.darkGrey
   }
 }

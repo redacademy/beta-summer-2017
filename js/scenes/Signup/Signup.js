@@ -1,16 +1,28 @@
 import React from 'react';
-import { TextInput, View, Text, Image, Linking } from 'react-native';
+import {
+  TextInput,
+  View,
+  Text,
+  Image,
+  Linking
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import OutlinedButton from '../../components/OutlinedButton/';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
+import { goToLanding } from '../../navigation/navHelpers';
+
 const Signup = ({ signupHandler, handleEmail, handlePassword, handleFullname, emailField, passwordField, fullnameField }) => {
 
   return (
     <View style={styles.container}>
       <LinearGradient style={styles.lgHeight} colors={[colors.lightGrey, colors.black]} start={{ x: 1, y: 0.1 }} end={{ x: 1, y: 0.4 }}>
+        <View style={styles.backArrow}>
+          <Icon onPress={() => goToLanding()} name='ios-arrow-back' size={36} color='white' />
+        </View>
         <View style={styles.signupField}>
           <Text style={styles.title}>create your beta talks account</Text>
           <Image
@@ -56,13 +68,13 @@ const Signup = ({ signupHandler, handleEmail, handlePassword, handleFullname, em
 }
 
 Signup.propTypes = {
-  emailField: PropTypes.string.isRequired,
-  passwordField: PropTypes.string.isRequired,
-  fullnameField: PropTypes.string.isRequired,
-  handleEmail: PropTypes.func.isRequired,
-  handlePassword: PropTypes.func.isRequired,
-  handleFullname: PropTypes.func.isRequired,
-  signupHandler: PropTypes.func.isRequired
+  emailField: PropTypes.string,
+  passwordField: PropTypes.string,
+  fullnameField: PropTypes.string,
+  handleEmail: PropTypes.func,
+  handlePassword: PropTypes.func,
+  handleFullname: PropTypes.func,
+  signupHandler: PropTypes.func
 };
 
 export default Signup;

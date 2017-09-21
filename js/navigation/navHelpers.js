@@ -25,15 +25,23 @@ export const goToSpeaker = (speakerData) => {
 
 export const goToLogin = (currentNavigatorUID) => {
   Store.dispatch(NavigationActions.push(
-    currentNavigatorUID, 
+    // currentNavigatorUID,
+    'root', 
     Router.getRoute('login')
   ));
 }
 
 export const goToSingup = (currentNavigatorUID) => {
   Store.dispatch(NavigationActions.push(
-    currentNavigatorUID, 
+    // currentNavigatorUID, 
+    'root',
     Router.getRoute('signup')
+  ));
+}
+
+export const goToLanding = () => {
+  Store.dispatch(NavigationActions.pop(
+    'root'
   ));
 }
 

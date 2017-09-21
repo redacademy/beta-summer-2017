@@ -10,36 +10,42 @@ import { getTime } from '../../config/helpers';
 import { idToObjs } from '../Lib/helperFunctions';
 
 class EventsContainer extends Component {
+
+
   static route = {
     navigationBar: {
       title: 'EVENTS',
-    }  
+    }
   }
-  componentWillMount() {
+  state = {
+    events: []
+  }
+
+  componentDidMount() {
     this.displayAllEvents()
   }
   displayAllEvents = () => {
-    this.setState({events: this.props.eventsData.events})
+    this.setState({ events: this.props.eventsData.events })
   }
   displayPastEvents = () => {
     const now = getTime();
     const pastEvents = this.props.eventsData.events.filter(event => {
       return event.date < now
     })
-    this.setState({events: pastEvents})
+    this.setState({ events: pastEvents })
   }
   displayUpcomingEvents = () => {
     const now = getTime();
     const upcomingEvents = this.props.eventsData.events.filter(event => {
       return event.date > now
     })
-    this.setState({events: upcomingEvents})
+    this.setState({ events: upcomingEvents })
   }
   displayAttendedEvents = () => {
-    const attendedEvents = this.props.eventsData.events.filter(event =>{
+    const attendedEvents = this.props.eventsData.events.filter(event => {
       return event.attendees.includes(auth.currentUser.uid)
     })
-    this.setState({events: attendedEvents})
+    this.setState({ events: attendedEvents })
   }
 
   eventDate(date) {
@@ -47,10 +53,10 @@ class EventsContainer extends Component {
       Moment.unix(date).format('dddd, MMMM Do YYYY')
     )
   }
-  
+
   eventTime(time) {
     return (
-      Moment.unix(time).format('h:mm a')    
+      Moment.unix(time).format('h:mm a')
     )
   }
 
@@ -61,7 +67,7 @@ class EventsContainer extends Component {
   }
 
   render() {
-    if(this.props.eventsData.loading) return (<Loader />)
+    if (this.props.eventsData.loading) return (<Loader />)
     return (
       <Events
         eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
