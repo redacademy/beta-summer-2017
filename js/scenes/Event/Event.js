@@ -67,7 +67,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent, currentUser }) => {
 
 SingleEvent.propTypes = {
   eventData: PropTypes.shape({
-    attendees: PropTypes.arrayOf(PropTypes.shape({
+    speakers: PropTypes.arrayOf(PropTypes.shape({
       bio: PropTypes.string,
       email: PropTypes.string,
       fullName: PropTypes.string,
