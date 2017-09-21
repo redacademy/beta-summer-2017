@@ -52,7 +52,7 @@ TalkStatsContainer.propTypes = {
       eventCode: PropTypes.string,
       event_id: PropTypes.string,
       score: PropTypes.number,
-      speaker_id: PropTypes.string,
+      //speaker_id: PropTypes.string,
       talkStats: PropTypes.arrayOf(PropTypes.shape({
         quality: PropTypes.string,
         value: PropTypes.number,

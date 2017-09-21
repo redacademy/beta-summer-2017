@@ -69,7 +69,7 @@ SingleEvent.propTypes = {
     eventCode: PropTypes.string,
     id: PropTypes.string,
     location: PropTypes.objectOf(PropTypes.string),
-    speakers: PropTypes.arrayOf(PropTypes.string),
+    //speakers: PropTypes.arrayOf(PropTypes.string),
     talks: PropTypes.arrayOf(PropTypes.string)
   }).isRequired,
   eventDataSet: PropTypes.arrayOf(PropTypes.shape({

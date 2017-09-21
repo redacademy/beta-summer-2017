@@ -50,11 +50,11 @@ const Events = ({
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>
         </View>
         <View style={styles.attendeeContainer}>
-          {item.attendees.map(attendee => (
+          {item.speakers.map(speaker => (
             <Image
-              key={attendee.user_id}
+              key={speaker.user_id}
               style={styles.attendeeImage}
-              source={{ uri: attendee.imageUrl }}
+              source={{ uri: speaker.imageUrl }}
             />
           ))}
         </View>
@@ -108,7 +108,7 @@ Events.PropTypes = {
       id: PropTypes.string,
       eventCode: PropTypes.string,
       attendees: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.objectOf(PropTypes.string),
+      //speakers: PropTypes.objectOf(PropTypes.string),
       talks: PropTypes.objectOf(PropTypes.string),
       location: PropTypes.objectOf(PropTypes.shape({
         city: PropTypes.string,

@@ -10,6 +10,13 @@ export const idToObjs = (event, users) => {
   }, { ...event, attendees: [] });
 }
 
+export const idToObjsSpeakers = (event, users) => {
+  return event.speakers.reduce((acc, cur) => {
+    acc.speakers.push(users[cur])
+    return acc;
+  }, { ...event, speakers: [] });
+}
+
 export const getNextEvent = (events, users) => {
   return idToObjs(calcNextEventDate(events), users);
 }
