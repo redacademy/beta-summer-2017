@@ -67,11 +67,7 @@ class EventsContainer extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    if(this.props.eventsData.loading) return (<Loader />);
-=======
     if (this.props.eventsData.loading) return (<Loader />)
->>>>>>> landing page implementation
     return (
       <Events
         eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
