@@ -68,7 +68,7 @@ EventContainer.propTypes = {
       eventCode: PropTypes.string,
       id: PropTypes.string,
       location: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.arrayOf(PropTypes.string),
+      //speakers: PropTypes.arrayOf(PropTypes.string),
       talks: PropTypes.arrayOf(PropTypes.string)
     })).isRequired,
   }).isRequired,
@@ -115,7 +115,7 @@ EventContainer.propTypes = {
       eventCode: PropTypes.string,
       id: PropTypes.string,
       location: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.arrayOf(PropTypes.string),
+      //speakers: PropTypes.arrayOf(PropTypes.string),
       talks: PropTypes.arrayOf(PropTypes.string)
     }).isRequired
   }).isRequired

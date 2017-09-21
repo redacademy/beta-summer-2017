@@ -108,7 +108,7 @@ Events.PropTypes = {
       id: PropTypes.string,
       eventCode: PropTypes.string,
       attendees: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.objectOf(PropTypes.string),
+      //speakers: PropTypes.objectOf(PropTypes.string),
       talks: PropTypes.objectOf(PropTypes.string),
       location: PropTypes.objectOf(PropTypes.shape({
         city: PropTypes.string,
