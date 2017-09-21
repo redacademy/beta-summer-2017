@@ -15,7 +15,23 @@ import pencil from '../../assets/icons/pencil.png';
 import { styles } from './styles';
 import SettingsPopUp from '../../components/SettingsPopUp/';
 
-const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCurrentEmail, getCurrentPassword, isVisible, user, showPopUp, handleImageUpload, imageUrl, handleEmail, emailField, handlePassword, passwordField, handleFullname, fullnameField }) => {
+const AccountSettings = ({ 
+  updateSettings,
+  currentEmail,
+  currentPassword,
+  getCurrentEmail,
+  getCurrentPassword,
+  isVisible,
+  user,
+  showPopUp,
+  handleImageUpload,
+  imageUrl,
+  handleEmail,
+  emailField,
+  handlePassword,
+  passwordField,
+  handleFullname,
+  fullnameField }) => {
   const getImage = imageUrl || user.imageUrl
   return (
     <ScrollView style={styles.container}>
@@ -67,12 +83,11 @@ const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCur
             placeholder={user.password}
           />
         </View>
-        {(fullnameField || emailField || passwordField) ?
+        {(fullnameField || emailField || passwordField) &&
           <SurveyButton
             text="save settings"
             onPress={() => showPopUp()}
-          />
-          : null}
+          />}
       </View>
       <SettingsPopUp
         isVisible={isVisible}
