@@ -1,4 +1,5 @@
 import { Platform, ImagePickerIOS } from 'react-native';
+<<<<<<< HEAD
 import RNFetchBlob from 'react-native-fetch-blob'
 import firebase from 'firebase';
 import { auth, betadb, betaevents, betatalks, betaquestions, betausers, betastorage } from './firebase';
@@ -8,6 +9,16 @@ const fs = RNFetchBlob.fs
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
 window.Blob = Blob
 
+=======
+// import RNFetchBlob from 'react-native-fetch-blob'
+import firebase from 'firebase';
+import { auth, betadb, betaevents, betatalks, betaquestions, betausers, betastorage } from './firebase';
+
+// const Blob = RNFetchBlob.polyfill.Blob
+// const fs = RNFetchBlob.fs
+// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+// window.Blob = Blob
+>>>>>>> landing page implementation
 //users
 const user = { //input format for initial signup form;
   email: 'test@pest.com',
@@ -31,17 +42,23 @@ export function logout() {
 export async function signUp(profile) {
   try {
     await auth.createUserWithEmailAndPassword(profile.email, profile.password)
-    await updateFullname(profile.name, auth.currentUser);
-    await initialProfileSetup(auth.currentUser.uid, profile.email, profile.name);
+    await updateFullname(auth.currentUser, profile.name);
+    return await initialProfileSetup(auth.currentUser.uid, profile.email, profile.name);
   } catch (error) {
     console.log(error.code, ' -code', error.message, ' -message');
   }
 }
 //update
 function updateEmail(user, email) {
+<<<<<<< HEAD
   if(email) {
     return user.updateEmail(email)
       .then(()=>updateEmailField(user.uid, email))
+=======
+  if (email) {
+    return user.updateEmail(email)
+      .then(() => updateEmailField(user.uid, email))
+>>>>>>> landing page implementation
       .catch(function (error) {
         console.log(error)
       });
@@ -50,11 +67,11 @@ function updateEmail(user, email) {
   }
 }
 function updateFullname(user, name) {
-  if(name) {
+  if (name) {
     user.updateProfile({
       displayName: name,
     })
-      .then(()=>updateNameField(user.uid, name))
+      .then(() => updateNameField(user.uid, name))
       .catch(function (error) {
         console.log(error)
       });
@@ -63,7 +80,7 @@ function updateFullname(user, name) {
   }
 }
 function updatePass(user, password) {
-  if(password) {
+  if (password) {
     user.updatePassword(password)
       .catch(function (error) {
         console.log(error)
@@ -72,7 +89,7 @@ function updatePass(user, password) {
     console.log('empty pass')
   }
 }
-export const batchProfileUpdate = async (options, user, currentdata) => { 
+export const batchProfileUpdate = async (options, user, currentdata) => {
   const credential = firebase.auth.EmailAuthProvider.credential(
     currentdata.email,
     currentdata.password
@@ -82,7 +99,7 @@ export const batchProfileUpdate = async (options, user, currentdata) => {
     await updateEmail(user, options.email)
     await updateFullname(user, options.name)
     await updatePass(user, options.password)
-  } catch (e) {console.log(e)}
+  } catch (e) { console.log(e) }
 }
 
 //set up custom profile fields
@@ -135,7 +152,7 @@ export const initialProfileSetup = (key, email, name) => {
     }],
     "user_id": key
   }
-  betadb.update(updates)
+ return betadb.update(updates)
 }
 //update user custom fields
 const updateEmailField = (key, email) => {
@@ -187,7 +204,7 @@ export const eventCodeSet = (event_id, events, code) => { //pass in specific eve
 }
 export const attendEvent = (event_id, events, user_id) => {
   let hit = findEvent(event_id, events)
-  if(!hit.event.attendees.includes(user_id)){
+  if (!hit.event.attendees.includes(user_id)) {
     let updates = {}
     hit.event.attendees.push(user_id)
     updates[hit.index] = hit.event
@@ -197,12 +214,12 @@ export const attendEvent = (event_id, events, user_id) => {
 const findEvent = (event_id, events) => {
   let result = {}
   events.find((event, index) => {
-    if(event.id === event_id){
+    if (event.id === event_id) {
       result = {
-        event, 
+        event,
         index
       }
-    } 
+    }
   })
   return result;
 }
@@ -225,7 +242,7 @@ export const enterSurvey = (talk, code) => { //attach to the button
 
 //for time and stuff
 export const getTime = () => {
-  return Math.round((Date.now()/1000))
+  return Math.round((Date.now() / 1000))
 }
 //update talks speaker stats
 

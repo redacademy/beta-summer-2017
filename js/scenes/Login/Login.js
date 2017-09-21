@@ -6,12 +6,15 @@ import {
   TextInput,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import OutlinedButton from '../../components/OutlinedButton';
-import Loader from '../../components/Loader';
+// import Loader from '../../components/Loader';
 import { auth } from '../../config/firebase';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
+import { goToLanding } from '../../navigation/navHelpers';
+
 
 import bulbLogo from '../../assets/images/beta_talks_lightbulb_white.png';
 
@@ -19,6 +22,9 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
   return (
     <View style={styles.container}>
       <LinearGradient style={styles.lgHeight} colors={[colors.lightGrey, colors.black]} start={{ x: 0.5, y: 0 }} end={{ x: 0.5, y: 0.4 }}>
+        <View style={styles.backArrow}>
+          <Icon onPress={() => goToLanding()} name='ios-arrow-back' width={100} size={36} color='white' />
+        </View>
         <View style={styles.loginField}>
           <Text style={styles.headerText}>
             SIGN IN TO BETA TALKS
@@ -44,13 +50,11 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
           />
           <OutlinedButton
             style={styles.bodyText}
-            onPress={() =>  loginHandler()} 
-            text={'LOG IN'}
+            onPress={() => loginHandler()}
+            text={'log in'}
             isLoading={isLoading}
           >
-            {/* <Loader
-              color='yellow' 
-              /> */}
+
           </OutlinedButton>
           {console.log(auth.currentUser)}
         </View>
@@ -60,11 +64,11 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
 }
 
 Login.propTypes = {
-  emailField: PropTypes.string.isRequired,
-  passwordField: PropTypes.string.isRequired,
-  handleEmail: PropTypes.func.isRequired,
-  handlePassword: PropTypes.func.isRequired,
-  loginHandler: PropTypes.func.isRequired
+  emailField: PropTypes.string,
+  passwordField: PropTypes.string,
+  handleEmail: PropTypes.func,
+  handlePassword: PropTypes.func,
+  loginHandler: PropTypes.func
 
 };
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { login } from '../../config/helpers';
 import Login from './Login';
-import Router from '../../navigation/routes'
+import Router from '../../navigation/routes';
 import { auth } from '../../config/firebase';
 import {
   updateEmailField,
@@ -18,13 +18,17 @@ class LoginContainer extends Component {
       this.loginRedirect()
     }
   }
+
   loginRedirect = () => {
-    this.props.navigator.push(Router.getRoute('home'));
+    // this.props.navigator.immediatelyResetStack([
+    //   Router.getRoute('navigation')
+    // ], 0);
+    this.props.navigator.push(Router.getRoute('navigation'))
   }
 
 
   logUser = (loggedInUser) => {
-    console.log("JUST A TEST!")
+
     const { dispatch } = this.props
     dispatch(loginBegin());
     setTimeout( () => { login(loggedInUser).then(user => {
@@ -32,7 +36,7 @@ class LoginContainer extends Component {
       this.loginRedirect();
     }).catch(error => {
       dispatch(loginError(error))
-    }) }, 1600)
+    }) }, 0)
   }
 
   handleEmail = (event) => {
@@ -43,7 +47,7 @@ class LoginContainer extends Component {
     this.props.dispatch(updatePasswordField(event))
   };
 
-  loginHandler = async () => {
+  loginHandler = () => {
     const { emailField, passwordField } = this.props
     if (emailField.length && passwordField.length) {
       const loggedInUser = {
@@ -81,9 +85,9 @@ const mapStateToProps = state => ({
 });
 
 LoginContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  emailField: PropTypes.string.isRequired,
-  passwordField: PropTypes.string.isRequired,
+  dispatch: PropTypes.func,
+  emailField: PropTypes.string,
+  passwordField: PropTypes.string,
 }
 
 export default connect(mapStateToProps)(LoginContainer);

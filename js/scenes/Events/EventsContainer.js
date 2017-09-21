@@ -10,37 +10,42 @@ import { getTime } from '../../config/helpers';
 import { idToObjsSpeakers } from '../Lib/helperFunctions';
 
 class EventsContainer extends Component {
+
+
   static route = {
     navigationBar: {
       title: 'EVENTS',
-    }  
+    }
+  }
+  state = {
+    events: []
   }
 
-  componentWillMount() {
-    this.displayAllEvents('ALL EVENTS')
+  componentDidMount() {
+    this.displayAllEvents()
   }
-  displayAllEvents = (title) => {
-    this.setState({ events: this.props.eventsData.events, selected: title })
+  displayAllEvents = () => {
+    this.setState({ events: this.props.eventsData.events })
   }
   displayPastEvents = (title) => {
     const now = getTime();
     const pastEvents = this.props.eventsData.events.filter(event => {
       return event.date < now
     })
-    this.setState({ events: pastEvents, selected: title })
+    this.setState({ events: pastEvents })
   }
   displayUpcomingEvents = (title) => {
     const now = getTime();
     const upcomingEvents = this.props.eventsData.events.filter(event => {
       return event.date > now
     })
-    this.setState({events: upcomingEvents, selected: title })
+    this.setState({ events: upcomingEvents })
   }
-  displayAttendedEvents = (title) => {
-    const attendedEvents = this.props.eventsData.events.filter(event =>{
+  displayAttendedEvents = () => {
+    const attendedEvents = this.props.eventsData.events.filter(event => {
       return event.attendees.includes(auth.currentUser.uid)
     })
-    this.setState({events: attendedEvents, selected: title })
+    this.setState({ events: attendedEvents })
   }
 
   eventDate(date) {
@@ -48,10 +53,10 @@ class EventsContainer extends Component {
       Moment.unix(date).format('dddd, MMMM Do YYYY')
     )
   }
-  
+
   eventTime(time) {
     return (
-      Moment.unix(time).format('h:mm a')    
+      Moment.unix(time).format('h:mm a')
     )
   }
 
@@ -62,7 +67,11 @@ class EventsContainer extends Component {
   }
 
   render() {
+<<<<<<< HEAD
     if(this.props.eventsData.loading) return (<Loader />);
+=======
+    if (this.props.eventsData.loading) return (<Loader />)
+>>>>>>> landing page implementation
     return (
       <Events
         eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
