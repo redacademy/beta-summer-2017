@@ -17,7 +17,6 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
 
   const getImage = imageUrl || user.imageUrl
 
-  console.log("THIS IS GET IMAGE", getImage)
   return (
     <ScrollView style={styles.container}>
       <View>

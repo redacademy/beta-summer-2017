@@ -31,7 +31,8 @@ const EventItem = ({ item }) => (
   </TouchableOpacity>
 );
 
-const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
+const SingleEvent = ({ eventData, eventDataSet, attendEvent, currentUser }) => {
+  const attending = eventData.attendees.find(attendee => attendee.user_id === currentUser);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -51,7 +52,11 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
             </View>
           ))}
           <OutlinedButton
-            text="attend event"
+            text={
+              (attending) ? 
+                "you are attending" : 
+                "attend event"
+            }
             onPress={() => attendEvent()}
           />
         </ScrollView>
@@ -62,7 +67,29 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
 
 SingleEvent.propTypes = {
   eventData: PropTypes.shape({
-    //attendees: PropTypes.arrayOf(PropTypes.string),
+    attendees: PropTypes.arrayOf(PropTypes.shape({
+      bio: PropTypes.string,
+      email: PropTypes.string,
+      fullName: PropTypes.string,
+      goals: PropTypes.shape({
+        goalOne: PropTypes.string,
+        goalTwo: PropTypes.string,
+        goalThree: PropTypes.string
+      }),
+      imageUrl: PropTypes.string,
+      myTalks: PropTypes.arrayOf(PropTypes.string),
+      socialMediaUrls: PropTypes.shape({
+        facebook: PropTypes.string,
+        linkedIn: PropTypes.string,
+        twitter: PropTypes.string
+      }),
+      speakerStats: PropTypes.arrayOf(PropTypes.shape({
+        quality: PropTypes.string,
+        submitAmnt: PropTypes.number,
+        value: PropTypes.number
+      })),
+      user_id: PropTypes.string
+    })),
     date: PropTypes.number,
     startTime: PropTypes.number,
     endTime: PropTypes.number,
@@ -91,7 +118,8 @@ SingleEvent.propTypes = {
     talk_id: PropTypes.string,
     title: PropTypes.string
   })).isRequired,
-  attendEvent: PropTypes.func.isRequired
+  attendEvent: PropTypes.func.isRequired,
+  currentUser: PropTypes.string
 }
 
 export default SingleEvent;
