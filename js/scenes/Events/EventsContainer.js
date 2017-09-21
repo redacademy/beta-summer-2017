@@ -15,31 +15,32 @@ class EventsContainer extends Component {
       title: 'EVENTS',
     }  
   }
+
   componentWillMount() {
-    this.displayAllEvents()
+    this.displayAllEvents('ALL EVENTS')
   }
-  displayAllEvents = () => {
-    this.setState({events: this.props.eventsData.events})
+  displayAllEvents = (title) => {
+    this.setState({ events: this.props.eventsData.events, selected: title })
   }
-  displayPastEvents = () => {
+  displayPastEvents = (title) => {
     const now = getTime();
     const pastEvents = this.props.eventsData.events.filter(event => {
       return event.date < now
     })
-    this.setState({events: pastEvents})
+    this.setState({ events: pastEvents, selected: title })
   }
-  displayUpcomingEvents = () => {
+  displayUpcomingEvents = (title) => {
     const now = getTime();
     const upcomingEvents = this.props.eventsData.events.filter(event => {
       return event.date > now
     })
-    this.setState({events: upcomingEvents})
+    this.setState({events: upcomingEvents, selected: title })
   }
-  displayAttendedEvents = () => {
+  displayAttendedEvents = (title) => {
     const attendedEvents = this.props.eventsData.events.filter(event =>{
       return event.attendees.includes(auth.currentUser.uid)
     })
-    this.setState({events: attendedEvents})
+    this.setState({events: attendedEvents, selected: title })
   }
 
   eventDate(date) {
@@ -61,10 +62,11 @@ class EventsContainer extends Component {
   }
 
   render() {
-    if(this.props.eventsData.loading) return (<Loader />)
+    if(this.props.eventsData.loading) return (<Loader />);
     return (
       <Events
         eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
+        selected={this.state.selected}
         eventDate={this.eventDate}
         eventTime={this.eventTime}
         navigatorUID={'events'}

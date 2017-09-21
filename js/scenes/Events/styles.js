@@ -15,11 +15,19 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     height: 25,
     width: 60,
-    backgroundColor: 'white'
+    backgroundColor: colors.white
+  },
+  filterSelected: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    height: 25,
+    width: 60,
+    backgroundColor: colors.taxiYellow
   },
   filterText: {
     fontFamily: typography.titleHeading,
-    fontSize: typography.norwester12
+    fontSize: 11
   },
   eventsListWrapper: {
     height: '100%',
