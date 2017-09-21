@@ -59,7 +59,7 @@ EventContainer.propTypes = {
   eventsData: PropTypes.shape({
     loading: PropTypes.bool,
     events: PropTypes.arrayOf(PropTypes.shape({
-      attendees: PropTypes.arrayOf(PropTypes.string),
+      //attendees: PropTypes.arrayOf(PropTypes.string),
       date: PropTypes.number,
       startTime: PropTypes.number,
       endTime: PropTypes.number,
@@ -106,7 +106,7 @@ EventContainer.propTypes = {
   }).isRequired,
   eventData: PropTypes.shape({
     item: PropTypes.shape({
-      attendees: PropTypes.arrayOf(PropTypes.shape({
+      speakers: PropTypes.arrayOf(PropTypes.shape({
         bio: PropTypes.string,
         email: PropTypes.string,
         fullName: PropTypes.string,

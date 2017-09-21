@@ -8,14 +8,14 @@ import {
 
 import { talkStyles } from '../styles';
 
-const TalkText = ({ talkTitle }) => (
+const TalkText = ({ talkTitle, speakerName }) => (
   <View style={talkStyles.talkInfoContainer}>
     <View style={talkStyles.infoTextContainer}>
       <Text style={talkStyles.talkTitle}>
         {talkTitle}
       </Text>
       <Text style={talkStyles.speakerName}>
-        Craig David
+        {speakerName}
       </Text>
     </View>
   </View>
@@ -29,11 +29,11 @@ const TalkScore = ({ tScore }) => (
   </View>
 );
 
-export const MyTalk = ({ score, title, onPress }) => (
+export const MyTalk = ({ score, title, onPress, userName }) => (
   <TouchableOpacity onPress={onPress}>
     <View style={talkStyles.talkBar}>
       <TalkScore tScore={score} />
-      <TalkText talkTitle={title} />
+      <TalkText talkTitle={title} speakerName={userName} />
     </View>
   </TouchableOpacity>
 );

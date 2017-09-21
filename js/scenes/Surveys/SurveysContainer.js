@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dimensions, Image } from 'react-native';
-import logo from '../../assets/images/beta_talks_logo_white_header.png';
+import { auth } from '../../config/firebase';
 
+import logo from '../../assets/images/beta_talks_logo_white_header.png';
 import '../../redux/modules/actions/questionsActions';
 import Surveys from './Pages/Surveys';
 import CommentScreen from './Pages/CommentScreen';
@@ -57,7 +58,7 @@ class SurveysContainer extends Component {
     const talk = this.props.talkObj.speakerData;
     const surveyAns = this.props.surveyAnswers;
     const textfeedback = this.props.comments;
-    const user = 'dKJaZ8tuniPW1Ee2BduSQQ8wSsp2'
+    const user = auth.currentUser.uid;
     // placeholder id for testing
     ExecFeedBackAsync(talk, user, surveyAns, textfeedback);
     goToSurveyComplete();

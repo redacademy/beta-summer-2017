@@ -12,7 +12,7 @@ import { goToMyTalkStats } from '../../../navigation/navHelpers';
 import { colors } from '../../../config/styles';
 import { styles, talkStyles } from '../styles';
 
-const MyTalks = ({ talks }) => (
+const MyTalks = ({ talks, userName }) => (
   <View style={styles.sceneContainer}>
     <LinearGradient
       style={StyleSheet.absoluteFill}
@@ -25,6 +25,7 @@ const MyTalks = ({ talks }) => (
           <MyTalk
             key={talk.talk_id}
             title={talk.title}
+            userName={userName}
             score={talk.score}
             onPress={() => goToMyTalkStats({ talk })}
           />
