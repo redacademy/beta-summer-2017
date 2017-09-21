@@ -54,7 +54,6 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
             text={'log in'}
             isLoading={isLoading}
           >
-
           </OutlinedButton>
           {console.log(auth.currentUser)}
         </View>
