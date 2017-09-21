@@ -27,8 +27,6 @@ export const styles = StyleSheet.create({
 
   contentContainer: {
     justifyContent: "flex-start",
-    //flex: 1,
-    //alignItems: 'center',
     width: Dimensions.get('window').width,
   },
 
@@ -36,10 +34,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    alignSelf: 'flex-start',
     marginBottom: 10,
-    borderColor: 'red',
-    borderWidth: 2,
     right: 30,
+    height: 70,
     width: Dimensions.get('window').width,
   },
 
@@ -47,21 +45,18 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.darkGrey,
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
-    minHeight: 50,
+    height: 80,
+    alignItems: 'center',
     width: Dimensions.get('window').width / 1.1,
     alignSelf: 'flex-end',
     marginTop: 2.5,
-    marginBottom: 2.5,
-    borderColor: 'green',
-    borderWidth: 2
+    marginBottom: 2.5
   },
 
   talkDetails: {
     flexDirection: 'column',
     backgroundColor: 'transparent',
-    borderColor: 'yellow',
-    borderWidth: 2,
-    maxWidth: Dimensions.get('window').width / 1.55
+    maxWidth: Dimensions.get('window').width / 1.35
   },
 
   talkTitleContainer: {
@@ -70,21 +65,21 @@ export const styles = StyleSheet.create({
 
   talkTitle: {
     fontFamily: typography.fontMainBold,
-    fontSize: typography.robotoRegular14,
+    fontSize: typography.robotoRegular12,
     color: colors.white,
     margin: 5
   },
 
   speaker: {
     fontFamily: typography.fontMainRegular,
-    fontSize: typography.robotoRegular14,
+    fontSize: typography.robotoRegular12,
     color: colors.white,
     margin: 5
   },
 
   image: {
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     borderRadius: 10,
     margin: 10
   }
