@@ -15,7 +15,23 @@ import pencil from '../../assets/icons/pencil.png';
 import { styles } from './styles';
 import SettingsPopUp from '../../components/SettingsPopUp/';
 
-const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCurrentEmail, getCurrentPassword, isVisible, user, showPopUp, handleImageUpload, imageUrl, handleEmail, emailField, handlePassword, passwordField, handleFullname, fullnameField }) => {
+const AccountSettings = ({ 
+  updateSettings,
+  currentEmail,
+  currentPassword,
+  getCurrentEmail,
+  getCurrentPassword,
+  isVisible,
+  user,
+  showPopUp,
+  handleImageUpload,
+  imageUrl,
+  handleEmail,
+  emailField,
+  handlePassword,
+  passwordField,
+  handleFullname,
+  fullnameField }) => {
   const getImage = imageUrl || user.imageUrl
   return (
     <ScrollView style={styles.container}>
@@ -24,7 +40,7 @@ const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCur
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={getImage ? {uri: getImage} : accountIcon}
+              source={getImage ? { uri: getImage } : accountIcon}
             />
             <Image
               style={styles.pencil}
@@ -38,6 +54,7 @@ const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCur
             style={styles.inputSmall}
             onChangeText={(text) => handleFullname(text)}
             value={fullnameField}
+            autoCorrect={false}
             placeholder={user.fullName}
           />
         </View>
@@ -48,6 +65,7 @@ const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCur
             style={styles.inputSmall}
             onChangeText={(text) => handleEmail(text)}
             autoCapitalize="none"
+            autoCorrect={false}
             value={emailField}
             placeholder={user.email}
           />
@@ -59,17 +77,19 @@ const AccountSettings = ({ updateSettings, currentEmail, currentPassword, getCur
             style={styles.inputSmall}
             onChangeText={handlePassword}
             secureTextEntry={true}
+            autoCorrect={false}
             autoCapitalize="none"
             value={passwordField}
             placeholder={user.password}
           />
         </View>
-        <SurveyButton
-          text="save settings"
-          onPress={() => showPopUp()}
-        />
+        {(fullnameField || emailField || passwordField) &&
+          <SurveyButton
+            text="save settings"
+            onPress={() => showPopUp()}
+          />}
       </View>
-      <SettingsPopUp 
+      <SettingsPopUp
         isVisible={isVisible}
         currentEmail={currentEmail}
         currentPassword={currentPassword}
