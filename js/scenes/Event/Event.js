@@ -15,6 +15,22 @@ import OutlinedButton from '../../components/OutlinedButton/';
 import { colors } from '../../config/styles';
 import { styles } from './styles';
 
+const EventItem = ({ item }) => (
+  <TouchableOpacity onPress={() => goToSpeaker({ item })}>
+    <View style={styles.talkBorder}>
+      <View style={styles.talkContainer}>
+        <Image style={styles.image} source={{ uri: item.speaker_id.imageUrl }} />
+        <View style={styles.talkDetails}>
+          <View style={styles.talkTitleContainer}>
+            <Text style={styles.talkTitle}>{item.title}</Text>
+          </View>
+          <Text style={styles.speaker}>{item.speaker_id.fullName}</Text>
+        </View>
+      </View>
+    </View>
+  </TouchableOpacity>
+);
+
 const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
   return (
     <View style={styles.container}>
@@ -31,19 +47,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
           </View>
           {eventDataSet.map((item) => (
             <View key={item.talk_id}>
-              <TouchableOpacity onPress={() => goToSpeaker({ item })}>
-                <View style={styles.talkBorder}>
-                  <View style={styles.talkContainer}>
-                    <Image style={styles.image} source={{ uri: item.speaker_id.imageUrl }} />
-                    <View style={styles.talkDetails}>
-                      <View style={styles.talkTitleContainer}>
-                        <Text style={styles.talkTitle}>{item.title}</Text>
-                      </View>
-                      <Text style={styles.speaker}>{item.speaker_id.fullName}</Text>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
+              <EventItem item={item} />
             </View>
           ))}
           <OutlinedButton
@@ -54,7 +58,7 @@ const SingleEvent = ({ eventData, eventDataSet, attendEvent }) => {
       </LinearGradient>
     </View>
   );
-}
+};
 
 SingleEvent.propTypes = {
   eventData: PropTypes.shape({
