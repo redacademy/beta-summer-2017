@@ -17,6 +17,7 @@ const CommentScreen = ({
   modalState,
   prevQuestion,
   previousQuestionFunc,
+  speakerGoals,
   submitSurvey
 }) => (
   <ScrollView style={styles.sceneContain}>
@@ -25,6 +26,7 @@ const CommentScreen = ({
         <GoalsModal
           onPress={() => displayGoalModal(!modalState)}
           modalState={modalState}
+          speakerGoals={speakerGoals}
         />
         <Text style={styles.titleQuestion}>
           Any Additional Comments?

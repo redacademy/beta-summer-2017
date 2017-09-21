@@ -86,6 +86,7 @@ class SurveysContainer extends Component {
           modalState={this.state.showGoalModal}
           displayGoalModal={this.displayGoalModal}
           submitSurvey={this.submitSurvey}
+          speakerGoals={parseGoalsObjToArr(this.props.talkObj.speakerData.speaker_id.goals)}          
           dispatchComments={this.dispatchComments}
           previousQuestionFunc={this.previousQuestion}
           prevQuestion={questions[n - 1]}
