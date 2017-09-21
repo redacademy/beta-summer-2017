@@ -34,7 +34,7 @@ const Events = ({
   const FilterButton = ({ data, selected }) => {
     const { title, func, action } = data;
     return (
-      <TouchableOpacity onPress={() => func(action)}>
+      <TouchableOpacity onPress={() => func(title, action)}>
         <View style={(selected === title) ? styles.filterSelected : styles.eventsFilter}>
           <Text style={styles.filterText}>{title}</Text>
         </View>

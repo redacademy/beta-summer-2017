@@ -17,30 +17,30 @@ class EventsContainer extends Component {
   }
 
   componentWillMount() {
-    this.displayAllEvents()
+    this.displayAllEvents('ALL EVENTS')
   }
-  displayAllEvents = () => {
-    this.setState({ events: this.props.eventsData.events, selected: 'ALL EVENTS' })
+  displayAllEvents = (title) => {
+    this.setState({ events: this.props.eventsData.events, selected: title })
   }
-  displayPastEvents = () => {
+  displayPastEvents = (title) => {
     const now = getTime();
     const pastEvents = this.props.eventsData.events.filter(event => {
       return event.date < now
     })
-    this.setState({ events: pastEvents, selected: 'PAST' })
+    this.setState({ events: pastEvents, selected: title })
   }
-  displayUpcomingEvents = () => {
+  displayUpcomingEvents = (title) => {
     const now = getTime();
     const upcomingEvents = this.props.eventsData.events.filter(event => {
       return event.date > now
     })
-    this.setState({events: upcomingEvents, selected: 'UPCOMING' })
+    this.setState({events: upcomingEvents, selected: title })
   }
-  displayAttendedEvents = () => {
+  displayAttendedEvents = (title) => {
     const attendedEvents = this.props.eventsData.events.filter(event =>{
       return event.attendees.includes(auth.currentUser.uid)
     })
-    this.setState({events: attendedEvents, selected: 'ATTENDED' })
+    this.setState({events: attendedEvents, selected: title })
   }
 
   eventDate(date) {
