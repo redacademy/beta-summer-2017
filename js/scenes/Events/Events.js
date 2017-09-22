@@ -13,8 +13,16 @@ import { goToEvent } from '../../navigation/navHelpers';
 import { styles } from './styles';
 import { colors } from '../../config/styles';
 
-const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEvents, displayPastEvents, displayUpcomingEvents, displayAttendedEvents }) => {
-
+const Events = ({ 
+  eventsData,
+  selected, 
+  eventDate, 
+  eventTime, 
+  navigatorUID, 
+  displayAllEvents, 
+  displayPastEvents, 
+  displayUpcomingEvents, 
+  displayAttendedEvents }) => {
   const filterData = [
     //TODO: Add filter methods
     { title: 'PAST', func: displayPastEvents, action: null },
@@ -23,11 +31,11 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEven
     { title: 'ALL EVENTS', func: displayAllEvents, action: null }
   ];
 
-  const FilterButton = ({ data }) => {
+  const FilterButton = ({ data, selected }) => {
     const { title, func, action } = data;
     return (
-      <TouchableOpacity onPress={() => func(action)}>
-        <View style={styles.eventsFilter}>
+      <TouchableOpacity onPress={() => func(title, action)}>
+        <View style={(selected === title) ? styles.filterSelected : styles.eventsFilter}>
           <Text style={styles.filterText}>{title}</Text>
         </View>
       </TouchableOpacity>
@@ -42,11 +50,11 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEven
           <Text style={styles.eventTime}>{eventTime(item.startTime)} - {eventTime(item.endTime)}</Text>
         </View>
         <View style={styles.attendeeContainer}>
-          {item.attendees.map(attendee => (
+          {item.speakers.map(speaker => (
             <Image
-              key={attendee.user_id}
+              key={speaker.user_id}
               style={styles.attendeeImage}
-              source={{ uri: attendee.imageUrl }}
+              source={{ uri: speaker.imageUrl }}
             />
           ))}
         </View>
@@ -64,7 +72,11 @@ const Events = ({ eventsData, eventDate, eventTime, navigatorUID, displayAllEven
       <View style={styles.eventsHeaderWrapper}>
         {
           filterData.map(data => (
-            <FilterButton data={data} key={data.title} />
+            <FilterButton 
+              data={data} 
+              key={data.title}
+              selected={selected} 
+            />
           ))
         }
       </View>
@@ -96,7 +108,7 @@ Events.PropTypes = {
       id: PropTypes.string,
       eventCode: PropTypes.string,
       attendees: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.objectOf(PropTypes.string),
+      //speakers: PropTypes.objectOf(PropTypes.string),
       talks: PropTypes.objectOf(PropTypes.string),
       location: PropTypes.objectOf(PropTypes.shape({
         city: PropTypes.string,

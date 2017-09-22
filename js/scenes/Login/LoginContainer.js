@@ -31,12 +31,13 @@ class LoginContainer extends Component {
 
     const { dispatch } = this.props
     dispatch(loginBegin());
-    setTimeout( () => { login(loggedInUser).then(user => {
-      dispatch(loginSuccess(user));
-      this.loginRedirect();
-    }).catch(error => {
-      dispatch(loginError(error))
-    }) }, 0)
+    login(loggedInUser)
+      .then(user => {
+        dispatch(loginSuccess());
+        this.loginRedirect();
+      }).catch(error => {
+        dispatch(loginError(error))
+      })
   }
 
   handleEmail = (event) => {
@@ -47,14 +48,21 @@ class LoginContainer extends Component {
     this.props.dispatch(updatePasswordField(event))
   };
 
-  loginHandler = () => {
+  loginHandler =  () => {
     const { emailField, passwordField } = this.props
-    if (emailField.length && passwordField.length) {
+    if (emailField.length && passwordField.length && emailField && passwordField) {
       const loggedInUser = {
         email: this.props.emailField,
         password: this.props.passwordField
       }
-      this.logUser(loggedInUser);
+      login(loggedInUser)
+        .then((resolve)=>{
+          if(resolve) {
+            this.loginRedirect()
+          }
+        }, (error)=> {
+          console.log(error)
+        })
     }
   };
 

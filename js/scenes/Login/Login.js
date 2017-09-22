@@ -53,10 +53,7 @@ const Login = ({ loginHandler, handleEmail, handlePassword, emailField, password
             onPress={() => loginHandler()}
             text={'log in'}
             isLoading={isLoading}
-          >
-
-          </OutlinedButton>
-          {console.log(auth.currentUser)}
+          />
         </View>
       </LinearGradient>
     </View>

@@ -17,7 +17,6 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
 
   const getImage = imageUrl || user.imageUrl
 
-  console.log("THIS IS GET IMAGE", getImage)
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -38,41 +37,43 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleBio(text)}
-            value={bioField || handleBio(user.bio)}
+            value={bioField}
             multiline={true}
             maxLength={100}
-            placeholder="Personal bio"
+            placeholder={user.bio}
           />
         </View>
-        <Text style={styles.headings}>Things you're working on</Text>
+        <Text style={styles.headings}>Goal One</Text>
         <View style={styles.fieldsContainer}>
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalOne")}
-            value={goalsField.goalOne || handleGoals(user.goals.goalOne, "goalOne")}
+            value={goalsField.goalOne}
             multiline={true}
             maxLength={100}
-            placeholder="Goal #1"
+            placeholder={user.goals.goalOne}
           />
         </View>
+        <Text style={styles.headings}>Goal Two</Text>
         <View style={styles.fieldsContainer}>
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalTwo")}
-            value={goalsField.goalTwo || handleGoals(user.goals.goalTwo, "goalTwo")}
+            value={goalsField.goalTwo}
             multiline={true}
             maxLength={100}
-            placeholder="Goal #2"
+            placeholder={user.goals.goalTwo}
           />
         </View>
+        <Text style={styles.headings}>Goal Three</Text>
         <View style={styles.fieldsContainer}>
           <TextInput
             style={styles.inputBig}
             onChangeText={(text) => handleGoals(text, "goalThree")}
-            value={goalsField.goalThree || handleGoals(user.goals.goalThree, "goalThree")}
+            value={goalsField.goalThree}
             multiline={true}
             maxLength={100}
-            placeholder="Goal #3"
+            placeholder={user.goals.goalThree}
           />
         </View>
         <Text style={styles.headings}>Facebook</Text>
@@ -82,8 +83,8 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "facebook")}
-            value={socialMedia.facebook || handleSocialMedia(user.socialMediaUrls.facebook, "facebook")}
-            placeholder="Facebook"
+            value={socialMedia.facebook}
+            placeholder={user.socialMediaUrls.facebook}
           />
         </View>
         <Text style={styles.headings}>Twitter</Text>
@@ -93,8 +94,8 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "twitter")}
-            value={socialMedia.twitter || handleSocialMedia(user.socialMediaUrls.twitter, "twitter")}
-            placeholder="Twitter"
+            value={socialMedia.twitter}
+            placeholder={user.socialMediaUrls.twitter}
           />
         </View>
         <Text style={styles.headings}>LinkedIn</Text>
@@ -104,8 +105,8 @@ const Profile = ({ updateProfile, user, handleImageUpload, imageUrl, handleBio, 
             autoCorrect={false}
             autoCapitalize="none"
             onChangeText={(text) => handleSocialMedia(text, "linkedIn")}
-            value={socialMedia.linkedIn || handleSocialMedia(user.socialMediaUrls.linkedIn, "linkedIn")}
-            placeholder="LinkedIn"
+            value={socialMedia.linkedIn}
+            placeholder={user.socialMediaUrls.linkedIn}
           />
         </View>
         <SurveyButton

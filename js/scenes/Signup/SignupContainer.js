@@ -33,18 +33,22 @@ class SignupContainer extends Component {
 
   signupHandler = () => {
     const { emailField, passwordField, fullnameField } = this.props
-    if (emailField.length && passwordField.length && fullnameField.length) {
+    if (emailField && passwordField && fullnameField) {
       const user = {
         email: this.props.emailField,
         password: this.props.passwordField,
         name: this.props.fullnameField
       }
-      const newUser = signUp(user).then(user => {
-        this.signupRedirect()
-      }).catch(err  => {
-        (console.log(err))
-      })
-    
+      signUp(user)
+        .then((error) => {
+          if(error){
+            console.log(error)
+          } else {
+            this.signupRedirect()
+          }
+        }, (error) => {
+          console.log(error)
+        })
     }
   };
 

@@ -1,19 +1,19 @@
 import { Platform, ImagePickerIOS } from 'react-native';
-// import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'react-native-fetch-blob'
 import firebase from 'firebase';
 import { auth, betadb, betaevents, betatalks, betaquestions, betausers, betastorage } from './firebase';
 
-// const Blob = RNFetchBlob.polyfill.Blob
-// const fs = RNFetchBlob.fs
-// window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
-// window.Blob = Blob
+const Blob = RNFetchBlob.polyfill.Blob
+const fs = RNFetchBlob.fs
+window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
+window.Blob = Blob
+
 //users
 const user = { //input format for initial signup form;
   email: 'test@pest.com',
   password: 'password',
   name: 'Firstname Lastname'
 }
-
 //login/logout
 export function login(profile) {
   return auth.signInWithEmailAndPassword(profile.email, profile.password)

@@ -7,7 +7,7 @@ import '../../redux/modules/actions/eventActions';
 import { colors, typography } from '../../config/styles';
 import { auth } from '../../config/firebase';
 import { getTime } from '../../config/helpers';
-import { idToObjs } from '../Lib/helperFunctions';
+import { idToObjsSpeakers } from '../Lib/helperFunctions';
 
 class EventsContainer extends Component {
 
@@ -27,14 +27,14 @@ class EventsContainer extends Component {
   displayAllEvents = () => {
     this.setState({ events: this.props.eventsData.events })
   }
-  displayPastEvents = () => {
+  displayPastEvents = (title) => {
     const now = getTime();
     const pastEvents = this.props.eventsData.events.filter(event => {
       return event.date < now
     })
     this.setState({ events: pastEvents })
   }
-  displayUpcomingEvents = () => {
+  displayUpcomingEvents = (title) => {
     const now = getTime();
     const upcomingEvents = this.props.eventsData.events.filter(event => {
       return event.date > now
@@ -62,7 +62,7 @@ class EventsContainer extends Component {
 
   withAttendeeData = (events, users) => {
     return events.map(event => {
-      return idToObjs(event, users);
+      return idToObjsSpeakers(event, users);
     });
   }
 
@@ -71,6 +71,7 @@ class EventsContainer extends Component {
     return (
       <Events
         eventsData={this.withAttendeeData(this.state.events, this.props.userData.users)}
+        selected={this.state.selected}
         eventDate={this.eventDate}
         eventTime={this.eventTime}
         navigatorUID={'events'}

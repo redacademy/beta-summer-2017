@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { auth } from '../../config/firebase';
 
 import Dashboard from './Pages/Dashboard';
 import MyTalks from './Pages/MyTalks';
@@ -15,8 +16,7 @@ import { styles } from './styles';
 const DashboardContainer = ({ userData, talksData }) => {
   const { uLoading, users } = userData;
   const { tLoading, talks } = talksData;
-  const testUser = users["wJW3GRYqtWYi4QplGLVSKPxxDtD3"];
-
+  const currUser = users[auth.currentUser.uid];
   if (uLoading || tLoading) return <Loader />;
   return (
     <Swiper
@@ -28,8 +28,11 @@ const DashboardContainer = ({ userData, talksData }) => {
       prevButton={<Text style={styles.buttonText}>‹</Text>}
       paginationStyle={{ bottom: 11 }}
     >
-      <Dashboard stats={testUser.speakerStats} />
-      <MyTalks talks={findTalks(testUser.myTalks, talks)} />
+      <Dashboard stats={currUser.speakerStats} />
+      <MyTalks 
+        talks={findTalks(currUser.myTalks, talks)} 
+        userName={currUser.fullName}
+      />
     </Swiper>
   );
 }

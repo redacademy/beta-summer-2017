@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
 import Moment from 'moment';
 import SingleEvent from './Event';
 import '../../redux/modules/actions/eventActions';
@@ -9,8 +8,6 @@ import '../../redux/modules/actions/talkActions';
 import '../../redux/modules/actions/userActions';
 import Loader from '../../components/Loader/';
 import { eventDataSet } from '../Lib/helperFunctions';
-import Router from '../../navigation/routes';
-import store from '../../redux/store';
 import { attendEvent } from '../../config/helpers';
 import { auth } from '../../config/firebase';
 
@@ -36,6 +33,7 @@ class EventContainer extends Component {
       return (
         <SingleEvent
           navigatorUID={'event'}
+          currentUser={auth.currentUser.uid}
           attendEvent={this.attendEvent}
           eventData={this.props.eventData.item}
           eventDataSet={eventDataSet(
@@ -61,14 +59,14 @@ EventContainer.propTypes = {
   eventsData: PropTypes.shape({
     loading: PropTypes.bool,
     events: PropTypes.arrayOf(PropTypes.shape({
-      attendees: PropTypes.arrayOf(PropTypes.string),
+      //attendees: PropTypes.arrayOf(PropTypes.string),
       date: PropTypes.number,
       startTime: PropTypes.number,
       endTime: PropTypes.number,
       eventCode: PropTypes.string,
       id: PropTypes.string,
       location: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.arrayOf(PropTypes.string),
+      //speakers: PropTypes.arrayOf(PropTypes.string),
       talks: PropTypes.arrayOf(PropTypes.string)
     })).isRequired,
   }).isRequired,
@@ -108,14 +106,36 @@ EventContainer.propTypes = {
   }).isRequired,
   eventData: PropTypes.shape({
     item: PropTypes.shape({
-      //attendees: PropTypes.arrayOf(PropTypes.string),
+      speakers: PropTypes.arrayOf(PropTypes.shape({
+        bio: PropTypes.string,
+        email: PropTypes.string,
+        fullName: PropTypes.string,
+        goals: PropTypes.shape({
+          goalOne: PropTypes.string,
+          goalTwo: PropTypes.string,
+          goalThree: PropTypes.string
+        }),
+        imageUrl: PropTypes.string,
+        myTalks: PropTypes.arrayOf(PropTypes.string),
+        socialMediaUrls: PropTypes.shape({
+          facebook: PropTypes.string,
+          linkedIn: PropTypes.string,
+          twitter: PropTypes.string
+        }),
+        speakerStats: PropTypes.arrayOf(PropTypes.shape({
+          quality: PropTypes.string,
+          submitAmnt: PropTypes.number,
+          value: PropTypes.number
+        })),
+        user_id: PropTypes.string
+      })),
       date: PropTypes.number,
       startTime: PropTypes.number,
       endTime: PropTypes.number,
       eventCode: PropTypes.string,
       id: PropTypes.string,
       location: PropTypes.objectOf(PropTypes.string),
-      speakers: PropTypes.arrayOf(PropTypes.string),
+      //speakers: PropTypes.arrayOf(PropTypes.string),
       talks: PropTypes.arrayOf(PropTypes.string)
     }).isRequired
   }).isRequired
