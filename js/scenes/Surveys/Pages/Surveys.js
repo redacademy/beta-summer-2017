@@ -16,6 +16,7 @@ const Surveys = ({
   question,
   questions,
   nextQuestion,
+  nextQuestionFunc,
   previousQuestionFunc,
   prevQuestion,
   selectedValue,
@@ -59,7 +60,7 @@ const Surveys = ({
             completePerc={questions.indexOf(question) + 1}
             totalSteps={questions.length + 1}
           />
-          <RightNavArrow navAction={() => nextQuestion()} />
+          <RightNavArrow navAction={() => nextQuestionFunc(nextQuestion.question)} />
         </View>
       </View>
     </ScrollView>
@@ -69,7 +70,8 @@ const Surveys = ({
 export default Surveys;
 
 Surveys.defaultProps = {
-  prevQuestion: null
+  prevQuestion: null,
+  nextQuestion: null
 };
 
 Surveys.propTypes = {
@@ -95,7 +97,15 @@ Surveys.propTypes = {
       value: PropTypes.number
     }))
   })).isRequired,
-  nextQuestion: PropTypes.func.isRequired,
+  nextQuestion: PropTypes.shape({
+    quality: PropTypes.string,
+    question: PropTypes.string,
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      answer: PropTypes.string,
+      value: PropTypes.number
+    }))
+  }),
+  nextQuestionFunc: PropTypes.func.isRequired,
   previousQuestionFunc: PropTypes.func.isRequired,
   prevQuestion: PropTypes.shape({
     quality: PropTypes.string,
