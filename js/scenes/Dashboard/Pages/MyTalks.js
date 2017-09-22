@@ -37,6 +37,10 @@ const MyTalks = ({ talks, userName }) => (
 
 export default MyTalks;
 
+MyTalks.defaultProps = {
+  talks: null
+};
+
 MyTalks.propTypes = {
   talks: PropTypes.arrayOf(PropTypes.shape({
     eventCode: PropTypes.string,
@@ -50,5 +54,5 @@ MyTalks.propTypes = {
     })),
     talk_id: PropTypes.string,
     title: PropTypes.string
-  })).isRequired
+  }))
 }
