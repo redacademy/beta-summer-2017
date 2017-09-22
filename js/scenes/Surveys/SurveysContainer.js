@@ -64,11 +64,15 @@ class SurveysContainer extends Component {
     goToSurveyComplete();
   }
 
-  nextQuestion = () => {
+  nextQuestion = (nextQuestion) => {
+    const selectedAnswer = this.props.surveyAnswers[nextQuestion];
     if (this.state.selectedValue === -1) {
       this.setState({ showWarningModal: true });
     } else {
-      this.setState({ n: this.state.n + 1, selectedValue: -1 });
+      this.setState({ 
+        n: this.state.n + 1, 
+        selectedValue: (selectedAnswer) ? selectedAnswer.value : -1 
+      });
     }
   }
 
@@ -104,9 +108,10 @@ class SurveysContainer extends Component {
           displayGoalModal={this.displayGoalModal}
           questions={questions}
           question={questions[n]}
-          nextQuestion={this.nextQuestion}
+          nextQuestionFunc={this.nextQuestion}
           previousQuestionFunc={this.previousQuestion}
           prevQuestion={questions[n - 1]}
+          nextQuestion={questions[n + 1]}
           selectedValue={selectedValue}
         />
       );

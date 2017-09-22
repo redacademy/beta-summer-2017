@@ -10,6 +10,8 @@ const initialState = {
 
 export function SurveyReducer(state = initialState, action) {
   switch (action.type) {
+  case 'RESET_SURVEY': 
+    return initialState;
   case 'SET_SURVEY_ANSWERS':
     return {
       ...state,

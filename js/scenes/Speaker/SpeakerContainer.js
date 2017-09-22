@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { auth } from '../../config/firebase';
 import Loader from '../../components/Loader';
 import { goToSurvey } from '../../navigation/navHelpers';
 import Speaker from './Speaker';
@@ -39,8 +40,7 @@ class SpeakerContainer extends Component {
 
   checkRespondent = () => {
     const currTalk = this.props.speakerData.item.talk_id;
-    // using a static id for testing
-    const currUser = 'dKJaZ8tuniPW1Ee2BduSQQ8wSsp2';
+    const currUser = auth.currentUser.uid;
     return this.props.talkData[currTalk].respondents[currUser];
   }
 
