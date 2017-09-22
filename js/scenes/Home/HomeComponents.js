@@ -26,7 +26,7 @@ export const EventInfo = ({ nextEvent }) => (
       {Moment.unix(nextEvent.date).format('MMMM Do YYYY')}
     </Text>
     <Text style={styles.eventDate}>
-      {Moment.unix(nextEvent.startTime).format('hh:mm a')} - {Moment.unix(nextEvent.endTime).format('hh:mm a')}
+      {Moment.unix(nextEvent.startTime).format('hh:mm a')} - {Moment.unix(nextEvent.endTime).local().format('hh:mm a')}
     </Text>
   </View>
 )

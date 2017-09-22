@@ -30,7 +30,7 @@ const DashboardContainer = ({ userData, talksData }) => {
     >
       <Dashboard stats={currUser.speakerStats} />
       <MyTalks 
-        talks={findTalks(currUser.myTalks, talks)} 
+        talks={(currUser.myTalks) && findTalks(currUser.myTalks, talks)} 
         userName={currUser.fullName}
       />
     </Swiper>
