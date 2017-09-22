@@ -5,6 +5,9 @@ export function setTalkData(talkData) {
   return { type: 'SET_TALK_DATA', talkData }
 }
 
+export function resetSurvey() {
+  return { type: 'RESET_SURVEY' };
+}
 
 export function setSurveyAnswers(surveyAnswers) {
   return { type: 'SET_SURVEY_ANSWERS', surveyAnswers };
