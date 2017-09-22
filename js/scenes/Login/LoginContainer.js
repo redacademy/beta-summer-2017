@@ -63,17 +63,6 @@ class LoginContainer extends Component {
         }, (error)=> {
           console.log(error)
         })
-      // try {
-      //   await login(loggedInUser)
-
-      //   await this.loginRedirect()
-       
-      // }
-      // catch (error) {
-      //   throw (error)
-      // }
-
-      //this.logUser(loggedInUser);
     }
   };
 
