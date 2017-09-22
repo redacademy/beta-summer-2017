@@ -60,7 +60,7 @@ const Surveys = ({
             completePerc={questions.indexOf(question) + 1}
             totalSteps={questions.length + 1}
           />
-          <RightNavArrow navAction={() => nextQuestionFunc((nextQuestion) ? nextQuestion.question : null)} />
+          <RightNavArrow navAction={() => nextQuestionFunc(nextQuestion && nextQuestion.question)} />
         </View>
       </View>
     </ScrollView>
